@@ -7,3 +7,5 @@
 *.woff binary
 *.woff2 binary
 *.ttf binary
+public/bundle.js
+public/bundle.js.map
