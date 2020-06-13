@@ -2,7 +2,7 @@ import React from "react";
 import Offer from "../offer/offer.jsx";
 import PropTypes from 'prop-types';
 
-const Main = ({rentAmount, offerNames}) => {
+const Main = ({offers}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -69,7 +69,7 @@ const Main = ({rentAmount, offerNames}) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentAmount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -86,9 +86,9 @@ const Main = ({rentAmount, offerNames}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offerNames.map((offerName) => {
-                  return <Offer key={offerName.id}
-                    offerName={offerName.offer}
+                {offers.map((offer) => {
+                  return <Offer key={offer.id}
+                    offerName={offer.title}
                   />;
                 })}
               </div>
@@ -104,11 +104,13 @@ const Main = ({rentAmount, offerNames}) => {
 };
 
 Main.propTypes = {
-  rentAmount: PropTypes.number.isRequired,
-  offerNames: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        offer: PropTypes.string.isRequired
+        title: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        rate: PropTypes.number.isRequired,
       })
   )
 };

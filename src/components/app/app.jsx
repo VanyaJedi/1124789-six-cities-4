@@ -2,19 +2,20 @@ import React from "react";
 import Main from "../main/main.jsx";
 import PropTypes from 'prop-types';
 
-const App = ({rentAmount, offerNames}) => {
+const App = ({offers}) => {
   return (
-    <Main rentAmount={rentAmount}
-      offerNames={offerNames} />
+    <Main offers={offers} />
   );
 };
 
 App.propTypes = {
-  rentAmount: PropTypes.number.isRequired,
-  offerNames: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-        offer: PropTypes.string.isRequired
+        title: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        rate: PropTypes.number.isRequired,
       })
   )
 };
