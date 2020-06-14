@@ -2,9 +2,14 @@ import React from "react";
 import Main from "../main/main.jsx";
 import PropTypes from 'prop-types';
 
+const titleClickTestHandler = () => {};
+
 const App = ({offers}) => {
   return (
-    <Main offers={offers} />
+    <Main
+      offers={offers}
+      titleClickTestHandler={titleClickTestHandler}
+    />
   );
 };
 
