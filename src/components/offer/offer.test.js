@@ -1,21 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Offer from "./offer.jsx";
+import {offers} from "../../mock/test/offers.js";
 
-const offer =
-  {
-    id: `1`,
-    title: `test test`,
-    img: `img/apartment-02.jpg`,
-    cost: `100`,
-    type: `Apartment`,
-    rate: 3
-  };
 
 it(`Offer snapshot`, () => {
+  const offerTest = offers[0];
+  const offerHoverHandler = jest.fn();
   const tree = renderer
     .create(
-        <Offer offerName={offer.title}/>
+        <Offer
+          offer={offerTest}
+          onHover={offerHoverHandler}
+        />
     )
     .toJSON();
 

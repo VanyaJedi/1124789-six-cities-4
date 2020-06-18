@@ -1,5 +1,5 @@
 import React from "react";
-import Offer from "../offer/offer.jsx";
+import OfferList from "../offer-list/offer-list.jsx";
 import PropTypes from 'prop-types';
 
 const Main = ({offers, titleClickTestHandler}) => {
@@ -87,13 +87,7 @@ const Main = ({offers, titleClickTestHandler}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => {
-                  return <Offer key={offer.id}
-                    offerName={offer.title}
-                  />;
-                })}
-              </div>
+              <OfferList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
