@@ -1,17 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import OfferList from "./offer-list.jsx";
 import {offers} from "../../mock/test/offers.js";
 
-const titleClickTestHandler = () => {};
-
-it(`Main snapshot`, () => {
+it(`Offer list snapshot`, () => {
   const tree = renderer
     .create(
-        <Main
-          titleClickTestHandler={titleClickTestHandler}
-          offers={offers}
-        />
+        <OfferList offers={offers}/>
     )
     .toJSON();
 

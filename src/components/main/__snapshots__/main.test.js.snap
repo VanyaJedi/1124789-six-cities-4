@@ -227,6 +227,7 @@ exports[`Main snapshot 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -245,7 +246,7 @@ exports[`Main snapshot 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="img/apartment-02.jpg"
                     width="260"
                   />
                 </a>
@@ -262,7 +263,8 @@ exports[`Main snapshot 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      100
                     </b>
                     <span
                       className="place-card__price-text"
@@ -299,7 +301,7 @@ exports[`Main snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "60%",
                         }
                       }
                     />
@@ -328,6 +330,7 @@ exports[`Main snapshot 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -346,7 +349,7 @@ exports[`Main snapshot 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="img/apartment-04.jpg"
                     width="260"
                   />
                 </a>
@@ -363,7 +366,8 @@ exports[`Main snapshot 1`] = `
                     <b
                       className="place-card__price-value"
                     >
-                      €120
+                      €
+                      00
                     </b>
                     <span
                       className="place-card__price-text"
@@ -423,7 +427,7 @@ exports[`Main snapshot 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  
                 </p>
               </div>
             </article>

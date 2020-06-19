@@ -15,4 +15,20 @@ export const offers = [
     type: `Apartment`,
     rate: 3
   },
+  {
+    id: `3`,
+    title: `nice`,
+    img: `img/apartment-02.jpg`,
+    cost: `120`,
+    type: `room`,
+    rate: 3
+  },
+  {
+    id: `4`,
+    title: `good`,
+    img: `img/apartment-03.jpg`,
+    cost: `12`,
+    type: `city`,
+    rate: 1
+  },
 ];
