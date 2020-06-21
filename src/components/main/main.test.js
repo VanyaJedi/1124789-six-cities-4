@@ -1,15 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import {offers} from "../../mock/test/offers.js";
+import {offers} from "../../mock/test/data.js";
 
-const titleClickTestHandler = () => {};
-
+const onHoveredOffer = () => {};
+const onClickOffer = jest.fn();
 it(`Main snapshot`, () => {
   const tree = renderer
     .create(
         <Main
-          titleClickTestHandler={titleClickTestHandler}
+          onClickOffer={onClickOffer}
+          onHoveredOffer={onHoveredOffer}
           offers={offers}
         />
     )

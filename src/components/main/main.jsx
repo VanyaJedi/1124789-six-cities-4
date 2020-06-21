@@ -1,8 +1,9 @@
 import React from "react";
 import OfferList from "../offer-list/offer-list.jsx";
 import PropTypes from 'prop-types';
+import {offerType} from "../../types/dataTypes.js";
 
-const Main = ({offers, titleClickTestHandler}) => {
+const Main = ({offers, onHoveredOffer, onClickOffer}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -32,7 +33,6 @@ const Main = ({offers, titleClickTestHandler}) => {
         <div className="tabs">
           <section className="locations container">
             <ul
-              onClick={titleClickTestHandler}
               className="locations__list tabs__list">
               <li className="locations__item">
                 <a className="locations__item-link tabs__item" href="#">
@@ -87,7 +87,10 @@ const Main = ({offers, titleClickTestHandler}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <OfferList offers={offers}/>
+              <OfferList
+                onHoveredOffer={onHoveredOffer}
+                onClickOffer={onClickOffer}
+                offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -101,15 +104,10 @@ const Main = ({offers, titleClickTestHandler}) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        img: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        rate: PropTypes.number.isRequired,
-      })
-  ),
-  titleClickTestHandler: PropTypes.func.isRequired
+      offerType
+  ).isRequired,
+  onHoveredOffer: PropTypes.func.isRequired,
+  onClickOffer: PropTypes.func.isRequired
 };
 
 export default Main;
