@@ -38,7 +38,8 @@ const Offer = ({offer, onHoveredOffer, onClickOffer}) => {
         </div>
         <h2 className="place-card__name">
           <a href="/offer" onClick={
-            () => {
+            (evt) => {
+              evt.preventDefault();
               onClickOffer(offer);
             }
           }>{title}</a>

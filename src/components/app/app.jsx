@@ -5,13 +5,12 @@ import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import {property} from "../../mock/data.js";
+import {offers} from "../../mock/data.js";
 
 class App extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.props = props;
     this.handleHoverOffer = this.handleHoverOffer.bind(this);
     this.handleClickOffer = this.handleClickOffer.bind(this);
     this.state = {
@@ -34,13 +33,18 @@ class App extends React.PureComponent {
   }
 
   _renderApp() {
-    return (
-      <Main
-        offers={this.props.offers}
-        onHoveredOffer={this.handleHoverOffer}
-        onClickOffer={this.handleClickOffer}
-      />
-    );
+    if (!this.state.currentOffer) {
+      return (
+        <Main
+          offers={this.props.offers}
+          onHoveredOffer={this.handleHoverOffer}
+          onClickOffer={this.handleClickOffer}
+        />
+      );
+    } else {
+      return <Property property={this.state.currentOffer}/>;
+    }
+
   }
 
   render() {
@@ -51,7 +55,7 @@ class App extends React.PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/offer">
-            <Property property={property}/>
+            <Property property={offers[0]}/>
           </Route>
         </Switch>
       </BrowserRouter>

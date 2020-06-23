@@ -35,11 +35,9 @@ const Property = ({property}) => {
             <div className="property__gallery">
               {images.map((image, index) => {
                 return (
-                  <React.Fragment key={index + image}>
-                    <div className="property__image-wrapper">
-                      <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-                    </div>
-                  </React.Fragment>
+                  <div key={index + image} className="property__image-wrapper">
+                    <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                  </div>
                 );
               })
               }

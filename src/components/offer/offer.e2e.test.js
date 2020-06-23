@@ -12,11 +12,13 @@ Enzyme.configure({
 
 it(`Offer should be hovered`, () => {
   const hoverOfferTestHandler = jest.fn();
+  const onClickOffer = jest.fn();
 
   const offerComponent = mount(
       <Offer
         offer={offerTest}
         onHoveredOffer={hoverOfferTestHandler}
+        onClickOffer={onClickOffer}
       />
   );
 
