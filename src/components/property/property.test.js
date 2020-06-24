@@ -1,13 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import Property from "./property.jsx";
 import {offers} from "../../mock/test/data.js";
 
-
-it(`App snapshot`, () => {
+it(`Property list snapshot`, () => {
   const tree = renderer
     .create(
-        <App offers={offers}/>
+        <Property offer={offers[0]}/>
     )
     .toJSON();
 

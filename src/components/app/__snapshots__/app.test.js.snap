@@ -72,7 +72,6 @@ exports[`App snapshot 1`] = `
       >
         <ul
           className="locations__list tabs__list"
-          onClick={[Function]}
         >
           <li
             className="locations__item"
@@ -264,7 +263,7 @@ exports[`App snapshot 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      100
+                      500
                     </b>
                     <span
                       className="place-card__price-text"
@@ -316,15 +315,16 @@ exports[`App snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
-                    test test
+                    Beautiful & luxurious apartment at great location
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  apartament
                 </p>
               </div>
             </article>
@@ -349,7 +349,7 @@ exports[`App snapshot 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-04.jpg"
+                    src="img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -367,7 +367,7 @@ exports[`App snapshot 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      00
+                      100
                     </b>
                     <span
                       className="place-card__price-text"
@@ -404,7 +404,7 @@ exports[`App snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "40%",
                         }
                       }
                     />
@@ -419,15 +419,16 @@ exports[`App snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer"
+                    onClick={[Function]}
                   >
-                    test test test
+                    Beautiful & luxurious apartment at great location
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  
+                  room
                 </p>
               </div>
             </article>

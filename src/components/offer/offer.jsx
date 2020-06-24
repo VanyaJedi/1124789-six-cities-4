@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {offerType} from "../../types/dataTypes.js";
 
-const Offer = ({offer, onHover}) => {
+const Offer = ({offer, onHoveredOffer, onClickOffer}) => {
   const {title, img, cost, type, rate} = offer;
   return (
     <article className="cities__place-card place-card"
-      onMouseEnter={onHover}>
+      onMouseEnter={() => {
+        onHoveredOffer(offer);
+      }}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
@@ -34,7 +37,12 @@ const Offer = ({offer, onHover}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a href="/offer" onClick={
+            (evt) => {
+              evt.preventDefault();
+              onClickOffer(offer);
+            }
+          }>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -43,14 +51,9 @@ const Offer = ({offer, onHover}) => {
 };
 
 Offer.propTypes = {
-  onHover: PropTypes.func.isRequired,
-  offer: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired,
-    cost: PropTypes.string.isRequired,
-  })
+  onHoveredOffer: PropTypes.func.isRequired,
+  onClickOffer: PropTypes.func.isRequired,
+  offer: offerType
 };
 
 export default Offer;
