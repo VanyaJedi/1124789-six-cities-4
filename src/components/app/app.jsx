@@ -42,7 +42,7 @@ class App extends React.PureComponent {
         />
       );
     } else {
-      return <Property property={this.state.currentOffer}/>;
+      return <Property offer={this.state.currentOffer}/>;
     }
 
   }
@@ -54,8 +54,8 @@ class App extends React.PureComponent {
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/offer">
-            <Property property={offers[0]}/>
+          <Route exact path="/dev-offer">
+            <Property offer={offers[0]}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -67,7 +67,7 @@ App.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
-  property: offerType
+  offer: offerType
 };
 
 export default App;

@@ -6,7 +6,7 @@ import {offers} from "../../mock/test/data.js";
 it(`Property list snapshot`, () => {
   const tree = renderer
     .create(
-        <Property property={offers[0]}/>
+        <Property offer={offers[0]}/>
     )
     .toJSON();
 

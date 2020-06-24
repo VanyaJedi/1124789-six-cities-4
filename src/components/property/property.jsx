@@ -1,8 +1,8 @@
 import React from "react";
 import {offerType} from "../../types/dataTypes.js";
 
-const Property = ({property}) => {
-  const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = property;
+const Property = ({offer}) => {
+  const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = offer;
   const {avatar, name} = owner;
   return (
     <div className="page">
@@ -298,7 +298,7 @@ const Property = ({property}) => {
 
 
 Property.propTypes = {
-  property: offerType
+  offer: offerType
 };
 
 
