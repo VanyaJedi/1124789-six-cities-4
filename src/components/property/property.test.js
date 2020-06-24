@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Property from "./Property.jsx";
+import Property from "./property.jsx";
 import {offers} from "../../mock/test/data.js";
 
 it(`Property list snapshot`, () => {
