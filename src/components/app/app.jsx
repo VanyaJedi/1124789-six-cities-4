@@ -41,6 +41,7 @@ class App extends React.PureComponent {
           onClickOffer={this.handleClickOffer}
         />
       );
+    }
     return <Property offer={this.state.currentOffer}/>;
   }
 
