@@ -3,7 +3,7 @@ import {offerType} from "../../types/dataTypes.js";
 
 const Property = ({offer}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = offer;
-  const {avatar, name} = owner;
+  const {avatar, name, isSuper} = owner;
   return (
     <div className="page">
       <header className="header">
@@ -96,7 +96,7 @@ const Property = ({offer}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
                     <img className="property__avatar user__avatar" src={avatar} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">

@@ -17,7 +17,8 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Katya`,
       isSuper: false
-    }
+    },
+    coordinates: [52.369553943508, 4.85309666406198]
   },
   {
     id: `2`,
@@ -36,6 +37,7 @@ export const offers = [
       avatar: `img/avatar-angelina.jpg`,
       name: `Ivan`,
       isSuper: true
-    }
+    },
+    coordinates: [52.369553943508, 4.85309666406198]
   },
 ];
