@@ -80,3 +80,105 @@ export const offers = [
     coordinates: [52.3809553943508, 4.939309666406198]
   },
 ];
+
+
+export const reviews = [
+  {
+    id: `1`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `2`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `3`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `4`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `5`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `6`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `7`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `8`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `9`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `10`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `11`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `12`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+  {
+    id: `13`,
+    text: `bla bla bla bla bla bla bla blablabla`,
+    rate: 5,
+    userName: `Olya`,
+    date: new Date()
+  },
+  {
+    id: `14`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date()
+  },
+];

@@ -1,6 +1,6 @@
 import React from "react";
 import OfferList from "../offer-list/offer-list.jsx";
-import Map from "../map/mapElement.jsx";
+import Map from "../map/map.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 

@@ -1,12 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MapElement from "./mapElement.jsx";
+import Map from "./map.jsx";
 import {offers} from "../../mock/test/data.js";
 
 it(`Map snapshot`, () => {
   const tree = renderer
     .create(
-        <MapElement offers={offers} />
+        <Map offers={offers} />,
+        {
+          createNodeMock: () => document.createElement(`div`)
+        }
     )
     .toJSON();
 

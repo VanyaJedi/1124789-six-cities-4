@@ -34,6 +34,7 @@ export default class MapElement extends React.PureComponent {
       .addTo(map);
 
     const {offers} = this.props;
+
     offers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon})
