@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import {offers} from "../../mock/data.js";
+import {offers, reviews} from "../../mock/data.js";
 
 class App extends React.PureComponent {
 
@@ -53,7 +53,10 @@ class App extends React.PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-offer">
-            <Property offer={offers[0]}/>
+            <Property
+              offer={offers[0]}
+              reviews={reviews}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

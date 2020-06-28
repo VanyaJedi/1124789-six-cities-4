@@ -1,23 +1,15 @@
 import React from "react";
 import ReviewList from "../review-list/review-list.jsx";
 import {offerType} from "../../types/dataTypes.js";
-import {reviews, offers} from "../../mock/data.js";
+import {offers} from "../../mock/data.js";
 import Map from "../map/map.jsx";
 import OfferList from "../../components/offer-list/offer-list.jsx";
+import {reviewType} from "../../types/dataTypes.js";
+import PropTypes from "prop-types";
 
-const Property = ({offer}) => {
+const Property = ({offer, reviews}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = offer;
   const {avatar, name, isSuper} = owner;
-
-  const reviewsToShow = reviews.slice().sort((prev, curr) => {
-    if (prev.date > curr.date) {
-      return -1;
-    } else if (prev.date < curr.date) {
-      return 1;
-    }
-    return 0;
-  })
-  .slice(0, 9);
 
   return (
     <div className="page">
@@ -128,7 +120,7 @@ const Property = ({offer}) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewList reviews={reviewsToShow}/>
+                <ReviewList reviews={reviews}/>
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
@@ -197,7 +189,10 @@ const Property = ({offer}) => {
 
 
 Property.propTypes = {
-  offer: offerType
+  offer: offerType,
+  reviews: PropTypes.arrayOf(
+      reviewType
+  ),
 };
 
 
