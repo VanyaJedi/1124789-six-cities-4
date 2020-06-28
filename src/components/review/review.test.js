@@ -8,7 +8,8 @@ it(`Review list snapshot`, () => {
   const reviewTest = reviews[0];
   const tree = renderer
     .create(
-        <Review text={reviewTest.text}
+        <Review key={reviewTest.id}
+          text={reviewTest.text}
           rate={reviewTest.rate}
           userName={reviewTest.userName}
           date={reviewTest.date}/>,
