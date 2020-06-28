@@ -51,8 +51,8 @@ const Offer = ({offer, onHoveredOffer, onClickOffer}) => {
 };
 
 Offer.propTypes = {
-  onHoveredOffer: PropTypes.func.isRequired,
-  onClickOffer: PropTypes.func.isRequired,
+  onHoveredOffer: PropTypes.func,
+  onClickOffer: PropTypes.func,
   offer: offerType
 };
 

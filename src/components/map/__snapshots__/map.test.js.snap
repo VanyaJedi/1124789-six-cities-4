@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map snapshot 1`] = `
+<Map
+  offers={
+    Array [
+      Object {
+        "bedAmount": 2,
+        "coordinates": Array [
+          52.369553943508,
+          4.85309666406198,
+        ],
+        "cost": "500",
+        "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
+        "houseItems": Array [
+          "TV",
+          "Rope",
+          "Fridge",
+        ],
+        "id": "1",
+        "images": Array [
+          "img/apartment-01.jpg",
+          "img/apartment-02.jpg",
+        ],
+        "img": "img/apartment-02.jpg",
+        "isPrime": true,
+        "maxAdults": 3,
+        "owner": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "isSuper": false,
+          "name": "Katya",
+        },
+        "rate": 3.9,
+        "title": "Beautiful & luxurious apartment at great location",
+        "type": "apartament",
+      },
+      Object {
+        "bedAmount": 2,
+        "coordinates": Array [
+          52.369553943508,
+          4.85309666406198,
+        ],
+        "cost": "100",
+        "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
+        "houseItems": Array [
+          "TV",
+          "Rope",
+        ],
+        "id": "2",
+        "images": Array [
+          "img/apartment-01.jpg",
+        ],
+        "img": "img/apartment-01.jpg",
+        "isPrime": false,
+        "maxAdults": 3,
+        "owner": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "isSuper": true,
+          "name": "Ivan",
+        },
+        "rate": 2.1,
+        "title": "Beautiful & luxurious apartment at great location",
+        "type": "room",
+      },
+    ]
+  }
+/>
+`;

@@ -1,13 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-import {offers} from "../../mock/test/data.js";
-jest.mock(`../map/map.jsx`, () => `Map`);
+import ReviewList from "./review-list.jsx";
+import {reviews} from "../../mock/test/data.js";
 
-it(`App snapshot`, () => {
+it(`Review list snapshot`, () => {
   const tree = renderer
     .create(
-        <App offers={offers}/>,
+        <ReviewList reviews={reviews}/>,
         {
           createNodeMock: () => document.createElement(`div`)
         }

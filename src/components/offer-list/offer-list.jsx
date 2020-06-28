@@ -22,8 +22,8 @@ OfferList.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
   ),
-  onHoveredOffer: PropTypes.func.isRequired,
-  onClickOffer: PropTypes.func.isRequired
+  onHoveredOffer: PropTypes.func,
+  onClickOffer: PropTypes.func
 };
 
 export default OfferList;

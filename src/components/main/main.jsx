@@ -1,5 +1,6 @@
 import React from "react";
 import OfferList from "../offer-list/offer-list.jsx";
+import Map from "../map/map.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 
@@ -93,7 +94,9 @@ const Main = ({offers, onHoveredOffer, onClickOffer}) => {
                 offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map offers={offers}/>
+              </section>
             </div>
           </div>
         </div>

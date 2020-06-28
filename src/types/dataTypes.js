@@ -20,3 +20,11 @@ export const offerType = PropTypes.shape({
     isSuper: PropTypes.bool.isRequired,
   })
 });
+
+export const reviewType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  rate: PropTypes.number.isRequired,
+  userName: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
+});
