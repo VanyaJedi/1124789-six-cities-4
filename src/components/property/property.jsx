@@ -8,6 +8,17 @@ import OfferList from "../../components/offer-list/offer-list.jsx";
 const Property = ({offer}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = offer;
   const {avatar, name, isSuper} = owner;
+
+  const reviewsToShow = reviews.slice().sort((prev, curr) => {
+    if (prev.date > curr.date) {
+      return -1;
+    } else if (prev.date < curr.date) {
+      return 1;
+    }
+    return 0;
+  })
+  .slice(0, 9);
+
   return (
     <div className="page">
       <header className="header">
@@ -117,7 +128,7 @@ const Property = ({offer}) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewList reviews={reviews}/>
+                <ReviewList reviews={reviewsToShow}/>
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
