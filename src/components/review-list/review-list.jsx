@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const ReviewList = ({reviews}) => {
 
   const reviewsToShow = reviews.sort((prev, curr) => {
-    return prev.date > curr.date ? -1 : 1
+    return prev.date > curr.date ? -1 : 1;
   })
   .slice(0, 9);
   return (

@@ -41,3 +41,21 @@ export const offers = [
     coordinates: [52.369553943508, 4.85309666406198]
   },
 ];
+
+
+export const reviews = [
+  {
+    id: `1`,
+    text: `test reviewtest reviewtest reviewtest review`,
+    rate: 2,
+    userName: `Kirill`,
+    date: new Date(`2007-10-09`)
+  },
+  {
+    id: `2`,
+    text: `olololololololo`,
+    rate: 3,
+    userName: `Masha`,
+    date: new Date(`1996-07-17`)
+  },
+];

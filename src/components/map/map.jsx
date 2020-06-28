@@ -3,7 +3,7 @@ import leaflet from 'leaflet';
 import PropTypes from "prop-types";
 import {offerType} from "../../types/dataTypes.js";
 
-export default class MapElement extends React.PureComponent {
+export default class Map extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -47,7 +47,7 @@ export default class MapElement extends React.PureComponent {
   }
 }
 
-MapElement.propTypes = {
+Map.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
   )
