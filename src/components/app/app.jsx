@@ -4,45 +4,41 @@ import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {actionCreator} from "../../reducer.js";
 
-import {offers, reviews} from "../../mock/data.js";
 
+import {offers as _offers, reviews} from "../../mock/data.js";
+import {connect} from "react-redux";
 class App extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleHoverOffer = this.handleHoverOffer.bind(this);
-    this.handleClickOffer = this.handleClickOffer.bind(this);
-    this.state = {
-      hoveredOffer: null,
-      currentOffer: null
-    };
-  }
-
-  handleHoverOffer(offer) {
-    this.setState({
-      hoveredOffer: offer
-    });
-  }
-
-  handleClickOffer(offer) {
-    this.setState({
-      currentOffer: offer
-    });
-
   }
 
   _renderApp() {
-    if (!this.state.currentOffer) {
+    const {
+      city,
+      offers,
+      onHoveredOffer,
+      onClickOffer,
+      onClickCity,
+      currentOffer
+    } = this.props;
+
+
+    if (!currentOffer) {
       return (
         <Main
-          offers={this.props.offers}
-          onHoveredOffer={this.handleHoverOffer}
-          onClickOffer={this.handleClickOffer}
+          city={city}
+          offers={offers}
+          onHoveredOffer={onHoveredOffer}
+          onClickOffer={onClickOffer}
+          onClickCity={onClickCity}
+          currentOffer={currentOffer}
         />
       );
     }
-    return <Property offer={this.state.currentOffer}/>;
+    return <Property offer={currentOffer}/>;
   }
 
   render() {
@@ -54,7 +50,7 @@ class App extends React.PureComponent {
           </Route>
           <Route exact path="/dev-offer">
             <Property
-              offer={offers[0]}
+              offer={_offers[0]}
               reviews={reviews}
             />
           </Route>
@@ -68,7 +64,36 @@ App.propTypes = {
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
-  offer: offerType
+  offer: offerType,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
+    zoom: PropTypes.number.isRequired
+  }).isRequired,
+  onHoveredOffer: PropTypes.func.isRequired,
+  onClickOffer: PropTypes.func.isRequired,
+  onClickCity: PropTypes.func.isRequired,
+  currentOffer: offerType
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers,
+  currentOffer: state.currentOffer
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onHoveredOffer(offer) {
+    dispatch(actionCreator.hoverOffer(offer));
+  },
+  onClickOffer(offer) {
+    dispatch(actionCreator.getCurrentOffer(offer));
+  },
+  onClickCity(city) {
+    dispatch(actionCreator.changeCity(city));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

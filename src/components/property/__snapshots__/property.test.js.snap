@@ -562,10 +562,58 @@ exports[`Property list snapshot 1`] = `
         className="property__map map"
       >
         <Map
+          currentOffer={
+            Object {
+              "bedAmount": 2,
+              "city": Object {
+                "cityCoord": Array [
+                  52.38333,
+                  4.9,
+                ],
+                "name": "Paris",
+                "zoom": 14,
+              },
+              "coordinates": Array [
+                52.369553943508,
+                4.85309666406198,
+              ],
+              "cost": "500",
+              "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
+              "houseItems": Array [
+                "TV",
+                "Rope",
+                "Fridge",
+              ],
+              "id": "1",
+              "images": Array [
+                "img/apartment-01.jpg",
+                "img/apartment-02.jpg",
+              ],
+              "img": "img/apartment-02.jpg",
+              "isPrime": true,
+              "maxAdults": 3,
+              "owner": Object {
+                "avatar": "img/avatar-angelina.jpg",
+                "isSuper": false,
+                "name": "Katya",
+              },
+              "rate": 3.9,
+              "title": "Beautiful & luxurious apartment at great location",
+              "type": "apartament",
+            }
+          }
           offers={
             Array [
               Object {
                 "bedAmount": 2,
+                "city": Object {
+                  "cityCoord": Array [
+                    52.38333,
+                    4.9,
+                  ],
+                  "name": "Amsterdam",
+                  "zoom": 10,
+                },
                 "coordinates": Array [
                   52.3909553943508,
                   4.85309666406198,
@@ -595,6 +643,14 @@ exports[`Property list snapshot 1`] = `
               },
               Object {
                 "bedAmount": 2,
+                "city": Object {
+                  "cityCoord": Array [
+                    52.38333,
+                    4.9,
+                  ],
+                  "name": "Amsterdam",
+                  "zoom": 10,
+                },
                 "coordinates": Array [
                   52.369553943508,
                   4.85309666406198,
@@ -621,9 +677,18 @@ exports[`Property list snapshot 1`] = `
                 "rate": 3.1,
                 "title": "Beautiful & luxurious apartment at great location",
                 "type": "room",
+                "zoom": 10,
               },
               Object {
                 "bedAmount": 2,
+                "city": Object {
+                  "cityCoord": Array [
+                    52.38333,
+                    4.9,
+                  ],
+                  "name": "Amsterdam",
+                  "zoom": 10,
+                },
                 "coordinates": Array [
                   52.3909553943508,
                   4.929309666406198,
@@ -650,9 +715,18 @@ exports[`Property list snapshot 1`] = `
                 "rate": 3.3,
                 "title": "Beautiful & luxurious apartment at great location",
                 "type": "room",
+                "zoom": 10,
               },
               Object {
                 "bedAmount": 2,
+                "city": Object {
+                  "cityCoord": Array [
+                    52.38333,
+                    50.9,
+                  ],
+                  "name": "Paris",
+                  "zoom": 9,
+                },
                 "coordinates": Array [
                   52.3809553943508,
                   4.939309666406198,

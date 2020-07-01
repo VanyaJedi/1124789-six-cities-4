@@ -18,7 +18,12 @@ export const offers = [
       name: `Katya`,
       isSuper: false
     },
-    coordinates: [52.369553943508, 4.85309666406198]
+    city: {
+      name: `Paris`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 14
+    },
+    coordinates: [52.369553943508, 4.85309666406198],
   },
   {
     id: `2`,
@@ -38,7 +43,12 @@ export const offers = [
       name: `Ivan`,
       isSuper: true
     },
-    coordinates: [52.369553943508, 4.85309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 10.9],
+      zoom: 16
+    },
+    coordinates: [52.369553943508, 4.85309666406198],
   },
 ];
 

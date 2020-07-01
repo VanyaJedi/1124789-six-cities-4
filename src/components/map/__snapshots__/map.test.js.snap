@@ -6,6 +6,14 @@ exports[`Map snapshot 1`] = `
     Array [
       Object {
         "bedAmount": 2,
+        "city": Object {
+          "cityCoord": Array [
+            52.38333,
+            4.9,
+          ],
+          "name": "Paris",
+          "zoom": 14,
+        },
         "coordinates": Array [
           52.369553943508,
           4.85309666406198,
@@ -36,6 +44,14 @@ exports[`Map snapshot 1`] = `
       },
       Object {
         "bedAmount": 2,
+        "city": Object {
+          "cityCoord": Array [
+            52.38333,
+            10.9,
+          ],
+          "name": "Amsterdam",
+          "zoom": 16,
+        },
         "coordinates": Array [
           52.369553943508,
           4.85309666406198,

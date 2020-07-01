@@ -18,7 +18,13 @@ export const offerType = PropTypes.shape({
     avatar: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     isSuper: PropTypes.bool.isRequired,
-  })
+  }),
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
+    zoom: PropTypes.number.isRequired
+  }).isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
 });
 
 export const reviewType = PropTypes.shape({

@@ -171,7 +171,11 @@ const Property = ({offer, reviews}) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers}></Map>
+            <Map
+              offers={offers}
+              currentOffer={offer}
+            />
+
           </section>
         </section>
         <div className="container">

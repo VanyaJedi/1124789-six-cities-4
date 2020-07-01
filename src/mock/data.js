@@ -17,7 +17,12 @@ export const offers = [
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3909553943508, 4.85309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     id: `2`,
@@ -37,7 +42,13 @@ export const offers = [
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.369553943508, 4.85309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.369553943508, 4.85309666406198],
+    zoom: 10
   },
   {
     id: `3`,
@@ -57,7 +68,13 @@ export const offers = [
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3909553943508, 4.929309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3909553943508, 4.929309666406198],
+    zoom: 10
   },
   {
     id: `4`,
@@ -77,7 +94,12 @@ export const offers = [
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3809553943508, 4.939309666406198]
+    city: {
+      name: `Paris`,
+      cityCoord: [52.38333, 50.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
 ];
 
