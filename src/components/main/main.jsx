@@ -2,9 +2,10 @@ import React from "react";
 import OfferList from "../offer-list/offer-list.jsx";
 import LocationList from "../location-list/location-list.jsx";
 import Map from "../map/map.jsx";
+import Sort from "../sort/sort.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
-import {getOffers} from "../../utils.js";
+import {getOffersOnCity} from "../../utils.js";
 
 class Main extends React.PureComponent {
   constructor(props) {
@@ -24,7 +25,7 @@ class Main extends React.PureComponent {
     </b>);
   }
 
-  createMapTemplate(offersToShow, currentOffer, city) {
+  createMapTemplate(offersToShow, currentOffer, city, hoveredOfferId) {
     if (offersToShow.length === 0) {
       return null;
     }
@@ -34,13 +35,14 @@ class Main extends React.PureComponent {
         offers={offersToShow}
         currentOffer={currentOffer}
         city={city}
+        hoveredOfferId={hoveredOfferId}
       />
     );
   }
 
   render() {
-    const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer} = this.props;
-    const offersToShow = getOffers(offers, city);
+    const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType} = this.props;
+    const offersToShow = getOffersOnCity(offers, city);
     return (
       <div className="page page--gray page--main">
         <header className="header">
@@ -80,29 +82,18 @@ class Main extends React.PureComponent {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 {this.createPlacesCountTemplate(offersToShow, city)}
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"/>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                </form>
+                <Sort onChangeSortType={onChangeSortType}/>
                 <OfferList
                   onHoveredOffer={onHoveredOffer}
                   onClickOffer={onClickOffer}
-                  offers={offersToShow}/>
+                  offers={offersToShow}
+                  sortType={sortType}
+                  currentOffer={currentOffer}
+                />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  {this.createMapTemplate(offersToShow, currentOffer, city)}
+                  {this.createMapTemplate(offersToShow, currentOffer, city, hoveredOfferId)}
                 </section>
               </div>
             </div>
@@ -125,7 +116,10 @@ Main.propTypes = {
   onHoveredOffer: PropTypes.func.isRequired,
   onClickOffer: PropTypes.func.isRequired,
   onClickCity: PropTypes.func.isRequired,
-  currentOffer: offerType
+  currentOffer: offerType,
+  hoveredOfferId: PropTypes.string,
+  sortType: PropTypes.string.isRequired,
+  onChangeSortType: PropTypes.func.isRequired
 };
 
 export default Main;

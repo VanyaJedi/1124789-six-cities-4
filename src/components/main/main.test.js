@@ -9,6 +9,9 @@ it(`Main snapshot`, () => {
   const onHoveredOffer = jest.fn();
   const onClickOffer = jest.fn();
   const onClickCity = jest.fn();
+  const hoveredOfferId = null;
+  const sortType = `Popular`;
+  const onChangeSortType = jest.fn();
   const tree = renderer
     .create(
         <Main
@@ -17,6 +20,9 @@ it(`Main snapshot`, () => {
           onClickCity={onClickCity}
           onHoveredOffer={onHoveredOffer}
           offers={offers}
+          hoveredOfferId={hoveredOfferId}
+          sortType={sortType}
+          onChangeSortType={onChangeSortType}
         />,
         {
           createNodeMock: () => document.createElement(`div`)

@@ -2,13 +2,21 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 
-const Offer = ({offer, onHoveredOffer, onClickOffer}) => {
+const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer}) => {
   const {title, img, cost, type, rate} = offer;
   return (
-    <article className="cities__place-card place-card"
+    <article className={currentOffer ? `near-places__card place-card` : `cities__place-card place-card` }
       onMouseEnter={() => {
-        onHoveredOffer(offer);
-      }}>
+        if (onHoveredOffer) {
+          onHoveredOffer(offer.id);
+        }
+      }}
+      onMouseLeave={()=>{
+        if (onHoveredOffer) {
+          onHoveredOffer(null);
+        }
+      }}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
@@ -53,7 +61,8 @@ const Offer = ({offer, onHoveredOffer, onClickOffer}) => {
 Offer.propTypes = {
   onHoveredOffer: PropTypes.func,
   onClickOffer: PropTypes.func,
-  offer: offerType
+  offer: offerType,
+  currentOffer: offerType
 };
 
 export default Offer;

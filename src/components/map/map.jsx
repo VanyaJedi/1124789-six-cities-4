@@ -17,6 +17,14 @@ export default class Map extends React.PureComponent {
     super(props);
     this._map = null;
     this._mapRef = React.createRef();
+    this._markers = [];
+  }
+
+  _getActulaIcon(offer, currentOffer, hoveredOfferId) {
+    if (currentOffer) {
+      return offer.id === currentOffer.id ? activeIcon : icon;
+    }
+    return offer.id === hoveredOfferId ? activeIcon : icon;
   }
 
   _initMap() {
@@ -35,19 +43,29 @@ export default class Map extends React.PureComponent {
       .addTo(this._map);
   }
 
-  _renderPins() {
-    const {offers, currentOffer} = this.props;
-
+  _renderPins(props) {
+    const {offers, currentOffer, hoveredOfferId} = props;
+    this._markers.forEach((marker) => {
+      this._map.removeLayer(marker);
+    });
     offers.forEach((offer) => {
-      leaflet
-        .marker(offer.coordinates, (currentOffer ? offer.id === (currentOffer.id) : false) ? {activeIcon} : {icon})
-        .addTo(this._map);
+      const actualIcon = this._getActulaIcon(offer, currentOffer, hoveredOfferId);
+      const marker = leaflet
+       .marker(offer.coordinates, {icon: actualIcon})
+       .addTo(this._map);
+      this._markers.push(marker);
     });
   }
 
   componentDidMount() {
     this._initMap();
-    this._renderPins();
+    this._renderPins(this.props);
+  }
+
+  componentDidUpdate() {
+    this._renderPins(this.props);
+    this._map.setView(this.props.city.cityCoord, this.props.city.zoom);
+
   }
 
   render() {

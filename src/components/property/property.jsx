@@ -8,7 +8,7 @@ import {reviewType} from "../../types/dataTypes.js";
 import PropTypes from "prop-types";
 
 const Property = ({offer, reviews}) => {
-  const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner} = offer;
+  const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
 
   return (
@@ -174,6 +174,7 @@ const Property = ({offer, reviews}) => {
             <Map
               offers={offers}
               currentOffer={offer}
+              city={city}
             />
 
           </section>
@@ -182,7 +183,7 @@ const Property = ({offer, reviews}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} />
+              <OfferList offers={offers}/>
             </div>
           </section>
         </div>

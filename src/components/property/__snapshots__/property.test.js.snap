@@ -562,6 +562,16 @@ exports[`Property list snapshot 1`] = `
         className="property__map map"
       >
         <Map
+          city={
+            Object {
+              "cityCoord": Array [
+                52.38333,
+                4.9,
+              ],
+              "name": "Paris",
+              "zoom": 14,
+            }
+          }
           currentOffer={
             Object {
               "bedAmount": 2,
@@ -618,7 +628,7 @@ exports[`Property list snapshot 1`] = `
                   52.3909553943508,
                   4.85309666406198,
                 ],
-                "cost": "100",
+                "cost": "50",
                 "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
                 "houseItems": Array [
                   "TV",
@@ -674,7 +684,7 @@ exports[`Property list snapshot 1`] = `
                   "isSuper": false,
                   "name": "Ivan",
                 },
-                "rate": 3.1,
+                "rate": 4.1,
                 "title": "Beautiful & luxurious apartment at great location",
                 "type": "room",
                 "zoom": 10,
@@ -693,7 +703,7 @@ exports[`Property list snapshot 1`] = `
                   52.3909553943508,
                   4.929309666406198,
                 ],
-                "cost": "100",
+                "cost": "90",
                 "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
                 "houseItems": Array [
                   "TV",
@@ -712,7 +722,7 @@ exports[`Property list snapshot 1`] = `
                   "isSuper": false,
                   "name": "Ivan",
                 },
-                "rate": 3.3,
+                "rate": 2.3,
                 "title": "Beautiful & luxurious apartment at great location",
                 "type": "room",
                 "zoom": 10,
@@ -722,7 +732,7 @@ exports[`Property list snapshot 1`] = `
                 "city": Object {
                   "cityCoord": Array [
                     52.38333,
-                    50.9,
+                    4.9,
                   ],
                   "name": "Paris",
                   "zoom": 9,
@@ -731,7 +741,7 @@ exports[`Property list snapshot 1`] = `
                   52.3809553943508,
                   4.939309666406198,
                 ],
-                "cost": "100",
+                "cost": "110",
                 "desc": "Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location",
                 "houseItems": Array [
                   "TV",
@@ -779,6 +789,112 @@ exports[`Property list snapshot 1`] = `
             <article
               className="cities__place-card place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <div
+                className="place-card__mark"
+              >
+                <span>
+                  Premium
+                </span>
+              </div>
+              <div
+                className="cities__image-wrapper place-card__image-wrapper"
+              >
+                <a
+                  href="#"
+                >
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="img/apartment-01.jpg"
+                    width="260"
+                  />
+                </a>
+              </div>
+              <div
+                className="place-card__info"
+              >
+                <div
+                  className="place-card__price-wrapper"
+                >
+                  <div
+                    className="place-card__price"
+                  >
+                    <b
+                      className="place-card__price-value"
+                    >
+                      €
+                      50
+                    </b>
+                    <span
+                      className="place-card__price-text"
+                    >
+                      / night
+                    </span>
+                  </div>
+                  <button
+                    className="place-card__bookmark-button button"
+                    type="button"
+                  >
+                    <svg
+                      className="place-card__bookmark-icon"
+                      height="19"
+                      width="18"
+                    >
+                      <use
+                        xlinkHref="#icon-bookmark"
+                      />
+                    </svg>
+                    <span
+                      className="visually-hidden"
+                    >
+                      To bookmarks
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className="place-card__rating rating"
+                >
+                  <div
+                    className="place-card__stars rating__stars"
+                  >
+                    <span
+                      style={
+                        Object {
+                          "width": "60%",
+                        }
+                      }
+                    />
+                    <span
+                      className="visually-hidden"
+                    >
+                      Rating
+                    </span>
+                  </div>
+                </div>
+                <h2
+                  className="place-card__name"
+                >
+                  <a
+                    href="/offer"
+                    onClick={[Function]}
+                  >
+                    Beautiful & luxurious apartment at great location
+                  </a>
+                </h2>
+                <p
+                  className="place-card__type"
+                >
+                  room
+                </p>
+              </div>
+            </article>
+            <article
+              className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -852,7 +968,7 @@ exports[`Property list snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "80%",
                         }
                       }
                     />
@@ -883,6 +999,7 @@ exports[`Property list snapshot 1`] = `
             <article
               className="cities__place-card place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -919,7 +1036,7 @@ exports[`Property list snapshot 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      100
+                      90
                     </b>
                     <span
                       className="place-card__price-text"
@@ -956,7 +1073,7 @@ exports[`Property list snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "40%",
                         }
                       }
                     />
@@ -987,6 +1104,7 @@ exports[`Property list snapshot 1`] = `
             <article
               className="cities__place-card place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -1023,111 +1141,7 @@ exports[`Property list snapshot 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      100
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "60%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="/offer"
-                    onClick={[Function]}
-                  >
-                    Beautiful & luxurious apartment at great location
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  room
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-            >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-01.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      100
+                      110
                     </b>
                     <span
                       className="place-card__price-text"

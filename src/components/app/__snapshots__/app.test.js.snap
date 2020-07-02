@@ -135,6 +135,7 @@ exports[`App snapshot 1`] = `
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -149,28 +150,33 @@ exports[`App snapshot 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom"
+              onClick={[Function]}
             >
               <li
                 className="places__option places__option--active"
+                data-sorttype="Popular"
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                data-sorttype="CostAsc"
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                data-sorttype="CostDesc"
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                data-sorttype="RateDesc"
                 tabIndex="0"
               >
                 Top rated first
@@ -183,6 +189,7 @@ exports[`App snapshot 1`] = `
             <article
               className="cities__place-card place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -304,6 +311,7 @@ exports[`App snapshot 1`] = `
                 }
               }
               currentOffer={null}
+              hoveredOfferId={null}
               offers={
                 Array [
                   Object {

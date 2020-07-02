@@ -10,7 +10,7 @@ export const offers = [
     rate: 3.1,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `50`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
@@ -32,7 +32,7 @@ export const offers = [
     desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
     isPrime: true,
     type: `room`,
-    rate: 3.1,
+    rate: 4.1,
     bedAmount: 2,
     maxAdults: 3,
     cost: `100`,
@@ -58,10 +58,10 @@ export const offers = [
     desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
     isPrime: true,
     type: `room`,
-    rate: 3.3,
+    rate: 2.3,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `90`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
@@ -87,7 +87,7 @@ export const offers = [
     rate: 3.1,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `110`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
@@ -96,7 +96,7 @@ export const offers = [
     },
     city: {
       name: `Paris`,
-      cityCoord: [52.38333, 50.9],
+      cityCoord: [52.38333, 4.9],
       zoom: 9
     },
     coordinates: [52.3809553943508, 4.939309666406198],

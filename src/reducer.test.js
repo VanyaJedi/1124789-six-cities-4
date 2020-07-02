@@ -1,5 +1,5 @@
 import {reducer, actionCreator} from "./reducer.js";
-import {offers as initialOffers} from "./mock/data.js";
+import {offers as initialOffers, reviews} from "./mock/test/data.js";
 import {offers as testOffers} from "./mock/test/data.js";
 
 const mockCity = {
@@ -8,12 +8,23 @@ const mockCity = {
   zoom: 10
 };
 
+const initData = {
+  city: initialOffers[0].city,
+  offers: initialOffers,
+  reviews,
+  hoveredOfferId: null,
+  currentOffer: null,
+  sortType: `Popular`
+};
+
 it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(void 0, {})).toEqual({
+  expect(reducer(initData, {})).toEqual({
     city: initialOffers[0].city,
     offers: initialOffers,
-    hoveredOffer: {},
-    currentOffer: null
+    reviews,
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`
   });
 });
 
@@ -23,16 +34,18 @@ it(`Reducer should change the city`, () => {
       {
         city: initialOffers[0].city,
         offers: initialOffers,
-        hoveredOffer: {},
-        currentOffer: null
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`
       },
       actionCreator.changeCity(mockCity)
   ))
   .toEqual({
     city: mockCity,
     offers: initialOffers,
-    hoveredOffer: {},
-    currentOffer: null
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`
   });
 });
 
@@ -41,16 +54,18 @@ it(`Reducer should change the hoverOffer`, () => {
       {
         city: initialOffers[0].city,
         offers: initialOffers,
-        hoveredOffer: {},
-        currentOffer: null
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`
       },
-      actionCreator.hoverOffer(testOffers[0])
+      actionCreator.hoverOffer(testOffers[0].id)
   ))
   .toEqual({
     city: initialOffers[0].city,
     offers: initialOffers,
-    hoveredOffer: testOffers[0],
-    currentOffer: null
+    hoveredOfferId: testOffers[0].id,
+    currentOffer: null,
+    sortType: `Popular`
   });
 });
 
@@ -59,15 +74,37 @@ it(`Reducer should change the currentOffer`, () => {
       {
         city: initialOffers[0].city,
         offers: initialOffers,
-        hoveredOffer: {},
-        currentOffer: null
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`
       },
       actionCreator.getCurrentOffer(testOffers[0])
   ))
   .toEqual({
     city: initialOffers[0].city,
     offers: initialOffers,
-    hoveredOffer: {},
-    currentOffer: testOffers[0]
+    hoveredOfferId: null,
+    currentOffer: testOffers[0],
+    sortType: `Popular`
+  });
+});
+
+it(`Reducer should change the sortType`, () => {
+  expect(reducer(
+      {
+        city: initialOffers[0].city,
+        offers: initialOffers,
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`
+      },
+      actionCreator.changeSortType(`CostDesc`)
+  ))
+  .toEqual({
+    city: initialOffers[0].city,
+    offers: initialOffers,
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `CostDesc`
   });
 });

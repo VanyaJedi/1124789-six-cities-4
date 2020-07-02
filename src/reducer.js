@@ -1,10 +1,13 @@
-import {offers as initialOffers} from "./mock/data.js";
+import {offers, reviews} from "./mock/data.js";
+import {extend} from "./utils.js";
 
 const initialState = {
-  city: initialOffers[0].city,
-  offers: initialOffers,
-  hoveredOffer: {},
-  currentOffer: null
+  city: offers[0].city,
+  offers,
+  reviews,
+  hoveredOfferId: null,
+  currentOffer: null,
+  sortType: `Popular`
 };
 
 
@@ -12,7 +15,9 @@ const actionType = {
   CITY_CHANGE: `CITY_CHANGE`,
   GET_OFFERS: `GET_OFFERS`,
   HOVER_OFFER: `HOVER_OFFER`,
-  GET_CURRENT_OFFER: `GET_CURRENT_OFFER`
+  GET_CURRENT_OFFER: `GET_CURRENT_OFFER`,
+  GET_REVIEWS: `GET_REVIEWS`,
+  CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
 };
 
 
@@ -21,24 +26,30 @@ export const actionCreator = {
     type: actionType.CITY_CHANGE,
     payload: city
   }),
-  hoverOffer: (offer) => ({
+  hoverOffer: (id) => ({
     type: actionType.HOVER_OFFER,
-    payload: offer
+    payload: id
   }),
   getCurrentOffer: (offer) => ({
     type: actionType.GET_CURRENT_OFFER,
     payload: offer
+  }),
+  changeSortType: (sortType) => ({
+    type: actionType.CHANGE_SORT_TYPE,
+    payload: sortType
   })
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.CITY_CHANGE:
-      return Object.assign({}, state, {city: action.payload});
+      return extend(state, {city: action.payload});
     case actionType.HOVER_OFFER:
-      return Object.assign({}, state, {hoveredOffer: action.payload});
+      return extend(state, {hoveredOfferId: action.payload});
     case actionType.GET_CURRENT_OFFER:
-      return Object.assign({}, state, {currentOffer: action.payload});
+      return extend(state, {currentOffer: action.payload});
+    case actionType.CHANGE_SORT_TYPE:
+      return extend(state, {sortType: action.payload});
     default:
       return state;
   }
