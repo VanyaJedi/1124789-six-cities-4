@@ -6,12 +6,14 @@ import {offers} from "../../mock/test/data.js";
 it(`Offer list snapshot`, () => {
   const onClickOffer = jest.fn();
   const onHoveredOffer = jest.fn();
+  const sortType = `Popular`;
   const tree = renderer
     .create(
         <OfferList
           onClickOffer={onClickOffer}
           onHoveredOffer={onHoveredOffer}
-          offers={offers}/>
+          offers={offers}
+          sortType={sortType}/>
     )
     .toJSON();
 

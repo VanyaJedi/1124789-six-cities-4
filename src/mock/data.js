@@ -10,14 +10,19 @@ export const offers = [
     rate: 3.1,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `50`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3909553943508, 4.85309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     id: `2`,
@@ -27,7 +32,7 @@ export const offers = [
     desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
     isPrime: true,
     type: `room`,
-    rate: 3.1,
+    rate: 4.1,
     bedAmount: 2,
     maxAdults: 3,
     cost: `100`,
@@ -37,7 +42,13 @@ export const offers = [
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.369553943508, 4.85309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.369553943508, 4.85309666406198],
+    zoom: 10
   },
   {
     id: `3`,
@@ -47,17 +58,23 @@ export const offers = [
     desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
     isPrime: true,
     type: `room`,
-    rate: 3.3,
+    rate: 2.3,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `90`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3909553943508, 4.929309666406198]
+    city: {
+      name: `Amsterdam`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3909553943508, 4.929309666406198],
+    zoom: 10
   },
   {
     id: `4`,
@@ -70,14 +87,19 @@ export const offers = [
     rate: 3.1,
     bedAmount: 2,
     maxAdults: 3,
-    cost: `100`,
+    cost: `110`,
     houseItems: [`TV`, `Rope`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
       name: `Ivan`,
       isSuper: false
     },
-    coordinates: [52.3809553943508, 4.939309666406198]
+    city: {
+      name: `Paris`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
 ];
 
