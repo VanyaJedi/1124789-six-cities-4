@@ -45,7 +45,7 @@ class App extends React.PureComponent {
         />
       );
     }
-    return <Property offer={currentOffer}/>;
+    return <Property offer={currentOffer} reviews={reviews}/>;
   }
 
   render() {
