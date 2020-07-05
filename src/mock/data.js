@@ -96,11 +96,238 @@ export const offers = [
     },
     city: {
       name: `Paris`,
+      cityCoord: [48.864716, 2.349014],
+      zoom: 9
+    },
+    coordinates: [48.864716, 2.349014],
+  },
+  {
+    id: `5`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Brussel`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `6`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Brussel`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 10
+    },
+    coordinates: [52.3409553943508, 4.939309666406198],
+  },
+  {
+    id: `7`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Moscow`,
       cityCoord: [52.38333, 4.9],
       zoom: 9
     },
     coordinates: [52.3809553943508, 4.939309666406198],
   },
+  {
+    id: `8`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Moscow`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `9`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Dublin`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `10`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Dublin`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `11`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Rio`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `12`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `Rio`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+  {
+    id: `13`,
+    img: `img/apartment-01.jpg`,
+    images: [`img/apartment-01.jpg`, `img/apartment-02.jpg`],
+    title: `Beautiful & luxurious apartment at great location`,
+    desc: `Beautiful & luxurious apartment at great location, Beautiful & luxurious apartment at great location`,
+    isPrime: true,
+    type: `room`,
+    rate: 3.1,
+    bedAmount: 2,
+    maxAdults: 3,
+    cost: `110`,
+    houseItems: [`TV`, `Rope`],
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Ivan`,
+      isSuper: false
+    },
+    city: {
+      name: `New York`,
+      cityCoord: [52.38333, 4.9],
+      zoom: 9
+    },
+    coordinates: [52.3809553943508, 4.939309666406198],
+  },
+
+
 ];
 
 

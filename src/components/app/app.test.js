@@ -12,9 +12,19 @@ const mockStore = configureStore([]);
 
 it(`App snapshot`, () => {
 
-  const store = mockStore({
+  const initialState = {
     city: offers[0].city,
-  });
+    offers,
+    reviews,
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`
+  };
+
+
+  const store = mockStore(initialState);
+
+
   const city = offers[0].city;
   const currentOffer = null;
   const onHoveredOffer = jest.fn();
