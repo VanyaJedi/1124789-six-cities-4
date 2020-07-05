@@ -6,6 +6,9 @@ import Sort from "../sort/sort.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 import {getOffersOnCity} from "../../utils.js";
+import withSort from "../../hocs/with-sort/with-sort.js";
+
+const SortWrapped = withSort(Sort);
 
 class Main extends React.PureComponent {
   constructor(props) {
@@ -82,7 +85,9 @@ class Main extends React.PureComponent {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 {this.createPlacesCountTemplate(offersToShow, city)}
-                <Sort onChangeSortType={onChangeSortType}/>
+                <SortWrapped
+                  onChangeSortType={onChangeSortType}
+                />
                 <OfferList
                   onHoveredOffer={onHoveredOffer}
                   onClickOffer={onClickOffer}

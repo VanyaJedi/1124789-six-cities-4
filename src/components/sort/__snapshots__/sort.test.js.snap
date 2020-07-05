@@ -13,7 +13,7 @@ exports[`Sort snapshot 1`] = `
   </span>
   <span
     className="places__sorting-type"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     tabIndex="0"
   >
     Popular

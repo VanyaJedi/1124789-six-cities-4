@@ -10,9 +10,15 @@ Enzyme.configure({
 
 it(`Sort should be clicked`, () => {
   const onChangeSortType = jest.fn();
+  const opened = false;
+  const onClickHandler = jest.fn();
 
   const sortComponent = mount(
-      <Sort onChangeSortType={onChangeSortType}/>
+      <Sort
+        onChangeSortType={onChangeSortType}
+        opened={opened}
+        onClickHandler={onClickHandler}
+      />
   );
 
   const sortTypesList = sortComponent.find(`.places__options`);

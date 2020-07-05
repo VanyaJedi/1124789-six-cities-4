@@ -5,9 +5,15 @@ import Sort from "./sort.jsx";
 
 it(`Sort snapshot`, () => {
   const onChangeSortType = jest.fn();
+  const opened = false;
+  const onClickHandler = jest.fn();
   const tree = renderer
     .create(
-        <Sort onChangeSortType={onChangeSortType}/>
+        <Sort
+          onChangeSortType={onChangeSortType}
+          onClickHandler={onClickHandler}
+          opened={opened}
+        />
     )
     .toJSON();
 
