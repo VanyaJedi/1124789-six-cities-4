@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Sort from "./sort.jsx";
+import {sortType, sortTypeMapping} from "../../mock/test/data.js";
 
 
 Enzyme.configure({
@@ -18,11 +19,13 @@ it(`Sort should be clicked`, () => {
         onChangeSortType={onChangeSortType}
         opened={opened}
         onClickHandler={onClickHandler}
+        sortTypeMapping={sortTypeMapping}
+        sortType={sortType}
       />
   );
 
-  const sortTypesList = sortComponent.find(`.places__options`);
-  sortTypesList.simulate(`click`);
+  const sortTypeNode = sortComponent.find(`.places__option`).at(1);
+  sortTypeNode.simulate(`click`);
   expect(onChangeSortType).toHaveBeenCalled();
 
 });

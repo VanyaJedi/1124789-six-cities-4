@@ -3,6 +3,7 @@ import OfferList from "../offer-list/offer-list.jsx";
 import LocationList from "../location-list/location-list.jsx";
 import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
+import Empty from "../empty/empty.jsx";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
 import {getOffersOnCity} from "../../utils.js";
@@ -15,37 +16,47 @@ class Main extends React.PureComponent {
     super(props);
   }
 
-  createPlacesCountTemplate(offers, city) {
-    if (offers.length === 0) {
-      return (
-        <b className="places__found">
-          No places to stay available
-        </b>
-      );
-    }
-    return (<b className="places__found">
-      {offers.length} places to stay in {city.name}
-    </b>);
-  }
-
-  createMapTemplate(offersToShow, currentOffer, city, hoveredOfferId) {
-    if (offersToShow.length === 0) {
-      return null;
-    }
-
-    return (
-      <Map
-        offers={offersToShow}
-        currentOffer={currentOffer}
-        city={city}
-        hoveredOfferId={hoveredOfferId}
-      />
-    );
-  }
-
   render() {
     const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType} = this.props;
     const offersToShow = getOffersOnCity(offers, city);
+
+    let contentElement;
+    if (offersToShow.length === 0) {
+      contentElement = <Empty/>;
+    } else {
+      contentElement = (
+        <div className="cities__places-container container">
+          <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">
+              {offersToShow.length} places to stay in {city.name}
+            </b>
+            <SortWrapped
+              onChangeSortType={onChangeSortType}
+              sortType={sortType}
+            />
+            <OfferList
+              onHoveredOffer={onHoveredOffer}
+              onClickOffer={onClickOffer}
+              offers={offersToShow}
+              sortType={sortType}
+              currentOffer={currentOffer}
+            />
+          </section>
+          <div className="cities__right-section">
+            <section className="cities__map map">
+              <Map
+                offers={offersToShow}
+                currentOffer={currentOffer}
+                city={city}
+                hoveredOfferId={hoveredOfferId}
+              />
+            </section>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="page page--gray page--main">
         <header className="header">
@@ -70,7 +81,7 @@ class Main extends React.PureComponent {
             </div>
           </div>
         </header>
-        <main className="page__main page__main--index">
+        <main className={offers.length === 0 ? `page__main page__main--index page__main--index-empty` : `page__main page__main--index`}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
@@ -81,27 +92,7 @@ class Main extends React.PureComponent {
             </section>
           </div>
           <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                {this.createPlacesCountTemplate(offersToShow, city)}
-                <SortWrapped
-                  onChangeSortType={onChangeSortType}
-                />
-                <OfferList
-                  onHoveredOffer={onHoveredOffer}
-                  onClickOffer={onClickOffer}
-                  offers={offersToShow}
-                  sortType={sortType}
-                  currentOffer={currentOffer}
-                />
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  {this.createMapTemplate(offersToShow, currentOffer, city, hoveredOfferId)}
-                </section>
-              </div>
-            </div>
+            {contentElement}
           </div>
         </main>
       </div>
