@@ -1,13 +1,12 @@
 import React from "react";
 import ReviewList from "../review-list/review-list.jsx";
 import {offerType} from "../../types/dataTypes.js";
-import {offers} from "../../mock/data.js";
 import Map from "../map/map.jsx";
 import OfferList from "../../components/offer-list/offer-list.jsx";
 import {reviewType} from "../../types/dataTypes.js";
 import PropTypes from "prop-types";
 
-const Property = ({offer, reviews}) => {
+const Property = ({offer, reviews, offers}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
 
@@ -198,6 +197,7 @@ Property.propTypes = {
   reviews: PropTypes.arrayOf(
       reviewType
   ),
+  offers: PropTypes.arrayOf(offerType)
 };
 
 

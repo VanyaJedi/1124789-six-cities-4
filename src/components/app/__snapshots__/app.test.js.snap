@@ -77,19 +77,6 @@ exports[`App snapshot 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
               href="#"
               onClick={[Function]}
@@ -108,46 +95,7 @@ exports[`App snapshot 1`] = `
               onClick={[Function]}
             >
               <span>
-                Brussel
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Moscow
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Dublin
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Rio
+                Amsterdam
               </span>
             </a>
           </li>
@@ -202,7 +150,7 @@ exports[`App snapshot 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom"
+              className="places__options places__options--custom "
             >
               <li
                 className="places__option places__option--active"
@@ -212,21 +160,21 @@ exports[`App snapshot 1`] = `
                 Popular
               </li>
               <li
-                className="places__option"
+                className="places__option "
                 data-sortype="CostAsc"
                 onClick={[Function]}
               >
                 Price: low to high
               </li>
               <li
-                className="places__option"
+                className="places__option "
                 data-sortype="CostDesc"
                 onClick={[Function]}
               >
                 Price: high to low
               </li>
               <li
-                className="places__option"
+                className="places__option "
                 data-sortype="RateDesc"
                 onClick={[Function]}
               >

@@ -15,12 +15,12 @@ const Sort = (props)=> {
         </svg>
       </span>
       <ul
-        className={opened ? `places__options places__options--custom places__options--opened` : `places__options places__options--custom`}
+        className={`places__options places__options--custom ${opened ? `places__options--opened` : ``}`}
       >
         {sortTypeMapping.map((sortObj)=> {
           return <li key={sortObj.id}
             data-sortype={sortObj.type}
-            className={sortType === sortObj.type ? `places__option places__option--active` : `places__option`}
+            className={`places__option ${sortType === sortObj.type ? `places__option--active` : ``}`}
             onClick={() => {
               onChangeSortType(sortObj.type);
             }}>{sortObj.text}</li>;

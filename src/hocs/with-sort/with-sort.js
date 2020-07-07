@@ -30,10 +30,10 @@ const withSort = (Component) => {
       this.state = {
         opened: false,
       };
-      this._onClickHandler = this._onClickHandler.bind(this);
+      this.onClickHandler = this.onClickHandler.bind(this);
     }
 
-    _onClickHandler() {
+    onClickHandler() {
       this.setState((state) => {
         return {opened: !state.opened};
       });
@@ -45,7 +45,7 @@ const withSort = (Component) => {
       return <Component
         {...this.props}
         opened={opened}
-        onClickHandler={this._onClickHandler}
+        onClickHandler={this.onClickHandler}
         sortTypeMapping={sortTypeMapping}
       />;
     }
