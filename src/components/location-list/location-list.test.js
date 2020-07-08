@@ -9,6 +9,7 @@ it(`Location list snapshot`, () => {
   const tree = renderer
     .create(
         <LocationList
+          offers={offers}
           onClickCity={onClickCity}
           city={city}/>
     )

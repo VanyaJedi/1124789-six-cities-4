@@ -59,6 +59,7 @@ class App extends React.PureComponent {
           <Route exact path="/dev-offer">
             <Property
               offer={offers[0]}
+              offers={offers}
               reviews={reviews}
               hoveredOfferId={hoveredOfferId}
               onHoveredOffer={onHoveredOffer}

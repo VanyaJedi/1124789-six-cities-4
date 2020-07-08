@@ -1,45 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class Sort extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {opened: false};
-  }
-
-  render() {
-    return (
-      <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
-        <span className="places__sorting-type" tabIndex="0"
-          onClick={()=> {
-            this.setState((state) => {
-              return {opened: !state.opened};
-            });
-          }}
-        >
-          Popular
-          <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select"/>
-          </svg>
-        </span>
-        <ul
-          className={this.state.opened ? `places__options places__options--custom places__options--opened` : `places__options places__options--custom`}
-          onClick={(evt) => {
-            const sortType = evt.target.dataset.sorttype;
-            this.props.onChangeSortType(sortType);
-          }}
-        >
-          <li data-sorttype="Popular" className="places__option places__option--active" tabIndex="0">Popular</li>
-          <li data-sorttype="CostAsc" className="places__option" tabIndex="0">Price: low to high</li>
-          <li data-sorttype="CostDesc" className="places__option" tabIndex="0">Price: high to low</li>
-          <li data-sorttype="RateDesc" className="places__option" tabIndex="0">Top rated first</li>
-        </ul>
-      </form>
-    );
-  }
-}
+const Sort = (props)=> {
+  const {onChangeSortType, opened, onClickHandler, sortTypeMapping, sortType} = props;
+  return (
+    <form className="places__sorting" action="#" method="get">
+      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-type" tabIndex="0"
+        onClick={onClickHandler}
+      >
+        Popular
+        <svg className="places__sorting-arrow" width="7" height="4">
+          <use xlinkHref="#icon-arrow-select"/>
+        </svg>
+      </span>
+      <ul
+        className={`places__options places__options--custom ${opened ? `places__options--opened` : ``}`}
+      >
+        {sortTypeMapping.map((sortObj)=> {
+          return <li key={sortObj.id}
+            data-sortype={sortObj.type}
+            className={`places__option ${sortType === sortObj.type ? `places__option--active` : ``}`}
+            onClick={() => {
+              onChangeSortType(sortObj.type);
+            }}>{sortObj.text}</li>;
+        })}
+      </ul>
+    </form>
+  );
+};
 
 Sort.propTypes = {
-  onChangeSortType: PropTypes.func.isRequired
+  onChangeSortType: PropTypes.func.isRequired,
+  opened: PropTypes.bool.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
+  sortTypeMapping: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  })),
+  sortType: PropTypes.string.isRequired
 };
+
+
+export default Sort;

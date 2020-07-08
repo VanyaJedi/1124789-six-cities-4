@@ -15,6 +15,7 @@ it(`Location item should be clicked`, () => {
 
   const locationList = mount(
       <LocationList
+        offers={offers}
         city={city}
         onClickCity={cityClick}
       />

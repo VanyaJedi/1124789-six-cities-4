@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {offerType} from "../../types/dataTypes.js";
 import {getCities} from "../../utils.js";
-import {offers} from "../../mock/data.js";
 
-const LocationList = ({city, onClickCity}) => {
+const LocationList = ({offers, city, onClickCity}) => {
   const locations = getCities(offers);
   return (
     <ul className="locations__list tabs__list">
@@ -26,6 +26,7 @@ const LocationList = ({city, onClickCity}) => {
 };
 
 LocationList.propTypes = {
+  offers: PropTypes.arrayOf(offerType),
   city: PropTypes.shape({
     name: PropTypes.string.isRequired,
     cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,

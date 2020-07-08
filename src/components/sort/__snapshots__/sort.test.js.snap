@@ -13,7 +13,7 @@ exports[`Sort snapshot 1`] = `
   </span>
   <span
     className="places__sorting-type"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     tabIndex="0"
   >
     Popular
@@ -28,34 +28,33 @@ exports[`Sort snapshot 1`] = `
     </svg>
   </span>
   <ul
-    className="places__options places__options--custom"
-    onClick={[Function]}
+    className="places__options places__options--custom "
   >
     <li
       className="places__option places__option--active"
-      data-sorttype="Popular"
-      tabIndex="0"
+      data-sortype="Popular"
+      onClick={[Function]}
     >
       Popular
     </li>
     <li
-      className="places__option"
-      data-sorttype="CostAsc"
-      tabIndex="0"
+      className="places__option "
+      data-sortype="CostAsc"
+      onClick={[Function]}
     >
       Price: low to high
     </li>
     <li
-      className="places__option"
-      data-sorttype="CostDesc"
-      tabIndex="0"
+      className="places__option "
+      data-sortype="CostDesc"
+      onClick={[Function]}
     >
       Price: high to low
     </li>
     <li
-      className="places__option"
-      data-sorttype="RateDesc"
-      tabIndex="0"
+      className="places__option "
+      data-sortype="RateDesc"
+      onClick={[Function]}
     >
       Top rated first
     </li>

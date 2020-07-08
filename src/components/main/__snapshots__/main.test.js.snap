@@ -77,19 +77,6 @@ exports[`Main snapshot 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
               href="#"
               onClick={[Function]}
@@ -108,46 +95,7 @@ exports[`Main snapshot 1`] = `
               onClick={[Function]}
             >
               <span>
-                Brussel
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Moscow
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Dublin
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Rio
+                Amsterdam
               </span>
             </a>
           </li>
@@ -202,34 +150,33 @@ exports[`Main snapshot 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom"
-              onClick={[Function]}
+              className="places__options places__options--custom "
             >
               <li
                 className="places__option places__option--active"
-                data-sorttype="Popular"
-                tabIndex="0"
+                data-sortype="Popular"
+                onClick={[Function]}
               >
                 Popular
               </li>
               <li
-                className="places__option"
-                data-sorttype="CostAsc"
-                tabIndex="0"
+                className="places__option "
+                data-sortype="CostAsc"
+                onClick={[Function]}
               >
                 Price: low to high
               </li>
               <li
-                className="places__option"
-                data-sorttype="CostDesc"
-                tabIndex="0"
+                className="places__option "
+                data-sortype="CostDesc"
+                onClick={[Function]}
               >
                 Price: high to low
               </li>
               <li
-                className="places__option"
-                data-sorttype="RateDesc"
-                tabIndex="0"
+                className="places__option "
+                data-sortype="RateDesc"
+                onClick={[Function]}
               >
                 Top rated first
               </li>

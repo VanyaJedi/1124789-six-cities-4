@@ -7,6 +7,7 @@ it(`Property list snapshot`, () => {
   const tree = renderer
     .create(
         <Property
+          offers={offers}
           offer={offers[0]}
           reviews={reviews}
         />,

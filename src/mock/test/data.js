@@ -69,3 +69,27 @@ export const reviews = [
     date: new Date(`1996-07-17`)
   },
 ];
+
+export const sortType = `Popular`;
+export const sortTypeMapping = [
+  {
+    id: `1`,
+    type: `Popular`,
+    text: `Popular`
+  },
+  {
+    id: `2`,
+    type: `CostAsc`,
+    text: `Price: low to high`
+  },
+  {
+    id: `3`,
+    type: `CostDesc`,
+    text: `Price: high to low`
+  },
+  {
+    id: `4`,
+    type: `RateDesc`,
+    text: `Top rated first`
+  },
+];
