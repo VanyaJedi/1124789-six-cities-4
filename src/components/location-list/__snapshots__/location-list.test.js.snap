@@ -8,13 +8,11 @@ exports[`Location list snapshot 1`] = `
     className="locations__item"
   >
     <a
-      className="locations__item-link tabs__item tabs__item--active"
+      className="locations__item-link tabs__item"
       href="#"
       onClick={[Function]}
     >
-      <span>
-        Paris
-      </span>
+      <span />
     </a>
   </li>
   <li
@@ -25,9 +23,7 @@ exports[`Location list snapshot 1`] = `
       href="#"
       onClick={[Function]}
     >
-      <span>
-        Amsterdam
-      </span>
+      <span />
     </a>
   </li>
 </ul>

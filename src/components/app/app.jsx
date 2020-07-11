@@ -2,10 +2,13 @@ import React from "react";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
-import {offerType, reviewType} from "../../types/dataTypes.js";
+import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {actionCreator} from "../../reducer.js";
+import {actionCreator as actionCreatorApp} from "../../reducer/app/app.js";
+import {actionCreator as actionCreatorData} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
+import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors.js";
+import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
 
 
 class App extends React.PureComponent {
@@ -25,9 +28,9 @@ class App extends React.PureComponent {
       currentOffer,
       hoveredOfferId,
       sortType,
-      onChangeSortType
+      onChangeSortType,
+      cities
     } = this.props;
-
 
     if (!currentOffer) {
       return (
@@ -42,10 +45,11 @@ class App extends React.PureComponent {
           currentOffer={currentOffer}
           onChangeSortType={onChangeSortType}
           sortType={sortType}
+          cities={cities}
         />
       );
     }
-    return <Property offer={currentOffer} reviews={reviews}/>;
+    return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
   }
 
   render() {
@@ -76,11 +80,7 @@ App.propTypes = {
       offerType
   ).isRequired,
   offer: offerType,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired
-  }).isRequired,
+  city: cityType,
   onHoveredOffer: PropTypes.func.isRequired,
   onClickOffer: PropTypes.func.isRequired,
   onClickCity: PropTypes.func.isRequired,
@@ -88,30 +88,32 @@ App.propTypes = {
   currentOffer: offerType,
   reviews: PropTypes.arrayOf(reviewType),
   hoveredOfferId: PropTypes.string,
-  sortType: PropTypes.string
+  sortType: PropTypes.string,
+  cities: PropTypes.arrayOf(cityType),
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  currentOffer: state.currentOffer,
-  reviews: state.reviews,
-  hoveredOfferId: state.hoveredOfferId,
-  sortType: state.sortType
+  city: getCity(state),
+  cities: getCities(state),
+  offers: getFilteredOffers(state),
+  currentOffer: getCurrentOffer(state),
+  reviews: getReviews(state),
+  hoveredOfferId: getHoveredOfferId(state),
+  sortType: getSortType(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onHoveredOffer(offer) {
-    dispatch(actionCreator.hoverOffer(offer));
+    dispatch(actionCreatorApp.hoverOffer(offer));
   },
   onClickOffer(offer) {
-    dispatch(actionCreator.getCurrentOffer(offer));
+    dispatch(actionCreatorApp.getCurrentOffer(offer));
   },
   onClickCity(city) {
-    dispatch(actionCreator.changeCity(city));
+    dispatch(actionCreatorData.changeCity(city));
   },
   onChangeSortType(sortType) {
-    dispatch(actionCreator.changeSortType(sortType));
+    dispatch(actionCreatorApp.changeSortType(sortType));
   }
 });
 

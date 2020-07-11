@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import LocationList from "./location-list.jsx";
-import {offers} from "../../mock/test/data.js";
+import {offers, cities} from "../../mock/test/data.js";
 
 const city = offers[0].city;
 
@@ -15,6 +15,7 @@ it(`Location item should be clicked`, () => {
 
   const locationList = mount(
       <LocationList
+        cities={cities}
         offers={offers}
         city={city}
         onClickCity={cityClick}

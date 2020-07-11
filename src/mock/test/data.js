@@ -93,3 +93,5 @@ export const sortTypeMapping = [
     text: `Top rated first`
   },
 ];
+
+export const cities = [`Paris`, `Amsterdam`];

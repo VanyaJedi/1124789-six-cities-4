@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {offers, reviews} from "../../mock/test/data.js";
+import {offers, reviews, cities} from "../../mock/test/data.js";
 
 
 jest.mock(`../map/map.jsx`, () => `Map`);
@@ -13,6 +13,7 @@ const mockStore = configureStore([]);
 it(`App snapshot`, () => {
 
   const initialState = {
+    cities,
     city: offers[0].city,
     offers,
     reviews,

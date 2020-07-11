@@ -5,15 +5,14 @@ import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
 import Empty from "../empty/empty.jsx";
 import PropTypes from 'prop-types';
-import {offerType} from "../../types/dataTypes.js";
-import {getOffersOnCity} from "../../utils.js";
+import {offerType, cityType} from "../../types/dataTypes.js";
 import withSort from "../../hocs/with-sort/with-sort.js";
 
 const SortWrapped = withSort(Sort);
 
 const Main = (props) => {
-  const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType} = props;
-  const offersToShow = getOffersOnCity(offers, city);
+  const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
+  const offersToShow = offers;
 
   let contentElement;
   if (offersToShow.length === 0) {
@@ -81,6 +80,7 @@ const Main = (props) => {
         <div className="tabs">
           <section className="locations container">
             <LocationList
+              cities={cities}
               offers={offers}
               onClickCity={onClickCity}
               city={city}
@@ -96,14 +96,11 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  cities: PropTypes.arrayOf(cityType),
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired
-  }).isRequired,
+  city: cityType,
   onHoveredOffer: PropTypes.func.isRequired,
   onClickOffer: PropTypes.func.isRequired,
   onClickCity: PropTypes.func.isRequired,

@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {offerType} from "../../types/dataTypes.js";
-import {getCities} from "../../utils.js";
+import {cityType} from "../../types/dataTypes.js";
 
-const LocationList = ({offers, city, onClickCity}) => {
-  const locations = getCities(offers);
+const LocationList = ({city, onClickCity, cities}) => {
   return (
     <ul className="locations__list tabs__list">
-      {locations.map((location, index) => {
+      {cities.map((location, index) => {
         return (
           <li key={location.name + index} className="locations__item">
             <a
@@ -26,12 +24,8 @@ const LocationList = ({offers, city, onClickCity}) => {
 };
 
 LocationList.propTypes = {
-  offers: PropTypes.arrayOf(offerType),
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired
-  }).isRequired,
+  cities: PropTypes.arrayOf(cityType),
+  city: cityType,
   onClickCity: PropTypes.func.isRequired,
 };
 

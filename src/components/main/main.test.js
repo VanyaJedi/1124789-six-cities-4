@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import {offers} from "../../mock/test/data.js";
+import {offers, cities} from "../../mock/test/data.js";
 jest.mock(`../map/map.jsx`, () => `Map`);
 
 it(`Main snapshot`, () => {
@@ -15,6 +15,7 @@ it(`Main snapshot`, () => {
   const tree = renderer
     .create(
         <Main
+          cities={cities}
           city={city}
           onClickOffer={onClickOffer}
           onClickCity={onClickCity}
