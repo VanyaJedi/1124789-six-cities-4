@@ -1,22 +1,32 @@
 
 import {createSelector} from "reselect";
 import nameSpace from "../name-space.js";
+import {createOffers} from "../../adapters/offers.js";
 
 const CITIES_TO_SHOW = 6;
 const NAME_SPACE = nameSpace.DATA;
-
 
 export const getCity = (state) => {
   return state[NAME_SPACE].city;
 };
 
 export const getOffers = (state) => {
-  return state[NAME_SPACE].offers;
+  return state[NAME_SPACE].offers.map((offer) => createOffers(offer));
 };
 
 export const getReviews = (state) => {
   return state[NAME_SPACE].reviews;
 };
+
+export const getInitCity = createSelector(
+    [getOffers],
+    (offers) => {
+      if (offers.length) {
+        return offers[0].city;
+      }
+      return ``;
+    }
+);
 
 export const getFilteredOffers = createSelector(
     [getCity, getOffers],
@@ -24,6 +34,7 @@ export const getFilteredOffers = createSelector(
       return offers.filter((offer) => offer.city.name === city.name);
     }
 );
+
 
 export const getCities = createSelector(
     [getOffers],

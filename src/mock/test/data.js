@@ -94,4 +94,15 @@ export const sortTypeMapping = [
   },
 ];
 
-export const cities = [`Paris`, `Amsterdam`];
+export const cities = [
+  {
+    name: `Paris`,
+    cityCoord: [1, 2],
+    zoom: 10
+  },
+  {
+    name: `Amsterdam`,
+    cityCoord: [2, 3],
+    zoom: 14
+  },
+];

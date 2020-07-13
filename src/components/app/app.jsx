@@ -1,15 +1,17 @@
 import React from "react";
 import Main from "../main/main.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
 import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {actionCreator as actionCreatorApp} from "../../reducer/app/app.js";
 import {actionCreator as actionCreatorData} from "../../reducer/data/data.js";
+import {Operation as userOperation} from "../../reducer/user/user.js";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors.js";
+import {getHoveredOfferId, getCurrentOffer, getSortType, getAuthScreen} from "../../reducer/app/selectors.js";
 import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
-
+import {getAuthStatus} from "../../reducer/user/selectors.js";
 
 class App extends React.PureComponent {
 
@@ -19,6 +21,10 @@ class App extends React.PureComponent {
 
   _renderApp() {
     const {
+      login,
+      showAuthScreen,
+      authScreen,
+      authorizationStatus,
       city,
       offers,
       reviews,
@@ -32,9 +38,12 @@ class App extends React.PureComponent {
       cities
     } = this.props;
 
-    if (!currentOffer) {
+    if (!currentOffer && !authScreen) {
       return (
         <Main
+          showAuthScreen={showAuthScreen}
+          authScreen={authScreen}
+          authorizationStatus={authorizationStatus}
           city={city}
           offers={offers}
           reviews={reviews}
@@ -48,8 +57,10 @@ class App extends React.PureComponent {
           cities={cities}
         />
       );
+    } else if (!authScreen) {
+      return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
     }
-    return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
+    return <SignIn loginHandler={login}/>;
   }
 
   render() {
@@ -76,6 +87,10 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
+  login: PropTypes.func,
+  showAuthScreen: PropTypes.func,
+  authScreen: PropTypes.bool,
+  authorizationStatus: PropTypes.string,
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
@@ -93,6 +108,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  authScreen: getAuthScreen(state),
+  authorizationStatus: getAuthStatus(state),
   city: getCity(state),
   cities: getCities(state),
   offers: getFilteredOffers(state),
@@ -103,6 +120,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  showAuthScreen(isAuth) {
+    dispatch(actionCreatorApp.showAuthScreen(isAuth));
+  },
+  login(authData) {
+    dispatch(userOperation.login(authData));
+  },
   onHoveredOffer(offer) {
     dispatch(actionCreatorApp.hoverOffer(offer));
   },

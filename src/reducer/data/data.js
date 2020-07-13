@@ -1,15 +1,20 @@
 
 import {extend} from "../../utils.js";
-import {createOffers} from "../../adapters/offers.js";
+import {createCity} from "../../adapters/offers.js";
 
 const initialState = {
-  city: ``,
+  city: {
+    name: ``,
+    cityCoord: [0, 0],
+    zoom: 0
+  },
   offers: [],
   offersOnCity: [],
   reviews: [],
 };
 
 const actionType = {
+  INIT_CITY: `INIT_CITY`,
   CITY_CHANGE: `CITY_CHANGE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -17,6 +22,7 @@ const actionType = {
 };
 
 const actionCreator = {
+
   changeCity: (city) => ({
     type: actionType.CITY_CHANGE,
     payload: city
@@ -49,17 +55,16 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        const adaptData = response.data.map((offer) => {
-          return createOffers(offer);
-        });
-        dispatch(actionCreator.changeCity(adaptData[0].city));
-        dispatch(actionCreator.loadOffers(adaptData));
+        dispatch(actionCreator.changeCity(createCity(response.data[0].city)));
+        dispatch(actionCreator.loadOffers(response.data));
       });
   },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.INIT_CITY:
+      return extend(state, {city: action.payload});
     case actionType.CITY_CHANGE:
       return extend(state, {city: action.payload});
     case actionType.LOAD_REVIEWS:

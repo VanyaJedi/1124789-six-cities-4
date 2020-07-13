@@ -11,7 +11,7 @@ import withSort from "../../hocs/with-sort/with-sort.js";
 const SortWrapped = withSort(Sort);
 
 const Main = (props) => {
-  const {city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
+  const {showAuthScreen, authScreen, authorizationStatus, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
   const offersToShow = offers;
 
   let contentElement;
@@ -67,7 +67,13 @@ const Main = (props) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    {authorizationStatus === `NO_AUTH`
+                      ? <span onClick={(evt) => {
+                        evt.preventDefault();
+                        showAuthScreen(!authScreen);
+                      }
+                      }> Sign in</span>
+                      : <span className="header__user-name user__name">Oliver.conner@gmail.com</span>}
                   </a>
                 </li>
               </ul>
@@ -96,6 +102,9 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  showAuthScreen: PropTypes.func,
+  authScreen: PropTypes.bool,
+  authorizationStatus: PropTypes.string,
   cities: PropTypes.arrayOf(cityType),
   offers: PropTypes.arrayOf(
       offerType

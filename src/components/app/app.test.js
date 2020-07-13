@@ -25,7 +25,6 @@ it(`App snapshot`, () => {
 
   const store = mockStore(initialState);
 
-
   const city = offers[0].city;
   const currentOffer = null;
   const onHoveredOffer = jest.fn();
@@ -39,6 +38,7 @@ it(`App snapshot`, () => {
     .create(
         <Provider store={store}>
           <App
+            cities={cities}
             city={city}
             onHoveredOffer={onHoveredOffer}
             onClickOffer={onClickOffer}

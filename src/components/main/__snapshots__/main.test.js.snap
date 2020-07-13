@@ -77,11 +77,13 @@ exports[`Main snapshot 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item tabs__item--active"
               href="#"
               onClick={[Function]}
             >
-              <span />
+              <span>
+                Paris
+              </span>
             </a>
           </li>
           <li
@@ -92,7 +94,9 @@ exports[`Main snapshot 1`] = `
               href="#"
               onClick={[Function]}
             >
-              <span />
+              <span>
+                Amsterdam
+              </span>
             </a>
           </li>
         </ul>

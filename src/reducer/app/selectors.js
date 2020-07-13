@@ -14,3 +14,12 @@ export const getCurrentOffer = (state) => {
 export const getSortType = (state) => {
   return state[NAME_SPACE].sortType;
 };
+
+export const getAuthScreenStatus = (state) => {
+  return state[NAME_SPACE].showAuthScreen;
+};
+
+export const getAuthScreen = (state) => {
+  return state[NAME_SPACE].authScreen;
+};
+
