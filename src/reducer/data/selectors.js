@@ -1,17 +1,17 @@
 
 import {createSelector} from "reselect";
 import nameSpace from "../name-space.js";
-import {createOffers} from "../../adapters/offers.js";
+import {createOffer, createCity} from "../../adapters/offers.js";
 
 const CITIES_TO_SHOW = 6;
 const NAME_SPACE = nameSpace.DATA;
 
 export const getCity = (state) => {
-  return state[NAME_SPACE].city;
+  return createCity(state[NAME_SPACE].city);
 };
 
 export const getOffers = (state) => {
-  return state[NAME_SPACE].offers.map((offer) => createOffers(offer));
+  return state[NAME_SPACE].offers.map((offer) => createOffer(offer));
 };
 
 export const getReviews = (state) => {

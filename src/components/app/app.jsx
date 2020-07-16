@@ -4,7 +4,7 @@ import SignIn from "../sign-in/sign-in.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
 import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch, Router} from 'react-router-dom';
 import {actionCreator as actionCreatorApp} from "../../reducer/app/app.js";
 import {actionCreator as actionCreatorData} from "../../reducer/data/data.js";
 import {Operation as userOperation} from "../../reducer/user/user.js";
@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import {getHoveredOfferId, getCurrentOffer, getSortType, getAuthScreen} from "../../reducer/app/selectors.js";
 import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
 import {getAuthStatus} from "../../reducer/user/selectors.js";
+import history from "../../history";
 
 class App extends React.PureComponent {
 
@@ -21,7 +22,6 @@ class App extends React.PureComponent {
 
   _renderApp() {
     const {
-      login,
       showAuthScreen,
       authScreen,
       authorizationStatus,
@@ -38,7 +38,7 @@ class App extends React.PureComponent {
       cities
     } = this.props;
 
-    if (!currentOffer && !authScreen) {
+    if (!currentOffer) {
       return (
         <Main
           showAuthScreen={showAuthScreen}
@@ -57,31 +57,23 @@ class App extends React.PureComponent {
           cities={cities}
         />
       );
-    } else if (!authScreen) {
-      return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
     }
-    return <SignIn loginHandler={login}/>;
+    return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
   }
 
   render() {
-    const {offers, reviews, hoveredOfferId, onHoveredOffer} = this.props;
+    const {login} = this.props;
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-offer">
-            <Property
-              offer={offers[0]}
-              offers={offers}
-              reviews={reviews}
-              hoveredOfferId={hoveredOfferId}
-              onHoveredOffer={onHoveredOffer}
-            />
+          <Route exact path="/login">
+            <SignIn loginHandler={login}/>
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

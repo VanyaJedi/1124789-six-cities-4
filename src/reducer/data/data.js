@@ -1,13 +1,8 @@
 
 import {extend} from "../../utils.js";
-import {createCity} from "../../adapters/offers.js";
 
 const initialState = {
-  city: {
-    name: ``,
-    cityCoord: [0, 0],
-    zoom: 0
-  },
+  city: null,
   offers: [],
   offersOnCity: [],
   reviews: [],
@@ -55,7 +50,7 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(actionCreator.changeCity(createCity(response.data[0].city)));
+        dispatch(actionCreator.changeCity(response.data[0].city));
         dispatch(actionCreator.loadOffers(response.data));
       });
   },

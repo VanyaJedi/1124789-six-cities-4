@@ -10,7 +10,7 @@ const initialState = {
 
 const actionType = {
   HOVER_OFFER: `HOVER_OFFER`,
-  GET_CURRENT_OFFER: `GET_CURRENT_OFFER`,
+  SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   SHOW_AUTH_SCREEN: `SHOW_AUTH_SCRENN`,
 };
@@ -22,7 +22,7 @@ const actionCreator = {
     payload: id
   }),
   getCurrentOffer: (offer) => ({
-    type: actionType.GET_CURRENT_OFFER,
+    type: actionType.SET_CURRENT_OFFER,
     payload: offer
   }),
   changeSortType: (sortType) => ({
@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {authScreen: action.payload});
     case actionType.HOVER_OFFER:
       return extend(state, {hoveredOfferId: action.payload});
-    case actionType.GET_CURRENT_OFFER:
+    case actionType.SET_CURRENT_OFFER:
       return extend(state, {currentOffer: action.payload});
     case actionType.CHANGE_SORT_TYPE:
       return extend(state, {sortType: action.payload});

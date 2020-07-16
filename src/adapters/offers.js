@@ -1,5 +1,5 @@
 
-export const createOffers = (data) => {
+export const createOffer = (data) => {
   return {
     id: data.id.toString(),
     img: data.preview_image,
@@ -35,6 +35,11 @@ export const createCity = (data) => {
       zoom: 1
     };
   }
+
+  if (data.cityCoord) {
+    return data;
+  }
+
   return {
     name: data.name,
     cityCoord: [data.location.latitude, data.location.longitude],
