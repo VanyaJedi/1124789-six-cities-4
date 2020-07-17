@@ -1,12 +1,18 @@
 import React from "react";
 import Main from "../main/main.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
-import {offerType, reviewType} from "../../types/dataTypes.js";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {actionCreator} from "../../reducer.js";
+import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
+import {Route, Switch, Router} from 'react-router-dom';
+import {actionCreator as actionCreatorApp} from "../../reducer/app/app.js";
+import {actionCreator as actionCreatorData} from "../../reducer/data/data.js";
+import {Operation as userOperation} from "../../reducer/user/user.js";
 import {connect} from "react-redux";
-
+import {getHoveredOfferId, getCurrentOffer, getSortType, getAuthScreen} from "../../reducer/app/selectors.js";
+import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
+import {getAuthStatus} from "../../reducer/user/selectors.js";
+import history from "../../history";
 
 class App extends React.PureComponent {
 
@@ -16,6 +22,9 @@ class App extends React.PureComponent {
 
   _renderApp() {
     const {
+      showAuthScreen,
+      authScreen,
+      authorizationStatus,
       city,
       offers,
       reviews,
@@ -25,13 +34,16 @@ class App extends React.PureComponent {
       currentOffer,
       hoveredOfferId,
       sortType,
-      onChangeSortType
+      onChangeSortType,
+      cities
     } = this.props;
-
 
     if (!currentOffer) {
       return (
         <Main
+          showAuthScreen={showAuthScreen}
+          authScreen={authScreen}
+          authorizationStatus={authorizationStatus}
           city={city}
           offers={offers}
           reviews={reviews}
@@ -42,45 +54,40 @@ class App extends React.PureComponent {
           currentOffer={currentOffer}
           onChangeSortType={onChangeSortType}
           sortType={sortType}
+          cities={cities}
         />
       );
     }
-    return <Property offer={currentOffer} reviews={reviews}/>;
+    return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
   }
 
   render() {
-    const {offers, reviews, hoveredOfferId, onHoveredOffer} = this.props;
+    const {login} = this.props;
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-offer">
-            <Property
-              offer={offers[0]}
-              offers={offers}
-              reviews={reviews}
-              hoveredOfferId={hoveredOfferId}
-              onHoveredOffer={onHoveredOffer}
-            />
+          <Route exact path="/login">
+            <SignIn loginHandler={login}/>
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
 App.propTypes = {
+  login: PropTypes.func,
+  showAuthScreen: PropTypes.func,
+  authScreen: PropTypes.bool,
+  authorizationStatus: PropTypes.string,
   offers: PropTypes.arrayOf(
       offerType
   ).isRequired,
   offer: offerType,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired
-  }).isRequired,
+  city: cityType,
   onHoveredOffer: PropTypes.func.isRequired,
   onClickOffer: PropTypes.func.isRequired,
   onClickCity: PropTypes.func.isRequired,
@@ -88,30 +95,40 @@ App.propTypes = {
   currentOffer: offerType,
   reviews: PropTypes.arrayOf(reviewType),
   hoveredOfferId: PropTypes.string,
-  sortType: PropTypes.string
+  sortType: PropTypes.string,
+  cities: PropTypes.arrayOf(cityType),
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  currentOffer: state.currentOffer,
-  reviews: state.reviews,
-  hoveredOfferId: state.hoveredOfferId,
-  sortType: state.sortType
+  authScreen: getAuthScreen(state),
+  authorizationStatus: getAuthStatus(state),
+  city: getCity(state),
+  cities: getCities(state),
+  offers: getFilteredOffers(state),
+  currentOffer: getCurrentOffer(state),
+  reviews: getReviews(state),
+  hoveredOfferId: getHoveredOfferId(state),
+  sortType: getSortType(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  showAuthScreen(isAuth) {
+    dispatch(actionCreatorApp.showAuthScreen(isAuth));
+  },
+  login(authData) {
+    dispatch(userOperation.login(authData));
+  },
   onHoveredOffer(offer) {
-    dispatch(actionCreator.hoverOffer(offer));
+    dispatch(actionCreatorApp.hoverOffer(offer));
   },
   onClickOffer(offer) {
-    dispatch(actionCreator.getCurrentOffer(offer));
+    dispatch(actionCreatorApp.getCurrentOffer(offer));
   },
   onClickCity(city) {
-    dispatch(actionCreator.changeCity(city));
+    dispatch(actionCreatorData.changeCity(city));
   },
   onChangeSortType(sortType) {
-    dispatch(actionCreator.changeSortType(sortType));
+    dispatch(actionCreatorApp.changeSortType(sortType));
   }
 });
 

@@ -34,3 +34,9 @@ export const reviewType = PropTypes.shape({
   userName: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
 });
+
+export const cityType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
+  zoom: PropTypes.number.isRequired
+});
