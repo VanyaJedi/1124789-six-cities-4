@@ -1,9 +1,10 @@
 
 import {createSelector} from "reselect";
 import nameSpace from "../name-space.js";
-import {createOffer, createCity} from "../../adapters/offers.js";
+import {createOffer} from "../../adapters/offers.js";
+import {createCity} from "../../adapters/city.js";
+import {CITIES_TO_SHOW} from '../../constants.js';
 
-const CITIES_TO_SHOW = 6;
 const NAME_SPACE = nameSpace.DATA;
 
 export const getCity = (state) => {

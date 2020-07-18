@@ -10,21 +10,21 @@ const initialState = {
   authorizationStatus: authorizationStatus.NO_AUTH,
 };
 
-const actionType = {
+const ActionType = {
   AUTH_STATUS: `AUTH_STATUS`,
 };
 
 
-const actionCreator = {
+const ActionCreator = {
   changeAuthStatus: (status) => ({
-    type: actionType.AUTH_STATUS,
+    type: ActionType.AUTH_STATUS,
     payload: status
   }),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.AUTH_STATUS:
+    case ActionType.AUTH_STATUS:
       return extend(state, {authorizationStatus: action.payload});
     default:
       return state;
@@ -35,7 +35,7 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then(() => {
-        dispatch(actionCreator.changeAuthStatus(authorizationStatus.AUTH));
+        dispatch(ActionCreator.changeAuthStatus(authorizationStatus.AUTH));
       })
       .catch((err) => {
         throw err;
@@ -48,9 +48,9 @@ const Operation = {
       password: authData.password,
     })
       .then(() => {
-        dispatch(actionCreator.changeAuthStatus(authorizationStatus.AUTH));
+        dispatch(ActionCreator.changeAuthStatus(authorizationStatus.AUTH));
       });
   },
 };
 
-export {reducer, Operation, actionType, actionCreator, authorizationStatus};
+export {reducer, Operation, ActionType, ActionCreator, authorizationStatus};

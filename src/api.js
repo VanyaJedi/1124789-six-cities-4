@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const error = {
+const Error = {
   UNAUTHORIZED: 401
 };
 
@@ -18,7 +18,7 @@ export const createAPI = (onUnauth) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === error.UNAUTHORIZED) {
+    if (response.status === Error.UNAUTHORIZED) {
       onUnauth();
 
       // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.

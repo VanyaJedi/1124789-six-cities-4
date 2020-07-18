@@ -1,4 +1,4 @@
-import {reducer, actionCreator, Operation, actionType} from "./data.js";
+import {reducer, ActionCreator, Operation, ActionType} from "./data.js";
 import {offers as initialOffers, reviews} from "../../mock/test/data.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
@@ -36,7 +36,7 @@ it(`Reducer should change the city`, () => {
         offersOnCity: [],
         reviews,
       },
-      actionCreator.changeCity(mockCity)
+      ActionCreator.changeCity(mockCity)
   ))
   .toEqual({
     city: mockCity,
@@ -54,7 +54,7 @@ it(`Reducer should load the offers`, () => {
         offersOnCity: [],
         reviews,
       },
-      actionCreator.loadOffers(initialOffers)
+      ActionCreator.loadOffers(initialOffers)
   ))
   .toEqual({
     city: initialOffers[0].city,
@@ -72,7 +72,7 @@ it(`Reducer should load the offers on city`, () => {
         offersOnCity: [],
         reviews,
       },
-      actionCreator.cityOffers(initialOffers)
+      ActionCreator.cityOffers(initialOffers)
   ))
   .toEqual({
     city: initialOffers[0].city,
@@ -95,7 +95,7 @@ it(`Should make the correct API call to /offers`, () => {
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(2, {
-        type: actionType.LOAD_OFFERS,
+        type: ActionType.LOAD_OFFERS,
         payload: initialOffers,
       });
     });

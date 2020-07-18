@@ -1,4 +1,4 @@
-import {reducer, actionCreator} from "./app.js";
+import {reducer, ActionCreator} from "./app.js";
 import {offers as testOffers} from "../../mock/test/data.js";
 
 
@@ -23,7 +23,7 @@ it(`Reducer should change the hoverOffer`, () => {
         currentOffer: null,
         sortType: `Popular`
       },
-      actionCreator.hoverOffer(testOffers[0].id)
+      ActionCreator.hoverOffer(testOffers[0].id)
   ))
   .toEqual({
     hoveredOfferId: testOffers[0].id,
@@ -39,7 +39,7 @@ it(`Reducer should change the currentOffer`, () => {
         currentOffer: null,
         sortType: `Popular`
       },
-      actionCreator.getCurrentOffer(testOffers[0])
+      ActionCreator.getCurrentOffer(testOffers[0])
   ))
   .toEqual({
     hoveredOfferId: null,
@@ -55,7 +55,7 @@ it(`Reducer should change the sortType`, () => {
         currentOffer: null,
         sortType: `Popular`
       },
-      actionCreator.changeSortType(`CostDesc`)
+      ActionCreator.changeSortType(`CostDesc`)
   ))
   .toEqual({
     hoveredOfferId: null,
