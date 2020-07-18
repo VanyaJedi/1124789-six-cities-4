@@ -5,9 +5,9 @@ import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
 import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
 import {Route, Switch, Router} from 'react-router-dom';
-import {actionCreator as actionCreatorApp} from "../../reducer/app/app.js";
-import {actionCreator as actionCreatorData} from "../../reducer/data/data.js";
-import {Operation as userOperation} from "../../reducer/user/user.js";
+import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app.js";
+import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {connect} from "react-redux";
 import {getHoveredOfferId, getCurrentOffer, getSortType, getAuthScreen} from "../../reducer/app/selectors.js";
 import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
@@ -113,22 +113,22 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   showAuthScreen(isAuth) {
-    dispatch(actionCreatorApp.showAuthScreen(isAuth));
+    dispatch(ActionCreatorApp.showAuthScreen(isAuth));
   },
   login(authData) {
-    dispatch(userOperation.login(authData));
+    dispatch(UserOperation.login(authData));
   },
   onHoveredOffer(offer) {
-    dispatch(actionCreatorApp.hoverOffer(offer));
+    dispatch(ActionCreatorApp.hoverOffer(offer));
   },
   onClickOffer(offer) {
-    dispatch(actionCreatorApp.getCurrentOffer(offer));
+    dispatch(ActionCreatorApp.getCurrentOffer(offer));
   },
   onClickCity(city) {
-    dispatch(actionCreatorData.changeCity(city));
+    dispatch(ActionCreatorData.changeCity(city));
   },
   onChangeSortType(sortType) {
-    dispatch(actionCreatorApp.changeSortType(sortType));
+    dispatch(ActionCreatorApp.changeSortType(sortType));
   }
 });
 

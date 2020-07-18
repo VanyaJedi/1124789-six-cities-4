@@ -8,7 +8,7 @@ const initialState = {
   reviews: [],
 };
 
-const actionType = {
+const ActionType = {
   INIT_CITY: `INIT_CITY`,
   CITY_CHANGE: `CITY_CHANGE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
@@ -16,30 +16,30 @@ const actionType = {
   CITY_OFFERS: `CITY_OFFERS`
 };
 
-const actionCreator = {
+const ActionCreator = {
 
   changeCity: (city) => ({
-    type: actionType.CITY_CHANGE,
+    type: ActionType.CITY_CHANGE,
     payload: city
   }),
 
   loadReviews: (reviews) => {
     return {
-      type: actionType.LOAD_REVIEWS,
+      type: ActionType.LOAD_REVIEWS,
       payload: reviews,
     };
   },
 
   loadOffers: (offers) => {
     return {
-      type: actionType.LOAD_OFFERS,
+      type: ActionType.LOAD_OFFERS,
       payload: offers,
     };
   },
 
   cityOffers: (offers) => {
     return {
-      type: actionType.CITY_OFFERS,
+      type: ActionType.CITY_OFFERS,
       payload: offers,
     };
   }
@@ -50,27 +50,27 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(actionCreator.changeCity(response.data[0].city));
-        dispatch(actionCreator.loadOffers(response.data));
+        dispatch(ActionCreator.changeCity(response.data[0].city));
+        dispatch(ActionCreator.loadOffers(response.data));
       });
   },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.INIT_CITY:
+    case ActionType.INIT_CITY:
       return extend(state, {city: action.payload});
-    case actionType.CITY_CHANGE:
+    case ActionType.CITY_CHANGE:
       return extend(state, {city: action.payload});
-    case actionType.LOAD_REVIEWS:
+    case ActionType.LOAD_REVIEWS:
       return extend(state, {reviews: action.payload});
-    case actionType.LOAD_OFFERS:
+    case ActionType.LOAD_OFFERS:
       return extend(state, {offers: action.payload});
-    case actionType.CITY_OFFERS:
+    case ActionType.CITY_OFFERS:
       return extend(state, {offersOnCity: action.payload});
     default:
       return state;
   }
 };
 
-export {reducer, Operation, actionType, actionCreator};
+export {reducer, Operation, ActionType, ActionCreator};

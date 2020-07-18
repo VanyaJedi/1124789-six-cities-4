@@ -1,4 +1,4 @@
-import {reducer, actionCreator, Operation, actionType} from "./user.js";
+import {reducer, ActionCreator, Operation, ActionType} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 
@@ -20,7 +20,7 @@ it(`Reducer should change the auth status`, () => {
       {
         authorizationStatus: `NO_AUTH`,
       },
-      actionCreator.changeAuthStatus(`AUTH`)
+      ActionCreator.changeAuthStatus(`AUTH`)
   ))
   .toEqual({
     authorizationStatus: `AUTH`,
@@ -40,7 +40,7 @@ it(`Should make the correct auth check`, () => {
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: actionType.AUTH_STATUS,
+        type: ActionType.AUTH_STATUS,
         payload: `AUTH`,
       });
     });
@@ -67,7 +67,7 @@ it(`Should make the correct login`, () => {
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: actionType.AUTH_STATUS,
+        type: ActionType.AUTH_STATUS,
         payload: `AUTH`,
       });
     });
