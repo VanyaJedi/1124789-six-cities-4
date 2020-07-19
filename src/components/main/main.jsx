@@ -7,14 +7,17 @@ import Empty from "../empty/empty.jsx";
 import PropTypes from 'prop-types';
 import {offerType, cityType} from "../../types/dataTypes.js";
 import withSort from "../../hocs/with-sort/with-sort.js";
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../constants.js';
 
 const SortWrapped = withSort(Sort);
 
 const Main = (props) => {
-  const {showAuthScreen, authScreen, authorizationStatus, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
+  const {authorizationStatus, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
   const offersToShow = offers;
 
   let contentElement;
+  let signInLink;
   if (offersToShow.length === 0) {
     contentElement = <Empty/>;
   } else {
@@ -51,6 +54,27 @@ const Main = (props) => {
     );
   }
 
+  if (authorizationStatus === `NO_AUTH`) {
+    signInLink = (
+      <Link
+        to={AppRoute.SIGNIN}
+        className="header__nav-link header__nav-link--profile" href="#">
+        <div className="header__avatar-wrapper user__avatar-wrapper">
+        </div>
+        <span>Sign in</span>
+      </Link>
+    );
+  } else {
+    signInLink = (
+      <a onClick={(evt) => {
+        evt.preventDefault();
+      }} className="header__nav-link header__nav-link--profile" href="#">
+        <div className="header__avatar-wrapper user__avatar-wrapper">
+        </div>
+        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+      </a>);
+  }
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -64,17 +88,7 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    {authorizationStatus === `NO_AUTH`
-                      ? <span onClick={(evt) => {
-                        evt.preventDefault();
-                        showAuthScreen(!authScreen);
-                      }
-                      }> Sign in</span>
-                      : <span className="header__user-name user__name">Oliver.conner@gmail.com</span>}
-                  </a>
+                  {signInLink}
                 </li>
               </ul>
             </nav>

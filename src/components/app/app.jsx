@@ -8,11 +8,13 @@ import {Route, Switch, Router} from 'react-router-dom';
 import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app.js";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType, getAuthScreen} from "../../reducer/app/selectors.js";
-import {getCity, getReviews, getFilteredOffers, getCities} from "../../reducer/data/selectors.js";
+import {getHoveredOfferId, getCurrentOffer, getSortType, getUser} from "../../reducer/app/selectors.js";
+import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers} from "../../reducer/data/selectors.js";
 import {getAuthStatus} from "../../reducer/user/selectors.js";
 import history from "../../history";
+import {AppRoute} from "../../constants.js";
 
 class App extends React.PureComponent {
 
@@ -35,7 +37,9 @@ class App extends React.PureComponent {
       hoveredOfferId,
       sortType,
       onChangeSortType,
-      cities
+      cities,
+      addComment,
+      nearbyOffers
     } = this.props;
 
     if (!currentOffer) {
@@ -58,7 +62,13 @@ class App extends React.PureComponent {
         />
       );
     }
-    return <Property offers={offers} offer={currentOffer} reviews={reviews}/>;
+    return <Property
+      offers={nearbyOffers}
+      offer={currentOffer}
+      reviews={reviews}
+      authorizationStatus={authorizationStatus}
+      addComment={addComment}
+    />;
   }
 
   render() {
@@ -66,10 +76,10 @@ class App extends React.PureComponent {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderApp()}
           </Route>
-          <Route exact path="/login">
+          <Route exact path={AppRoute.SIGNIN}>
             <SignIn loginHandler={login}/>
           </Route>
         </Switch>
@@ -97,10 +107,12 @@ App.propTypes = {
   hoveredOfferId: PropTypes.string,
   sortType: PropTypes.string,
   cities: PropTypes.arrayOf(cityType),
+  addComment: PropTypes.func,
+  nearbyOffers: PropTypes.arrayOf(offerType)
 };
 
 const mapStateToProps = (state) => ({
-  authScreen: getAuthScreen(state),
+  user: getUser(state),
   authorizationStatus: getAuthStatus(state),
   city: getCity(state),
   cities: getCities(state),
@@ -108,7 +120,8 @@ const mapStateToProps = (state) => ({
   currentOffer: getCurrentOffer(state),
   reviews: getReviews(state),
   hoveredOfferId: getHoveredOfferId(state),
-  sortType: getSortType(state)
+  sortType: getSortType(state),
+  nearbyOffers: getNearbyOffers(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -122,6 +135,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorApp.hoverOffer(offer));
   },
   onClickOffer(offer) {
+    dispatch(DataOperation.loadNearbyOffers(offer.id));
+    dispatch(DataOperation.getComments(offer.id));
     dispatch(ActionCreatorApp.getCurrentOffer(offer));
   },
   onClickCity(city) {
@@ -129,6 +144,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onChangeSortType(sortType) {
     dispatch(ActionCreatorApp.changeSortType(sortType));
+  },
+  addComment(commentData) {
+    dispatch(DataOperation.addComment(commentData));
   }
 });
 

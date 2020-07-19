@@ -19,7 +19,7 @@ export const getAuthScreenStatus = (state) => {
   return state[NAME_SPACE].showAuthScreen;
 };
 
-export const getAuthScreen = (state) => {
-  return state[NAME_SPACE].authScreen;
+export const getUser = (state) => {
+  return state[NAME_SPACE].user;
 };
 

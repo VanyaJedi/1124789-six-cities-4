@@ -4,7 +4,7 @@ const initialState = {
   hoveredOfferId: null,
   currentOffer: null,
   sortType: `Popular`,
-  authScreen: false,
+  user: null
 };
 
 
@@ -12,7 +12,7 @@ const ActionType = {
   HOVER_OFFER: `HOVER_OFFER`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  SHOW_AUTH_SCREEN: `SHOW_AUTH_SCRENN`,
+  SET_USER: `SET_USER`,
 };
 
 
@@ -29,21 +29,21 @@ const ActionCreator = {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: sortType
   }),
-  showAuthScreen: (isAuth) => ({
-    type: ActionType.SHOW_AUTH_SCREEN,
-    payload: isAuth
+  setUser: (user) => ({
+    type: ActionType.SET_USER,
+    payload: user
   })
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SHOW_AUTH_SCREEN:
-      return extend(state, {authScreen: action.payload});
     case ActionType.HOVER_OFFER:
       return extend(state, {hoveredOfferId: action.payload});
     case ActionType.SET_CURRENT_OFFER:
       return extend(state, {currentOffer: action.payload});
     case ActionType.CHANGE_SORT_TYPE:
+      return extend(state, {sortType: action.payload});
+    case ActionType.SET_USER:
       return extend(state, {sortType: action.payload});
     default:
       return state;

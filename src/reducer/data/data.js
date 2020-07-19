@@ -5,6 +5,7 @@ const initialState = {
   city: null,
   offers: [],
   offersOnCity: [],
+  nearbyOffers: [],
   reviews: [],
 };
 
@@ -13,7 +14,9 @@ const ActionType = {
   CITY_CHANGE: `CITY_CHANGE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  CITY_OFFERS: `CITY_OFFERS`
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
+  CITY_OFFERS: `CITY_OFFERS`,
+  ADD_COMMENT: `ADD_COMMENT`
 };
 
 const ActionCreator = {
@@ -37,10 +40,25 @@ const ActionCreator = {
     };
   },
 
+  loadNearbyOffers: (offers) => {
+    return {
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: offers,
+    };
+  },
+
+
   cityOffers: (offers) => {
     return {
       type: ActionType.CITY_OFFERS,
       payload: offers,
+    };
+  },
+
+  addComment: (comment) => {
+    return {
+      type: ActionType.ADD_COMMENT,
+      payload: comment,
     };
   }
 };
@@ -54,6 +72,30 @@ const Operation = {
         dispatch(ActionCreator.loadOffers(response.data));
       });
   },
+
+  loadNearbyOffers: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        dispatch(ActionCreator.loadNearbyOffers(response.data));
+      });
+  },
+
+  getComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadReviews(response.data));
+      });
+  },
+
+  addComment: (data) => (dispatch, getState, api) => {
+    return api.post(`/comments/${data.id}`, {
+      comment: data.comment,
+      rating: data.rating,
+    })
+    .then((response) => {
+      dispatch(ActionCreator.loadReviews(response.data));
+    });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +110,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {offers: action.payload});
     case ActionType.CITY_OFFERS:
       return extend(state, {offersOnCity: action.payload});
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return extend(state, {nearbyOffers: action.payload});
     default:
       return state;
   }
