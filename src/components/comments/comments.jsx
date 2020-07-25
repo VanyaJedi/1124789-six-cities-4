@@ -8,6 +8,10 @@ class Comments extends React.PureComponent {
     this.formRef = React.createRef();
     this.sendButtonRef = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      incorrectFrom: false,
+    };
   }
 
   handleSubmit(evt) {
@@ -20,13 +24,18 @@ class Comments extends React.PureComponent {
         rating = input.value;
       }
     }
-    if (this.commentRef.current.value && rating) {
+
+    const isValidText = this.commentRef.current.value.length >= 50 && this.commentRef.current.value.length <= 300;
+    if (isValidText && rating) {
       addComment({
         id: offerId,
         comment: this.commentRef.current.value,
         rating
       });
+      this.setState({incorrectFrom: false});
       this.formRef.current.reset();
+    } else {
+      this.setState({incorrectFrom: true});
     }
   }
 
@@ -34,10 +43,10 @@ class Comments extends React.PureComponent {
     return (
       <form
         ref={this.formRef}
-        onSubmit={(evt) => {
-          this.handleSubmit(evt);
-        }}
-        className="reviews__form form" action="#" method="post">
+        onSubmit={this.handleSubmit}
+        className="reviews__form form" action="#" method="post"
+        style={this.state.incorrectFrom ? {border: `1px solid red`} : {}}
+      >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"/>

@@ -40,3 +40,12 @@ export const cityType = PropTypes.shape({
   cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
   zoom: PropTypes.number.isRequired
 });
+
+export const userType = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  is_pro: PropTypes.bool.isRequired,
+});
+

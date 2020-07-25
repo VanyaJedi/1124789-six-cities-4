@@ -1,13 +1,13 @@
 import React from "react";
 import ReviewList from "../review-list/review-list.jsx";
-import {offerType} from "../../types/dataTypes.js";
+import {offerType, userType} from "../../types/dataTypes.js";
 import Map from "../map/map.jsx";
 import OfferList from "../../components/offer-list/offer-list.jsx";
 import {reviewType} from "../../types/dataTypes.js";
 import PropTypes from "prop-types";
 import Comments from "../comments/comments.jsx";
 
-const Property = ({offer, reviews, offers, authorizationStatus, addComment}) => {
+const Property = ({user, offer, reviews, offers, addComment}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
   return (
@@ -26,7 +26,7 @@ const Property = ({offer, reviews, offers, authorizationStatus, addComment}) => 
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{user.email}</span>
                   </a>
                 </li>
               </ul>
@@ -120,7 +120,7 @@ const Property = ({offer, reviews, offers, authorizationStatus, addComment}) => 
               </div>
               <section className="property__reviews reviews">
                 <ReviewList reviews={reviews}/>
-                {authorizationStatus === `AUTH` ? <Comments addComment={addComment} offerId={offer.id}/> : null}
+                {user ? <Comments addComment={addComment} offerId={offer.id}/> : null}
               </section>
             </div>
           </div>
@@ -154,7 +154,8 @@ Property.propTypes = {
   ),
   offers: PropTypes.arrayOf(offerType),
   authorizationStatus: PropTypes.string,
-  addComment: PropTypes.func
+  addComment: PropTypes.func,
+  user: userType
 };
 
 

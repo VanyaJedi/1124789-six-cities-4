@@ -5,7 +5,7 @@ import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
 import Empty from "../empty/empty.jsx";
 import PropTypes from 'prop-types';
-import {offerType, cityType} from "../../types/dataTypes.js";
+import {offerType, cityType, userType} from "../../types/dataTypes.js";
 import withSort from "../../hocs/with-sort/with-sort.js";
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../constants.js';
@@ -13,67 +13,8 @@ import {AppRoute} from '../../constants.js';
 const SortWrapped = withSort(Sort);
 
 const Main = (props) => {
-  const {authorizationStatus, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities} = props;
+  const {user, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities, addToFavorites} = props;
   const offersToShow = offers;
-
-  let contentElement;
-  let signInLink;
-  if (offersToShow.length === 0) {
-    contentElement = <Empty/>;
-  } else {
-    contentElement = (
-      <div className="cities__places-container container">
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">
-            {offersToShow.length} places to stay in {city.name}
-          </b>
-          <SortWrapped
-            onChangeSortType={onChangeSortType}
-            sortType={sortType}
-          />
-          <OfferList
-            onHoveredOffer={onHoveredOffer}
-            onClickOffer={onClickOffer}
-            offers={offersToShow}
-            sortType={sortType}
-            currentOffer={currentOffer}
-          />
-        </section>
-        <div className="cities__right-section">
-          <section className="cities__map map">
-            <Map
-              offers={offersToShow}
-              currentOffer={currentOffer}
-              city={city}
-              hoveredOfferId={hoveredOfferId}
-            />
-          </section>
-        </div>
-      </div>
-    );
-  }
-
-  if (authorizationStatus === `NO_AUTH`) {
-    signInLink = (
-      <Link
-        to={AppRoute.SIGNIN}
-        className="header__nav-link header__nav-link--profile" href="#">
-        <div className="header__avatar-wrapper user__avatar-wrapper">
-        </div>
-        <span>Sign in</span>
-      </Link>
-    );
-  } else {
-    signInLink = (
-      <a onClick={(evt) => {
-        evt.preventDefault();
-      }} className="header__nav-link header__nav-link--profile" href="#">
-        <div className="header__avatar-wrapper user__avatar-wrapper">
-        </div>
-        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-      </a>);
-  }
 
   return (
     <div className="page page--gray page--main">
@@ -88,7 +29,21 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  {signInLink}
+                  {user ?
+                    <Link to={AppRoute.FAVORITES}
+                      className="header__nav-link header__nav-link--profile">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__user-name user__name">{user.email}</span>
+                    </Link>
+                    :
+                    <Link
+                      to={AppRoute.SIGNIN}
+                      className="header__nav-link header__nav-link--profile" href="#">
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span>Sign in</span>
+                    </Link>}
                 </li>
               </ul>
             </nav>
@@ -108,7 +63,36 @@ const Main = (props) => {
           </section>
         </div>
         <div className="cities">
-          {contentElement}
+          {offersToShow.length === 0 ? <Empty/> : <div className="cities__places-container container">
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">
+                {offersToShow.length} places to stay in {city.name}
+              </b>
+              <SortWrapped
+                onChangeSortType={onChangeSortType}
+                sortType={sortType}
+              />
+              <OfferList
+                onHoveredOffer={onHoveredOffer}
+                onClickOffer={onClickOffer}
+                offers={offersToShow}
+                sortType={sortType}
+                currentOffer={currentOffer}
+                addToFavorites={addToFavorites}
+              />
+            </section>
+            <div className="cities__right-section">
+              <section className="cities__map map">
+                <Map
+                  offers={offersToShow}
+                  currentOffer={currentOffer}
+                  city={city}
+                  hoveredOfferId={hoveredOfferId}
+                />
+              </section>
+            </div>
+          </div>}
         </div>
       </main>
     </div>
@@ -130,7 +114,9 @@ Main.propTypes = {
   currentOffer: offerType,
   hoveredOfferId: PropTypes.string,
   sortType: PropTypes.string.isRequired,
-  onChangeSortType: PropTypes.func.isRequired
+  onChangeSortType: PropTypes.func.isRequired,
+  user: userType,
+  addToFavorites: PropTypes.func
 };
 
 export default Main;

@@ -95,6 +95,10 @@ const Operation = {
     .then((response) => {
       dispatch(ActionCreator.loadReviews(response.data));
     });
+  },
+
+  addToFavorites: (data) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${data.id}/${data.status}`);
   }
 };
 

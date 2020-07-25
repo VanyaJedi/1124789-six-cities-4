@@ -4,7 +4,6 @@ const initialState = {
   hoveredOfferId: null,
   currentOffer: null,
   sortType: `Popular`,
-  user: null
 };
 
 
@@ -12,7 +11,6 @@ const ActionType = {
   HOVER_OFFER: `HOVER_OFFER`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  SET_USER: `SET_USER`,
 };
 
 
@@ -29,10 +27,6 @@ const ActionCreator = {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: sortType
   }),
-  setUser: (user) => ({
-    type: ActionType.SET_USER,
-    payload: user
-  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,8 +36,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CURRENT_OFFER:
       return extend(state, {currentOffer: action.payload});
     case ActionType.CHANGE_SORT_TYPE:
-      return extend(state, {sortType: action.payload});
-    case ActionType.SET_USER:
       return extend(state, {sortType: action.payload});
     default:
       return state;

@@ -6,6 +6,7 @@ exports[`Comments snapshot 1`] = `
   className="reviews__form form"
   method="post"
   onSubmit={[Function]}
+  style={Object {}}
 >
   <label
     className="reviews__label form__label"

@@ -39,16 +39,14 @@ exports[`App snapshot 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/signin"
                 onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
                 />
-                <span
-                  className="header__user-name user__name"
-                >
-                  Oliver.conner@gmail.com
+                <span>
+                  Sign in
                 </span>
               </a>
             </li>

@@ -4,7 +4,7 @@ import Offer from "../offer/offer.jsx";
 import {offerType} from "../../types/dataTypes.js";
 import {getSortedOffers} from "../../utils.js";
 
-const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer}) => {
+const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer, addToFavorites}) => {
   const sortedOffers = getSortedOffers(sortType, offers);
   return (
     <div className={currentOffer ? `near-places__list places__list` : `cities__places-list places__list tabs__content`}>
@@ -14,6 +14,7 @@ const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer
           onHoveredOffer={onHoveredOffer}
           onClickOffer={onClickOffer}
           currentOffer={currentOffer}
+          addToFavorites={addToFavorites}
         />;
       })}
     </div>
@@ -27,7 +28,8 @@ OfferList.propTypes = {
   onHoveredOffer: PropTypes.func,
   onClickOffer: PropTypes.func,
   sortType: PropTypes.string,
-  currentOffer: offerType
+  currentOffer: offerType,
+  addToFavorites: PropTypes.func
 };
 
 export default OfferList;

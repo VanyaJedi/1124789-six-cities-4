@@ -1,20 +1,22 @@
 import React from "react";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import Property from "../property/property.jsx";
 import PropTypes from 'prop-types';
-import {offerType, reviewType, cityType} from "../../types/dataTypes.js";
+import {offerType, reviewType, cityType, userType} from "../../types/dataTypes.js";
 import {Route, Switch, Router} from 'react-router-dom';
 import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app.js";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType, getUser} from "../../reducer/app/selectors.js";
+import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors.js";
 import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers} from "../../reducer/data/selectors.js";
-import {getAuthStatus} from "../../reducer/user/selectors.js";
+import {getUser} from "../../reducer/user/selectors.js";
 import history from "../../history";
 import {AppRoute} from "../../constants.js";
+import {Link} from 'react-router-dom';
 
 class App extends React.PureComponent {
 
@@ -24,9 +26,7 @@ class App extends React.PureComponent {
 
   _renderApp() {
     const {
-      showAuthScreen,
-      authScreen,
-      authorizationStatus,
+      user,
       city,
       offers,
       reviews,
@@ -39,15 +39,14 @@ class App extends React.PureComponent {
       onChangeSortType,
       cities,
       addComment,
-      nearbyOffers
+      nearbyOffers,
+      addToFavorites
     } = this.props;
 
     if (!currentOffer) {
       return (
         <Main
-          showAuthScreen={showAuthScreen}
-          authScreen={authScreen}
-          authorizationStatus={authorizationStatus}
+          user={user}
           city={city}
           offers={offers}
           reviews={reviews}
@@ -59,20 +58,22 @@ class App extends React.PureComponent {
           onChangeSortType={onChangeSortType}
           sortType={sortType}
           cities={cities}
+          addToFavorites={addToFavorites}
         />
       );
     }
     return <Property
+      user={user}
       offers={nearbyOffers}
       offer={currentOffer}
       reviews={reviews}
-      authorizationStatus={authorizationStatus}
       addComment={addComment}
+      addToFavorites={addToFavorites}
     />;
   }
 
   render() {
-    const {login} = this.props;
+    const {login, user} = this.props;
     return (
       <Router history={history}>
         <Switch>
@@ -82,6 +83,15 @@ class App extends React.PureComponent {
           <Route exact path={AppRoute.SIGNIN}>
             <SignIn loginHandler={login}/>
           </Route>
+          <Route exact path={AppRoute.FAVORITES}>
+            <Favorites user={user}/>
+          </Route>
+          <Route render={() => {
+            return (<React.Fragment>
+              <h1>404 page not found</h1>
+              <Link to="/">go to main page</Link>
+            </React.Fragment>);
+          }}/>
         </Switch>
       </Router>
     );
@@ -108,12 +118,13 @@ App.propTypes = {
   sortType: PropTypes.string,
   cities: PropTypes.arrayOf(cityType),
   addComment: PropTypes.func,
-  nearbyOffers: PropTypes.arrayOf(offerType)
+  nearbyOffers: PropTypes.arrayOf(offerType),
+  user: userType,
+  addToFavorites: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   user: getUser(state),
-  authorizationStatus: getAuthStatus(state),
   city: getCity(state),
   cities: getCities(state),
   offers: getFilteredOffers(state),
@@ -147,6 +158,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addComment(commentData) {
     dispatch(DataOperation.addComment(commentData));
+  },
+  addToFavorites(data) {
+    dispatch(DataOperation.addToFavorites(data));
   }
 });
 

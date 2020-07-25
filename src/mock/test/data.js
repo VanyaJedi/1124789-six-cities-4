@@ -106,3 +106,9 @@ export const cities = [
     zoom: 14
   },
 ];
+
+export const user = {
+  id: 1,
+  email: `vanya71310@gmail.com`,
+  name: `vanya71310`,
+};
