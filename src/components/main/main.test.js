@@ -1,8 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import {offers, cities} from "../../mock/test/data.js";
+import {offers, cities, user} from "../../mock/test/data.js";
+import {Router} from "react-router-dom";
 jest.mock(`../map/map.jsx`, () => `Map`);
+import history from "../../history.js";
 
 it(`Main snapshot`, () => {
   const city = offers[0].city;
@@ -14,17 +16,21 @@ it(`Main snapshot`, () => {
   const onChangeSortType = jest.fn();
   const tree = renderer
     .create(
-        <Main
-          cities={cities}
-          city={city}
-          onClickOffer={onClickOffer}
-          onClickCity={onClickCity}
-          onHoveredOffer={onHoveredOffer}
-          offers={offers}
-          hoveredOfferId={hoveredOfferId}
-          sortType={sortType}
-          onChangeSortType={onChangeSortType}
-        />,
+        <Router history={history}>
+          <Main
+            user={user}
+            cities={cities}
+            city={city}
+            onClickOffer={onClickOffer}
+            onClickCity={onClickCity}
+            onHoveredOffer={onHoveredOffer}
+            offers={offers}
+            hoveredOfferId={hoveredOfferId}
+            sortType={sortType}
+            onChangeSortType={onChangeSortType}
+          />
+        </Router>
+        ,
         {
           createNodeMock: () => document.createElement(`div`)
         }

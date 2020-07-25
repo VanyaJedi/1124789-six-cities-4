@@ -46,6 +46,6 @@ export const userType = PropTypes.shape({
   email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  is_pro: PropTypes.bool.isRequired,
+  isPro: PropTypes.bool.isRequired,
 });
 

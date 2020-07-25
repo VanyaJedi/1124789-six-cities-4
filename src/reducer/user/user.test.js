@@ -1,29 +1,27 @@
 import {reducer, ActionCreator, Operation, ActionType} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
-
+import {user} from "../../mock/test/data.js";
 const api = createAPI(()=>{});
 
 
 const initData = {
-  authorizationStatus: `NO_AUTH`,
+  user: null
 };
+
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(initData, {})).toEqual({
-    authorizationStatus: `NO_AUTH`,
+    user: null,
   });
 });
 
-it(`Reducer should change the auth status`, () => {
-  expect(reducer(
-      {
-        authorizationStatus: `NO_AUTH`,
-      },
-      ActionCreator.changeAuthStatus(`AUTH`)
+it(`Reducer should set the user`, () => {
+  expect(reducer(initData,
+      ActionCreator.setUser(user)
   ))
   .toEqual({
-    authorizationStatus: `AUTH`,
+    user
   });
 });
 
@@ -34,14 +32,14 @@ it(`Should make the correct auth check`, () => {
 
   apiMock
     .onGet(`/login`)
-    .reply(200, `AUTH`);
+    .reply(200, user);
 
   return checkStatusOperation(dispatch, ()=>{}, api)
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: ActionType.AUTH_STATUS,
-        payload: `AUTH`,
+        type: ActionType.SET_USER,
+        payload: user,
       });
     });
 });
@@ -61,14 +59,14 @@ it(`Should make the correct login`, () => {
       email: `qwerty@mail.ru`,
       password: `111`
     })
-    .reply(200, {user: `data`});
+    .reply(200, user);
 
   return loginOperation(dispatch, ()=>{}, api)
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: ActionType.AUTH_STATUS,
-        payload: `AUTH`,
+        type: ActionType.SET_USER,
+        payload: user,
       });
     });
 });

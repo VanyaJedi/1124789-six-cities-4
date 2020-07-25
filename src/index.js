@@ -9,9 +9,13 @@ import thunk from "redux-thunk";
 import App from "./components/app/app.jsx";
 import {Provider} from "react-redux";
 import {createAPI} from './api.js';
+import history from "./history.js";
+import {AppRoute} from "./constants.js";
+import {Router} from "react-router-dom";
 
 const onUnauth = () => {
   store.dispatch(ActionCreatorUser.setUser(null));
+  history.push(AppRoute.SIGNIN);
 };
 
 const api = createAPI(onUnauth);
@@ -28,7 +32,9 @@ store.dispatch(DataOperation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <Router history={history}>
+        <App />
+      </Router>
     </Provider>
     ,
     document.querySelector(`#root`)

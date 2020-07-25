@@ -7,7 +7,7 @@ import {reviewType} from "../../types/dataTypes.js";
 import PropTypes from "prop-types";
 import Comments from "../comments/comments.jsx";
 
-const Property = ({user, offer, reviews, offers, addComment}) => {
+const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
   return (
@@ -137,7 +137,7 @@ const Property = ({user, offer, reviews, offers, addComment}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers}/>
+              <OfferList offers={offers} addToFavorites={addToFavorites}/>
             </div>
           </section>
         </div>
@@ -155,7 +155,8 @@ Property.propTypes = {
   offers: PropTypes.arrayOf(offerType),
   authorizationStatus: PropTypes.string,
   addComment: PropTypes.func,
-  user: userType
+  user: userType,
+  addToFavorites: PropTypes.func
 };
 
 

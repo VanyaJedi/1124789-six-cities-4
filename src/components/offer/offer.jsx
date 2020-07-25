@@ -32,7 +32,15 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorite
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button" type="button">
+            onClick={(evt) => {
+              evt.preventDefault();
+              const data = {
+                id: offer.id,
+                status: offer.isFav ? 0 : 1
+              };
+              addToFavorites(data);
+            }}
+            className={`place-card__bookmark-button button ${offer.isFav ? `place-card__bookmark-button--active` : ``}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>

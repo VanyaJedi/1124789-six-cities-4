@@ -1,5 +1,6 @@
 
 import {extend} from "../../utils.js";
+import {getCurrentOffer} from "../app/selectors.js";
 
 const initialState = {
   city: null,
@@ -16,7 +17,8 @@ const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   CITY_OFFERS: `CITY_OFFERS`,
-  ADD_COMMENT: `ADD_COMMENT`
+  ADD_COMMENT: `ADD_COMMENT`,
+  SET_FAV_STATUS: `SET_FAV_STATUS`
 };
 
 const ActionCreator = {
@@ -47,7 +49,6 @@ const ActionCreator = {
     };
   },
 
-
   cityOffers: (offers) => {
     return {
       type: ActionType.CITY_OFFERS,
@@ -59,6 +60,13 @@ const ActionCreator = {
     return {
       type: ActionType.ADD_COMMENT,
       payload: comment,
+    };
+  },
+
+  setFavStatus: (status) => {
+    return {
+      type: ActionType.SET_FAV_STATUS,
+      payload: status
     };
   }
 };
@@ -98,7 +106,14 @@ const Operation = {
   },
 
   addToFavorites: (data) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${data.id}/${data.status}`);
+    return api.post(`/favorite/${data.id}/${data.status}`)
+    .then(() => {
+      dispatch(Operation.loadOffers());
+      const currentOffer = getCurrentOffer(getState());
+      if (currentOffer) {
+        dispatch(Operation.loadNearbyOffers(currentOffer.id));
+      }
+    });
   }
 };
 

@@ -32,7 +32,6 @@ const Operation = {
         dispatch(ActionCreator.setUser(res.data));
       })
       .catch((err) => {
-        dispatch(ActionCreator.setUser(null));
         throw err;
       });
   },

@@ -23,6 +23,7 @@ export const createOffer = (data) => {
       cityCoord: [data.city.location.latitude, data.city.location.longitude],
       zoom: data.city.location.zoom
     },
-    coordinates: [data.location.latitude, data.location.longitude]
+    coordinates: [data.location.latitude, data.location.longitude],
+    isFav: data.is_favorite
   };
 };

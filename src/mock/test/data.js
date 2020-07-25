@@ -109,6 +109,8 @@ export const cities = [
 
 export const user = {
   id: 1,
-  email: `vanya71310@gmail.com`,
-  name: `vanya71310`,
+  email: `123@gmail.com`,
+  name: `sasha`,
+  avatar: ``,
+  isPro: false
 };

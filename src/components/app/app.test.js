@@ -4,6 +4,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {offers, reviews, cities} from "../../mock/test/data.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 
 jest.mock(`../map/map.jsx`, () => `Map`);
@@ -37,19 +39,22 @@ it(`App snapshot`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            cities={cities}
-            city={city}
-            onHoveredOffer={onHoveredOffer}
-            onClickOffer={onClickOffer}
-            onClickCity={onClickCity}
-            currentOffer={currentOffer}
-            offers={offers}
-            hoveredOfferId={hoveredOfferId}
-            sortType={sortType}
-            onChangeSortType={onChangeSortType}
-            reviews={reviews}
-          />
+          <Router history={history}>
+            <App
+              cities={cities}
+              city={city}
+              onHoveredOffer={onHoveredOffer}
+              onClickOffer={onClickOffer}
+              onClickCity={onClickCity}
+              currentOffer={currentOffer}
+              offers={offers}
+              hoveredOfferId={hoveredOfferId}
+              sortType={sortType}
+              onChangeSortType={onChangeSortType}
+              reviews={reviews}
+            />
+          </Router>
+
         </Provider>
         ,
         {

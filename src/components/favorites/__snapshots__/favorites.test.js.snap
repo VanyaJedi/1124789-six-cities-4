@@ -48,7 +48,7 @@ exports[`Favorites list snapshot 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  vanya71310@gmail.com
+                  123@gmail.com
                 </span>
               </a>
             </li>
