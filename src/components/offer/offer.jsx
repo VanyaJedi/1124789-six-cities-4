@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
+import {AppRoute} from "../../constants.js";
+import {Link} from 'react-router-dom';
+
 
 const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorites}) => {
   const {title, img, cost, type, rate} = offer;
@@ -54,12 +57,11 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorite
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/offer" onClick={
-            (evt) => {
-              evt.preventDefault();
+          <Link to={`${AppRoute.OFFER}/${offer.id}`} onClick={
+            () => {
               onClickOffer(offer);
             }
-          }>{title}</a>
+          }>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

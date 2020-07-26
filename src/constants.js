@@ -3,7 +3,8 @@ export const CITIES_TO_SHOW = 6;
 export const AppRoute = {
   SIGNIN: `/signin`,
   FAVORITES: `/favorites`,
-  ROOT: `/`
+  ROOT: `/`,
+  OFFER: `/offer`
 };
 
 export const commentInputs = [

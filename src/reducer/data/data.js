@@ -8,6 +8,7 @@ const initialState = {
   offersOnCity: [],
   nearbyOffers: [],
   reviews: [],
+  favorites: []
 };
 
 const ActionType = {
@@ -18,7 +19,7 @@ const ActionType = {
   LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   CITY_OFFERS: `CITY_OFFERS`,
   ADD_COMMENT: `ADD_COMMENT`,
-  SET_FAV_STATUS: `SET_FAV_STATUS`
+  LOAD_FAVORITES: `LOAD_FAVORITES`
 };
 
 const ActionCreator = {
@@ -63,10 +64,10 @@ const ActionCreator = {
     };
   },
 
-  setFavStatus: (status) => {
+  loadFavorites: (offers) => {
     return {
-      type: ActionType.SET_FAV_STATUS,
-      payload: status
+      type: ActionType.LOAD_FAVORITES,
+      payload: offers
     };
   }
 };
@@ -85,6 +86,13 @@ const Operation = {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
         dispatch(ActionCreator.loadNearbyOffers(response.data));
+      });
+  },
+
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavorites(response.data));
       });
   },
 
@@ -112,6 +120,7 @@ const Operation = {
       const currentOffer = getCurrentOffer(getState());
       if (currentOffer) {
         dispatch(Operation.loadNearbyOffers(currentOffer.id));
+        dispatch(Operation.loadFavorites());
       }
     });
   }
@@ -131,6 +140,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {offersOnCity: action.payload});
     case ActionType.LOAD_NEARBY_OFFERS:
       return extend(state, {nearbyOffers: action.payload});
+    case ActionType.LOAD_FAVORITES:
+      return extend(state, {favorites: action.payload});
     default:
       return state;
   }

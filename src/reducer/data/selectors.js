@@ -20,6 +20,10 @@ export const getNearbyOffers = (state) => {
   return state[NAME_SPACE].nearbyOffers.map((offer) => createOffer(offer));
 };
 
+export const getFavorites = (state) => {
+  return state[NAME_SPACE].favorites.map((offer) => createOffer(offer));
+};
+
 export const getReviews = (state) => {
   return state[NAME_SPACE].reviews.map((review) => createReview(review));
 };
