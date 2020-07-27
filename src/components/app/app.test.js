@@ -52,6 +52,7 @@ it(`App snapshot`, () => {
               sortType={sortType}
               onChangeSortType={onChangeSortType}
               reviews={reviews}
+              favorites={offers}
             />
           </Router>
 

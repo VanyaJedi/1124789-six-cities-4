@@ -6,7 +6,7 @@ import OfferList from "../../components/offer-list/offer-list.jsx";
 import {reviewType} from "../../types/dataTypes.js";
 import PropTypes from "prop-types";
 import Comments from "../comments/comments.jsx";
-import Header from  "../header/header.jsx";
+import Header from "../header/header.jsx";
 
 const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;

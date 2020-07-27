@@ -4,7 +4,7 @@ import LocationList from "../location-list/location-list.jsx";
 import Map from "../map/map.jsx";
 import Sort from "../sort/sort.jsx";
 import Empty from "../empty/empty.jsx";
-import Header from  "../header/header.jsx";
+import Header from "../header/header.jsx";
 import PropTypes from 'prop-types';
 import {offerType, cityType, userType} from "../../types/dataTypes.js";
 import withSort from "../../hocs/with-sort/with-sort.js";

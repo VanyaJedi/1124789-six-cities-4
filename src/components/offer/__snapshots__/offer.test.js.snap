@@ -94,7 +94,7 @@ exports[`Offer snapshot 1`] = `
       className="place-card__name"
     >
       <a
-        href="/offer"
+        href="/offer/1"
         onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location

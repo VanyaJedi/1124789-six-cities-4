@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Offer from "./offer.jsx";
 import {offers} from "../../mock/test/data.js";
+import {Router} from 'react-router-dom';
+import history from "../../history.js";
 
 
 it(`Offer snapshot`, () => {
@@ -10,11 +12,13 @@ it(`Offer snapshot`, () => {
   const onClickOffer = jest.fn();
   const tree = renderer
     .create(
-        <Offer
-          offer={offerTest}
-          onClickOffer={onClickOffer}
-          onHoveredOffer={offerHoverHandler}
-        />
+        <Router history={history}>
+          <Offer
+            offer={offerTest}
+            onClickOffer={onClickOffer}
+            onHoveredOffer={offerHoverHandler}
+          />
+        </Router>
     )
     .toJSON();
 
