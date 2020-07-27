@@ -8,12 +8,12 @@ import history from "../../history.js";
 it(`Favorites list snapshot`, () => {
   const tree = renderer
     .create(
-      <Router history={history}>
-        <Favorites
-          user={user}
-          favorites={offers}
-        />
-      </Router>
+        <Router history={history}>
+          <Favorites
+            user={user}
+            favorites={offers}
+          />
+        </Router>
 
     )
     .toJSON();
