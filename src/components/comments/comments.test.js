@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Comments from "./Comments.jsx";
+import Comments from "./comments.jsx";
 
 it(`Comments snapshot`, () => {
 
