@@ -18,8 +18,3 @@ export const getSortType = (state) => {
 export const getAuthScreenStatus = (state) => {
   return state[NAME_SPACE].showAuthScreen;
 };
-
-export const getAuthScreen = (state) => {
-  return state[NAME_SPACE].authScreen;
-};
-

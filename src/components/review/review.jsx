@@ -3,13 +3,13 @@ import {reviewType} from "../../types/dataTypes.js";
 
 
 const Review = (review) => {
-  const {text, rate, userName, date} = review;
+  const {text, rate, userName, date, avatar} = review;
   const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar"/>
         </div>
         <span className="reviews__user-name">
           {userName}

@@ -1,31 +1,25 @@
 import {extend} from "../../utils.js";
 
-
-const authorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
-
 const initialState = {
-  authorizationStatus: authorizationStatus.NO_AUTH,
+  user: null
 };
 
 const ActionType = {
-  AUTH_STATUS: `AUTH_STATUS`,
+  SET_USER: `SET_USER`,
 };
 
 
 const ActionCreator = {
-  changeAuthStatus: (status) => ({
-    type: ActionType.AUTH_STATUS,
-    payload: status
-  }),
+  setUser: (user) => ({
+    type: ActionType.SET_USER,
+    payload: user
+  })
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.AUTH_STATUS:
-      return extend(state, {authorizationStatus: action.payload});
+    case ActionType.SET_USER:
+      return extend(state, {user: action.payload});
     default:
       return state;
   }
@@ -34,8 +28,8 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
-        dispatch(ActionCreator.changeAuthStatus(authorizationStatus.AUTH));
+      .then((res) => {
+        dispatch(ActionCreator.setUser(res.data));
       })
       .catch((err) => {
         throw err;
@@ -47,10 +41,10 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
-        dispatch(ActionCreator.changeAuthStatus(authorizationStatus.AUTH));
+      .then((res) => {
+        dispatch(ActionCreator.setUser(res.data));
       });
   },
 };
 
-export {reducer, Operation, ActionType, ActionCreator, authorizationStatus};
+export {reducer, Operation, ActionType, ActionCreator};

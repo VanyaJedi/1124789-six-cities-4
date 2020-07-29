@@ -27,6 +27,8 @@ const ReviewList = ({reviews}) => {
               rate={review.rate}
               userName={review.userName}
               date={review.date}
+              avatar={review.avatar}
+              isPro={review.isPro}
             />;
           })
         }

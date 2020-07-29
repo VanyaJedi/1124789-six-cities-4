@@ -17,8 +17,7 @@ exports[`Property list snapshot 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link"
-            href="main.html"
+            className="header__logo-link header__logo-link--active"
           >
             <img
               alt="6 cities logo"
@@ -40,7 +39,8 @@ exports[`Property list snapshot 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="#"
+                href="/favorites"
+                onClick={[Function]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
@@ -48,7 +48,7 @@ exports[`Property list snapshot 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  123@gmail.com
                 </span>
               </a>
             </li>
@@ -289,7 +289,6 @@ exports[`Property list snapshot 1`] = `
                       alt="Reviews avatar"
                       className="reviews__avatar user__avatar"
                       height="54"
-                      src="img/avatar-max.jpg"
                       width="54"
                     />
                   </div>
@@ -348,7 +347,6 @@ exports[`Property list snapshot 1`] = `
                       alt="Reviews avatar"
                       className="reviews__avatar user__avatar"
                       height="54"
-                      src="img/avatar-max.jpg"
                       width="54"
                     />
                   </div>
@@ -399,6 +397,8 @@ exports[`Property list snapshot 1`] = `
               action="#"
               className="reviews__form form"
               method="post"
+              onSubmit={[Function]}
+              style={Object {}}
             >
               <label
                 className="reviews__label form__label"
@@ -413,6 +413,7 @@ exports[`Property list snapshot 1`] = `
                   className="form__rating-input visually-hidden"
                   id="5-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                   value="5"
                 />
@@ -435,13 +436,14 @@ exports[`Property list snapshot 1`] = `
                   className="form__rating-input visually-hidden"
                   id="4-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                   value="4"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="4-stars"
-                  title="good"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -457,13 +459,14 @@ exports[`Property list snapshot 1`] = `
                   className="form__rating-input visually-hidden"
                   id="3-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                   value="3"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="3-stars"
-                  title="not bad"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -479,13 +482,14 @@ exports[`Property list snapshot 1`] = `
                   className="form__rating-input visually-hidden"
                   id="2-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                   value="2"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="2-stars"
-                  title="badly"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -501,13 +505,14 @@ exports[`Property list snapshot 1`] = `
                   className="form__rating-input visually-hidden"
                   id="1-star"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                   value="1"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="1-star"
-                  title="terribly"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -759,7 +764,8 @@ exports[`Property list snapshot 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -802,7 +808,7 @@ exports[`Property list snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
@@ -864,7 +870,8 @@ exports[`Property list snapshot 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button "
+                    onClick={[Function]}
                     type="button"
                   >
                     <svg
@@ -907,7 +914,7 @@ exports[`Property list snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="/offer"
+                    href="/offer/2"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location

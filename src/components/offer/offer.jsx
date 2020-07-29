@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {offerType} from "../../types/dataTypes.js";
+import {AppRoute} from "../../constants.js";
+import {Link} from 'react-router-dom';
 
-const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer}) => {
+
+const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorites}) => {
   const {title, img, cost, type, rate} = offer;
   return (
     <article className={currentOffer ? `near-places__card place-card` : `cities__place-card place-card` }
@@ -31,7 +34,16 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer}) => {
             <b className="place-card__price-value">&euro;{cost}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            onClick={(evt) => {
+              evt.preventDefault();
+              const data = {
+                id: offer.id,
+                status: offer.isFav ? 0 : 1
+              };
+              addToFavorites(data);
+            }}
+            className={`place-card__bookmark-button button ${offer.isFav ? `place-card__bookmark-button--active` : ``}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"/>
             </svg>
@@ -45,12 +57,11 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/offer" onClick={
-            (evt) => {
-              evt.preventDefault();
+          <Link to={`${AppRoute.OFFER}/${offer.id}`} onClick={
+            () => {
               onClickOffer(offer);
             }
-          }>{title}</a>
+          }>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -62,7 +73,8 @@ Offer.propTypes = {
   onHoveredOffer: PropTypes.func,
   onClickOffer: PropTypes.func,
   offer: offerType,
-  currentOffer: offerType
+  currentOffer: offerType,
+  addToFavorites: PropTypes.func
 };
 
 export default Offer;

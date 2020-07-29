@@ -3,6 +3,8 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Offer from "./offer.jsx";
 import {offers} from "../../mock/test/data.js";
+import {Router} from 'react-router-dom';
+import history from "../../history.js";
 
 const offerTest = offers[0];
 
@@ -15,11 +17,13 @@ it(`Offer should be hovered`, () => {
   const onClickOffer = jest.fn();
 
   const offerComponent = mount(
-      <Offer
-        offer={offerTest}
-        onHoveredOffer={hoverOfferTestHandler}
-        onClickOffer={onClickOffer}
-      />
+      <Router history={history}>
+        <Offer
+          offer={offerTest}
+          onHoveredOffer={hoverOfferTestHandler}
+          onClickOffer={onClickOffer}
+        />
+      </Router>
   );
 
   const offerCard = offerComponent.find(`.place-card`);

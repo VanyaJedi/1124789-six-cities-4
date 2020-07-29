@@ -3,6 +3,7 @@ import {createSelector} from "reselect";
 import nameSpace from "../name-space.js";
 import {createOffer} from "../../adapters/offers.js";
 import {createCity} from "../../adapters/city.js";
+import {createReview} from "../../adapters/reviews.js";
 import {CITIES_TO_SHOW} from '../../constants.js';
 
 const NAME_SPACE = nameSpace.DATA;
@@ -15,8 +16,16 @@ export const getOffers = (state) => {
   return state[NAME_SPACE].offers.map((offer) => createOffer(offer));
 };
 
+export const getNearbyOffers = (state) => {
+  return state[NAME_SPACE].nearbyOffers.map((offer) => createOffer(offer));
+};
+
+export const getFavorites = (state) => {
+  return state[NAME_SPACE].favorites.map((offer) => createOffer(offer));
+};
+
 export const getReviews = (state) => {
-  return state[NAME_SPACE].reviews;
+  return state[NAME_SPACE].reviews.map((review) => createReview(review));
 };
 
 export const getInitCity = createSelector(

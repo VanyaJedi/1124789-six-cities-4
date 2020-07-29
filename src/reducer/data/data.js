@@ -1,11 +1,14 @@
 
 import {extend} from "../../utils.js";
+import {getCurrentOffer} from "../app/selectors.js";
 
 const initialState = {
   city: null,
   offers: [],
   offersOnCity: [],
+  nearbyOffers: [],
   reviews: [],
+  favorites: []
 };
 
 const ActionType = {
@@ -13,7 +16,10 @@ const ActionType = {
   CITY_CHANGE: `CITY_CHANGE`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  CITY_OFFERS: `CITY_OFFERS`
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
+  CITY_OFFERS: `CITY_OFFERS`,
+  ADD_COMMENT: `ADD_COMMENT`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`
 };
 
 const ActionCreator = {
@@ -37,10 +43,31 @@ const ActionCreator = {
     };
   },
 
+  loadNearbyOffers: (offers) => {
+    return {
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: offers,
+    };
+  },
+
   cityOffers: (offers) => {
     return {
       type: ActionType.CITY_OFFERS,
       payload: offers,
+    };
+  },
+
+  addComment: (comment) => {
+    return {
+      type: ActionType.ADD_COMMENT,
+      payload: comment,
+    };
+  },
+
+  loadFavorites: (offers) => {
+    return {
+      type: ActionType.LOAD_FAVORITES,
+      payload: offers
     };
   }
 };
@@ -54,6 +81,49 @@ const Operation = {
         dispatch(ActionCreator.loadOffers(response.data));
       });
   },
+
+  loadNearbyOffers: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        dispatch(ActionCreator.loadNearbyOffers(response.data));
+      });
+  },
+
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavorites(response.data));
+      });
+  },
+
+  getComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadReviews(response.data));
+      });
+  },
+
+  addComment: (data) => (dispatch, getState, api) => {
+    return api.post(`/comments/${data.id}`, {
+      comment: data.comment,
+      rating: data.rating,
+    })
+    .then((response) => {
+      dispatch(ActionCreator.loadReviews(response.data));
+    });
+  },
+
+  addToFavorites: (data) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${data.id}/${data.status}`)
+    .then(() => {
+      dispatch(Operation.loadOffers());
+      const currentOffer = getCurrentOffer(getState());
+      if (currentOffer) {
+        dispatch(Operation.loadNearbyOffers(currentOffer.id));
+        dispatch(Operation.loadFavorites());
+      }
+    });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -68,6 +138,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {offers: action.payload});
     case ActionType.CITY_OFFERS:
       return extend(state, {offersOnCity: action.payload});
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return extend(state, {nearbyOffers: action.payload});
+    case ActionType.LOAD_FAVORITES:
+      return extend(state, {favorites: action.payload});
     default:
       return state;
   }
