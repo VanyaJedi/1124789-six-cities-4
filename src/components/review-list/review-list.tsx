@@ -1,6 +1,6 @@
-import React from "react";
-import Review from "../review/review.jsx";
-import {reviewType} from "../../types/dataTypes.js";
+import * as React from "react"
+import Review from "../review/review";
+import {reviewType} from "../../types/dataTypes";
 import PropTypes from "prop-types";
 
 

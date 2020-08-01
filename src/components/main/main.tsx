@@ -1,13 +1,13 @@
-import React from "react";
-import OfferList from "../offer-list/offer-list.jsx";
-import LocationList from "../location-list/location-list.jsx";
-import Map from "../map/map.jsx";
-import Sort from "../sort/sort.jsx";
-import Empty from "../empty/empty.jsx";
-import Header from "../header/header.jsx";
+import * as React from "react"
+import OfferList from "../offer-list/offer-list";
+import LocationList from "../location-list/location-list";
+import Map from "../map/map";
+import Sort from "../sort/sort";
+import Empty from "../empty/empty";
+import Header from "../header/header";
 import PropTypes from 'prop-types';
-import {offerType, cityType, userType} from "../../types/dataTypes.js";
-import withSort from "../../hocs/with-sort/with-sort.js";
+import {offerType, cityType, userType} from "../../types/dataTypes";
+import withSort from "../../hocs/with-sort/with-sort";
 
 
 const SortWrapped = withSort(Sort);

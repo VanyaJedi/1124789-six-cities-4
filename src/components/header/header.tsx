@@ -1,7 +1,7 @@
-import React from "react";
-import {userType} from "../../types/dataTypes.js";
+import * as React from "react"
+import {userType} from "../../types/dataTypes";
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../constants.js';
+import {AppRoute} from '../../constants';
 
 const Header = ({user}) => {
   return (

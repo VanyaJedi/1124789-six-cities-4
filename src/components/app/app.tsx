@@ -1,23 +1,23 @@
-import React from "react";
-import Main from "../main/main.jsx";
-import SignIn from "../sign-in/sign-in.jsx";
-import Favorites from "../favorites/favorites.jsx";
-import FavoritesEmpty from "../favorites-empty/favorites-empty.jsx";
-import Property from "../property/property.jsx";
+import * as React from "react"
+import Main from "../main/main";
+import SignIn from "../sign-in/sign-in";
+import Favorites from "../favorites/favorites";
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
+import Property from "../property/property";
 import PropTypes from 'prop-types';
-import {offerType, reviewType, cityType, userType} from "../../types/dataTypes.js";
+import {offerType, reviewType, cityType, userType} from "../../types/dataTypes";
 import {Route, Switch, Router} from 'react-router-dom';
-import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app.js";
-import {ActionCreator as ActionCreatorData} from "../../reducer/data/data.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app";
+import {ActionCreator as ActionCreatorData} from "../../reducer/data/data";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors.js";
-import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites} from "../../reducer/data/selectors.js";
-import {getUser} from "../../reducer/user/selectors.js";
-import {AppRoute} from "../../constants.js";
+import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors";
+import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites} from "../../reducer/data/selectors";
+import {getUser} from "../../reducer/user/selectors";
+import {AppRoute} from "../../constants";
 import {Link} from 'react-router-dom';
-import history from "../../history.js";
+import history from "../../history";
 
 class App extends React.PureComponent {
 
@@ -74,12 +74,14 @@ class App extends React.PureComponent {
           <Route
             path={`${AppRoute.OFFER}/:id`}
             exact
-            render={() => {
+            render={(props) => {
+              const offerId = props.match.params.id;
+              const offer = offers.find((el) => el.id === offerId);
               return (
                 <Property
                   user={user}
                   offers={nearbyOffers}
-                  offer={currentOffer}
+                  offer={offer}
                   reviews={reviews}
                   addComment={addComment}
                   addToFavorites={addToFavorites}

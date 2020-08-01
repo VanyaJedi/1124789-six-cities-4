@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react"
 import PropTypes from 'prop-types';
-import {offerType} from "../../types/dataTypes.js";
-import {AppRoute} from "../../constants.js";
+import {offerType} from "../../types/dataTypes";
+import {AppRoute} from "../../constants";
 import {Link} from 'react-router-dom';
 
 

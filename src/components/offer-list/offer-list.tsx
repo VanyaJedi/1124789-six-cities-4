@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react"
 import PropTypes from "prop-types";
-import Offer from "../offer/offer.jsx";
-import {offerType} from "../../types/dataTypes.js";
-import {getSortedOffers} from "../../utils.js";
+import Offer from "../offer/offer";
+import {offerType} from "../../types/dataTypes";
+import {getSortedOffers} from "../../utils";
 
 const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer, addToFavorites}) => {
   const sortedOffers = getSortedOffers(sortType, offers);

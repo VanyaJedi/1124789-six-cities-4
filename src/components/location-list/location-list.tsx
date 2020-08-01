@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react"
 import PropTypes from "prop-types";
-import {cityType} from "../../types/dataTypes.js";
+import {cityType} from "../../types/dataTypes";
 
 const LocationList = ({city, onClickCity, cities}) => {
   return (

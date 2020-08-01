@@ -10,10 +10,11 @@ import App from "./components/app/app.jsx";
 import {Provider} from "react-redux";
 import {createAPI} from './api.js';
 import {AppRoute} from "./constants.js";
+import history from "./history.js";
 
 const onUnauth = () => {
   store.dispatch(ActionCreatorUser.setUser(null));
-  history.push(AppRoute.SIGNIN);
+  //history.push(AppRoute.SIGNIN);
 };
 
 const api = createAPI(onUnauth);

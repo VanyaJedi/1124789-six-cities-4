@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react"
 import {userType} from "../../types/dataTypes.js";
-import Header from "../header/header.jsx";
+import Header from "../header/header";
 
 const FavoritesEmpty = ({user}) => {
 

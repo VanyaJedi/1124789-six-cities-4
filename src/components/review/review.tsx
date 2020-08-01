@@ -1,5 +1,5 @@
-import React from "react";
-import {reviewType} from "../../types/dataTypes.js";
+import * as React from "react"
+import {reviewType} from "../../types/dataTypes";
 
 
 const Review = (review) => {

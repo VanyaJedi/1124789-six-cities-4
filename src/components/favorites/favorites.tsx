@@ -1,8 +1,8 @@
-import React from "react";
-import {userType, offerType} from "../../types/dataTypes.js";
+import * as React from "react"
+import {userType, offerType} from "../../types/dataTypes";
 import PropTypes from "prop-types";
-import Header from "../header/header.jsx";
-import {getCities} from "../../utils.js";
+import Header from "../header/header";
+import {getCities} from "../../utils";
 
 const Favorites = ({user, favorites}) => {
 

@@ -1,12 +1,12 @@
-import React from "react";
-import ReviewList from "../review-list/review-list.jsx";
-import {offerType, userType} from "../../types/dataTypes.js";
-import Map from "../map/map.jsx";
-import OfferList from "../../components/offer-list/offer-list.jsx";
-import {reviewType} from "../../types/dataTypes.js";
+import * as React from "react"
+import ReviewList from "../review-list/review-list";
+import {offerType, userType} from "../../types/dataTypes";
+import Map from "../map/map";
+import OfferList from "../offer-list/offer-list";
+import {reviewType} from "../../types/dataTypes";
 import PropTypes from "prop-types";
-import Comments from "../comments/comments.jsx";
-import Header from "../header/header.jsx";
+import Comments from "../comments/comments";
+import Header from "../header/header";
 
 const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) => {
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
@@ -82,7 +82,7 @@ const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) =>
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={isSuper ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={avatar} width="74" height="74" alt="Host avatar"/>
+                    <img className="property__avatar user__avatar" src={`/${avatar}`} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
                     {name}

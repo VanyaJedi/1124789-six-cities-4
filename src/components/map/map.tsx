@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react"
 import leaflet from 'leaflet';
 import PropTypes from "prop-types";
-import {offerType} from "../../types/dataTypes.js";
+import {offerType} from "../../types/dataTypes";
 
 const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
