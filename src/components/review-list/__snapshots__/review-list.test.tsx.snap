@@ -67,9 +67,9 @@ Array [
         </p>
         <time
           className="reviews__time"
-          dateTime="Tue Oct 09 2007 04:00:00 GMT+0400 (GMT+03:00)"
+          dateTime="Mon Apr 22 2019 13:20:30 GMT+0300 (GMT+03:00)"
         >
-          October 9, 2007
+          April 22, 2019
         </time>
       </div>
     </li>
@@ -125,9 +125,9 @@ Array [
         </p>
         <time
           className="reviews__time"
-          dateTime="Wed Jul 17 1996 04:00:00 GMT+0400 (GMT+03:00)"
+          dateTime="Mon Apr 22 2019 13:20:30 GMT+0300 (GMT+03:00)"
         >
-          July 17, 1996
+          April 22, 2019
         </time>
       </div>
     </li>
