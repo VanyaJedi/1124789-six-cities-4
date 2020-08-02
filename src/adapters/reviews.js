@@ -5,7 +5,7 @@ export const createReview = (data) => {
     text: data.comment,
     rate: data.rating,
     userName: data.user.name,
-    date: new Date(data.date),
+    date: data.date,
     avatar: data.user.avatar_url,
     isPro: data.user.is_pro,
   };

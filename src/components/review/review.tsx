@@ -7,6 +7,7 @@ interface Props {
 
 const Review: React.FunctionComponent<Props> = (props: Props) => {
   const {text, rate, userName, date, avatar} = props.review;
+  const dateFormat = new Date(date);
   const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
   return (
     <li className="reviews__item">
@@ -28,7 +29,7 @@ const Review: React.FunctionComponent<Props> = (props: Props) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date.toString()}>{`${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</time>
+        <time className="reviews__time" dateTime={date.toString()}>{`${monthNames[dateFormat.getMonth()]} ${dateFormat.getDate()}, ${dateFormat.getFullYear()}`}</time>
       </div>
     </li>
   );

@@ -59,14 +59,14 @@ export const reviews = [
     text: `test reviewtest reviewtest reviewtest review`,
     rate: 2,
     userName: `Kirill`,
-    date: new Date(`2019-04-22T10:20:30Z`)
+    date: `2019-04-22T10:20:30Z`
   },
   {
     id: `2`,
     text: `olololololololo`,
     rate: 3,
     userName: `Masha`,
-    date: new Date(`2019-04-22T10:20:30Z`)
+    date: `2019-04-22T10:20:30Z`
   },
 ];
 
