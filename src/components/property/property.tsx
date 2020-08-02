@@ -23,6 +23,7 @@ const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers,
   if (!offer) {
     return null;
   }
+
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
   return (

@@ -26,3 +26,7 @@ export const getRating = (state) => {
 export const getFormStatus = (state) => {
   return state[NAME_SPACE].isValidForm;
 };
+
+export const getLoadingStatus = (state) => {
+  return state[NAME_SPACE].isLoading;
+};

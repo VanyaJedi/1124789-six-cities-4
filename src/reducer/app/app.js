@@ -5,7 +5,8 @@ const initialState = {
   currentOffer: null,
   sortType: `Popular`,
   rating: 0,
-  isValidForm: true
+  isValidForm: true,
+  isLoading: true,
 };
 
 
@@ -15,6 +16,7 @@ const ActionType = {
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_RATING: `CHANGE_RATING`,
   CHANGE_FORM_STATUS: `CHANGE_FORM_STATUS`,
+  CHANGE_LOADING: `CHANGE_LOADING`,
 };
 
 
@@ -39,6 +41,10 @@ const ActionCreator = {
     type: ActionType.CHANGE_FORM_STATUS,
     payload: status
   }),
+  changeLoading: (status) => ({
+    type: ActionType.CHANGE_LOADING,
+    payload: status
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +59,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {rating: action.payload});
     case ActionType.CHANGE_FORM_STATUS:
       return extend(state, {isValidForm: action.payload});
+    case ActionType.CHANGE_LOADING:
+      return extend(state, {isLoading: action.payload});
     default:
       return state;
   }

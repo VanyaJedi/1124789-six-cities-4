@@ -10,7 +10,7 @@ import {ActionCreator as ActionCreatorData} from "../../reducer/data/data";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType, getRating, getFormStatus} from "../../reducer/app/selectors";
+import {getHoveredOfferId, getCurrentOffer, getSortType, getRating, getFormStatus, getLoadingStatus} from "../../reducer/app/selectors";
 import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites} from "../../reducer/data/selectors";
 import {getUser} from "../../reducer/user/selectors";
 import {AppRoute} from "../../constants";
@@ -42,6 +42,7 @@ interface Props {
   isValidForm: boolean;
   changeRating: () => void;
   changeFormStatus: () => void;
+  isLoading: boolean;
 }
 
 class App extends React.PureComponent<Props, {}> {
@@ -62,7 +63,6 @@ class App extends React.PureComponent<Props, {}> {
       onHoveredOffer,
       onClickOffer,
       onClickCity,
-      currentOffer,
       hoveredOfferId,
       sortType,
       onChangeSortType,
@@ -74,71 +74,73 @@ class App extends React.PureComponent<Props, {}> {
       rating,
       isValidForm,
       changeRating,
-      changeFormStatus
+      changeFormStatus,
+      isLoading
     } = this.props;
     return (
-      <Router history={history}>
-        <Switch>
-          <Route path={AppRoute.ROOT} exact>
-            <Main
+      isLoading ? null : (
+        <Router history={history}>
+          <Switch>
+            <Route path={AppRoute.ROOT} exact>
+              <Main
+                user={user}
+                city={city}
+                offers={offers}
+                hoveredOfferId={hoveredOfferId}
+                onHoveredOffer={onHoveredOffer}
+                onClickOffer={onClickOffer}
+                onClickCity={onClickCity}
+                currentOffer={null}
+                onChangeSortType={onChangeSortType}
+                sortType={sortType}
+                cities={cities}
+                addToFavorites={addToFavorites}
+              />
+            </Route>
+            <Route path={AppRoute.SIGNIN} exact>
+              {user ? <Redirect to={AppRoute.ROOT}/> : <SignIn loginHandler={login}/>}
+            </Route>
+            <PrivateRoute
+              exact
+              path={AppRoute.FAVORITES}
+              component={Favorites}
               user={user}
-              city={city}
-              offers={offers}
-              hoveredOfferId={hoveredOfferId}
-              onHoveredOffer={onHoveredOffer}
-              onClickOffer={onClickOffer}
-              onClickCity={onClickCity}
-              currentOffer={currentOffer}
-              onChangeSortType={onChangeSortType}
-              sortType={sortType}
-              cities={cities}
-              addToFavorites={addToFavorites}
+              render={() => {
+                return (
+                  favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>
+                );
+              }}
             />
-          </Route>
-          <Route path={AppRoute.SIGNIN} exact>
-            {user ? <Redirect to={AppRoute.ROOT}/> : <SignIn loginHandler={login}/>}
-          </Route>
-          <PrivateRoute
-            exact
-            path={AppRoute.FAVORITES}
-            component={Favorites}
-            user={user}
-            render={() => {
-              return (
-                favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>
-              );
-            }}
-          />
-          <Route
-            path={`${AppRoute.OFFER}/:id`}
-            exact
-            render={(props) => {
-              const offerId = props.match.params.id;
-              const offer = offers.find((el) => el.id === offerId);
-              return (
-                <Property
-                  user={user}
-                  offers={nearbyOffers}
-                  offer={offer}
-                  reviews={reviews}
-                  addComment={addComment}
-                  addToFavorites={addToFavorites}
-                  rating={rating}
-                  isValidForm={isValidForm}
-                  changeRating={changeRating}
-                  changeFormStatus={changeFormStatus}
-                />
-              );
-            }}
-          />
-          <Route render={() => {
-            return (<React.Fragment>
-              <h1>404 page not found</h1>
-              <Link to="/">go to main page</Link>
-            </React.Fragment>);
-          }}/>
-        </Switch>
-      </Router>
+            <Route
+              path={`${AppRoute.OFFER}/:id`}
+              exact
+              render={(props) => {
+                const offerId = props.match.params.id;
+                const offer = offers.find((el) => el.id === offerId);
+                return (
+                  <Property
+                    user={user}
+                    offers={nearbyOffers}
+                    offer={offer}
+                    reviews={reviews}
+                    addComment={addComment}
+                    addToFavorites={addToFavorites}
+                    rating={rating}
+                    isValidForm={isValidForm}
+                    changeRating={changeRating}
+                    changeFormStatus={changeFormStatus}
+                  />
+                );
+              }}
+            />
+            <Route render={() => {
+              return (<React.Fragment>
+                <h1>404 page not found</h1>
+                <Link to="/">go to main page</Link>
+              </React.Fragment>);
+            }}/>
+          </Switch>
+        </Router>)
     );
   }
 }
@@ -155,7 +157,8 @@ const mapStateToProps = (state) => ({
   nearbyOffers: getNearbyOffers(state),
   favorites: getFavorites(state),
   rating: getRating(state),
-  isValidForm: getFormStatus(state)
+  isValidForm: getFormStatus(state),
+  isLoading: getLoadingStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -169,9 +172,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorApp.hoverOffer(offer));
   },
   onClickOffer(offer) {
-    dispatch(DataOperation.loadNearbyOffers(offer.id));
-    dispatch(DataOperation.getComments(offer.id));
-    dispatch(ActionCreatorApp.getCurrentOffer(offer));
+    dispatch(DataOperation.loadNearbyOffers(offer.id))
+      .then(()=> dispatch(DataOperation.getComments(offer.id)))
+      .then(()=> dispatch(ActionCreatorApp.getCurrentOffer(offer)));
   },
   onClickCity(city) {
     dispatch(ActionCreatorData.changeCity(city));

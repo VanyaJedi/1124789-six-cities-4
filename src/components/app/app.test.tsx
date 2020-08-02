@@ -42,6 +42,7 @@ it(`App snapshot`, () => {
   const isValidForm = true;
   const changeRating = jest.fn();
   const changeFormStatus = jest.fn();
+  const isLoading = false;
 
   const tree = renderer
     .create(
@@ -70,6 +71,7 @@ it(`App snapshot`, () => {
               changeRating={changeRating}
               changeFormStatus={changeFormStatus}
               offer={offer}
+              isLoading={isLoading}
             />
           </Router>
 

@@ -28,9 +28,9 @@ const Offer: React.FunctionComponent<Props> = ({offer, onHoveredOffer, onClickOf
         }
       }}
     >
-     {isPrime ? <div className="place-card__mark">
+      {isPrime ? <div className="place-card__mark">
         <span>Premium</span>
-      </div>: null}
+      </div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={img} width="260" height="200" alt="Place image"/>
