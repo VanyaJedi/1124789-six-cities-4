@@ -1,8 +1,13 @@
-import * as React from "react"
-import {userType} from "../../types/dataTypes.js";
+import * as React from "react";
+import {userType} from "../../types/dataTypes";
 import Header from "../header/header";
+import {User} from "../../types/types";
 
-const FavoritesEmpty = ({user}) => {
+interface Props {
+  user: User;
+}
+
+const FavoritesEmpty: React.FunctionComponent<Props> = ({user}) => {
 
   return (
     <div className="page page--favorites-empty">

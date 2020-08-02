@@ -4,6 +4,8 @@ const initialState = {
   hoveredOfferId: null,
   currentOffer: null,
   sortType: `Popular`,
+  rating: 0,
+  isValidForm: true
 };
 
 
@@ -11,6 +13,8 @@ const ActionType = {
   HOVER_OFFER: `HOVER_OFFER`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
+  CHANGE_RATING: `CHANGE_RATING`,
+  CHANGE_FORM_STATUS: `CHANGE_FORM_STATUS`,
 };
 
 
@@ -27,6 +31,14 @@ const ActionCreator = {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: sortType
   }),
+  changeRating: (rate) => ({
+    type: ActionType.CHANGE_RATING,
+    payload: rate
+  }),
+  changeFormStatus: (status) => ({
+    type: ActionType.CHANGE_FORM_STATUS,
+    payload: status
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +49,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {currentOffer: action.payload});
     case ActionType.CHANGE_SORT_TYPE:
       return extend(state, {sortType: action.payload});
+    case ActionType.CHANGE_RATING:
+      return extend(state, {rating: action.payload});
+    case ActionType.CHANGE_FORM_STATUS:
+      return extend(state, {isValidForm: action.payload});
     default:
       return state;
   }

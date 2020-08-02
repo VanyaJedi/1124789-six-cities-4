@@ -1,10 +1,16 @@
-import * as React from "react"
-import {userType, offerType} from "../../types/dataTypes";
-import PropTypes from "prop-types";
+import * as React from "react";
 import Header from "../header/header";
 import {getCities} from "../../utils";
+import {Offer, User} from "../../types/types";
 
-const Favorites = ({user, favorites}) => {
+interface Props {
+  user: User;
+  favorites: Offer[];
+}
+
+const Favorites: React.FunctionComponent<Props> = (props: Props) => {
+
+  const {user, favorites} = props;
 
   const cities = getCities(favorites);
   return (
@@ -77,11 +83,6 @@ const Favorites = ({user, favorites}) => {
       </footer>
     </div>
   );
-};
-
-Favorites.propTypes = {
-  user: userType,
-  favorites: PropTypes.arrayOf(offerType),
 };
 
 export default Favorites;

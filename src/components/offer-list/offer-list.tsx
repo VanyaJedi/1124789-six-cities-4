@@ -1,10 +1,18 @@
-import * as React from "react"
-import PropTypes from "prop-types";
+import * as React from "react";
 import Offer from "../offer/offer";
-import {offerType} from "../../types/dataTypes";
 import {getSortedOffers} from "../../utils";
+import {Offer as OfferType} from "../../types/types";
 
-const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer, addToFavorites}) => {
+interface Props {
+  offers: OfferType[];
+  onHoveredOffer?: () => void;
+  onClickOffer?: () => void;
+  sortType?: string;
+  currentOffer?: OfferType;
+  addToFavorites: () => void;
+}
+
+const OfferList: React.FunctionComponent<Props> = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer, addToFavorites}: Props) => {
   const sortedOffers = getSortedOffers(sortType, offers);
   return (
     <div className={currentOffer ? `near-places__list places__list` : `cities__places-list places__list tabs__content`}>
@@ -21,15 +29,5 @@ const OfferList = ({offers, onHoveredOffer, onClickOffer, sortType, currentOffer
   );
 };
 
-OfferList.propTypes = {
-  offers: PropTypes.arrayOf(
-      offerType
-  ),
-  onHoveredOffer: PropTypes.func,
-  onClickOffer: PropTypes.func,
-  sortType: PropTypes.string,
-  currentOffer: offerType,
-  addToFavorites: PropTypes.func
-};
 
 export default OfferList;

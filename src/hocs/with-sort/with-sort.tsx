@@ -1,4 +1,5 @@
-import * as React from "react"
+import * as React from "react";
+import {Subtract} from "utility-types";
 
 const sortTypeMapping = [
   {
@@ -23,8 +24,27 @@ const sortTypeMapping = [
   },
 ];
 
+interface State {
+  opened: boolean;
+}
+
+interface InjectingProps {
+  onChangeSortType: (arg: string) => void;
+}
+
 const withSort = (Component) => {
-  class WithSort extends React.PureComponent {
+
+  type P = React.ComponentProps<typeof Component>;
+
+  // Вычисляем реальные пропсы, которые нужно передать снаружи в обернутый компонент.
+  // P - пропсы компонента, InjectingProps - добавляемые хоком пропсы.
+  // T - пропсы, которые нужно передать в обернутый хоком компонент.
+  // Условно: T = P - InjectingProps
+  // Например: P = {foo: string, bar: string}, InjectingProps = {bar: string}
+  // Тогда: T = {foo: string}
+  type T = Subtract<P, InjectingProps>;
+
+  class WithSort extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {

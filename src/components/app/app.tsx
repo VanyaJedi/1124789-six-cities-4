@@ -1,25 +1,52 @@
-import * as React from "react"
+import * as React from "react";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import Property from "../property/property";
-import PropTypes from 'prop-types';
-import {offerType, reviewType, cityType, userType} from "../../types/dataTypes";
-import {Route, Switch, Router} from 'react-router-dom';
+import {Route, Switch, Router, Redirect} from 'react-router-dom';
 import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType} from "../../reducer/app/selectors";
+import {getHoveredOfferId, getCurrentOffer, getSortType, getRating, getFormStatus} from "../../reducer/app/selectors";
 import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites} from "../../reducer/data/selectors";
 import {getUser} from "../../reducer/user/selectors";
 import {AppRoute} from "../../constants";
 import {Link} from 'react-router-dom';
 import history from "../../history";
+import PrivateRoute from "../private-route/private-route";
+import {Offer, City, Review, User} from "../../types/types";
 
-class App extends React.PureComponent {
+interface Props {
+  login: () => void;
+  offers: Offer[];
+  offer: Offer;
+  city: City;
+  onHoveredOffer: () => void;
+  onClickOffer: () => void;
+  onClickCity: () => void;
+  onChangeSortType: () => void;
+  currentOffer: Offer;
+  reviews: Review[];
+  hoveredOfferId: string;
+  sortType: string;
+  cities: City[];
+  addComment: () => void;
+  nearbyOffers: Offer[];
+  user: User;
+  addToFavorites: () => void;
+  favorites: Offer[];
+  rating: number;
+  isValidForm: boolean;
+  changeRating: () => void;
+  changeFormStatus: () => void;
+}
+
+class App extends React.PureComponent<Props, {}> {
+
+  props: Props;
 
   constructor(props) {
     super(props);
@@ -43,7 +70,11 @@ class App extends React.PureComponent {
       addComment,
       nearbyOffers,
       addToFavorites,
-      favorites
+      favorites,
+      rating,
+      isValidForm,
+      changeRating,
+      changeFormStatus
     } = this.props;
     return (
       <Router history={history}>
@@ -53,7 +84,6 @@ class App extends React.PureComponent {
               user={user}
               city={city}
               offers={offers}
-              reviews={reviews}
               hoveredOfferId={hoveredOfferId}
               onHoveredOffer={onHoveredOffer}
               onClickOffer={onClickOffer}
@@ -66,11 +96,19 @@ class App extends React.PureComponent {
             />
           </Route>
           <Route path={AppRoute.SIGNIN} exact>
-            <SignIn loginHandler={login}/>
+            {user ? <Redirect to={AppRoute.ROOT}/> : <SignIn loginHandler={login}/>}
           </Route>
-          <Route path={AppRoute.FAVORITES} exact>
-            {favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>}
-          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            component={Favorites}
+            user={user}
+            render={() => {
+              return (
+                favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>
+              );
+            }}
+          />
           <Route
             path={`${AppRoute.OFFER}/:id`}
             exact
@@ -85,6 +123,10 @@ class App extends React.PureComponent {
                   reviews={reviews}
                   addComment={addComment}
                   addToFavorites={addToFavorites}
+                  rating={rating}
+                  isValidForm={isValidForm}
+                  changeRating={changeRating}
+                  changeFormStatus={changeFormStatus}
                 />
               );
             }}
@@ -101,32 +143,6 @@ class App extends React.PureComponent {
   }
 }
 
-App.propTypes = {
-  login: PropTypes.func,
-  showAuthScreen: PropTypes.func,
-  authScreen: PropTypes.bool,
-  authorizationStatus: PropTypes.string,
-  offers: PropTypes.arrayOf(
-      offerType
-  ).isRequired,
-  offer: offerType,
-  city: cityType,
-  onHoveredOffer: PropTypes.func.isRequired,
-  onClickOffer: PropTypes.func.isRequired,
-  onClickCity: PropTypes.func.isRequired,
-  onChangeSortType: PropTypes.func.isRequired,
-  currentOffer: offerType,
-  reviews: PropTypes.arrayOf(reviewType),
-  hoveredOfferId: PropTypes.string,
-  sortType: PropTypes.string,
-  cities: PropTypes.arrayOf(cityType),
-  addComment: PropTypes.func,
-  nearbyOffers: PropTypes.arrayOf(offerType),
-  user: userType,
-  addToFavorites: PropTypes.func,
-  favorites: PropTypes.arrayOf(offerType)
-};
-
 const mapStateToProps = (state) => ({
   user: getUser(state),
   city: getCity(state),
@@ -137,7 +153,9 @@ const mapStateToProps = (state) => ({
   hoveredOfferId: getHoveredOfferId(state),
   sortType: getSortType(state),
   nearbyOffers: getNearbyOffers(state),
-  favorites: getFavorites(state)
+  favorites: getFavorites(state),
+  rating: getRating(state),
+  isValidForm: getFormStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -166,7 +184,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addToFavorites(data) {
     dispatch(DataOperation.addToFavorites(data));
-  }
+  },
+  changeRating(rate) {
+    dispatch(ActionCreatorApp.changeRating(rate));
+  },
+  changeFormStatus(status) {
+    dispatch(ActionCreatorApp.changeFormStatus(status));
+  },
+
 });
 
 export {App};

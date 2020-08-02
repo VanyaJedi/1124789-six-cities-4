@@ -1,23 +1,23 @@
-import * as React from "react"
-import PropTypes from "prop-types";
-import {Route, Redirect} from "react-router-dom";
+import * as React from "react";
+import {Route, Redirect, RouteProps} from "react-router-dom";
 import {AppRoute} from "../../constants";
-import {userType} from "../../types/dataTypes";
+import {User} from "../../types/types";
 
-const PrivateRoute = ({component: Component, ...rest}) => {
+type Props = RouteProps & {
+  user: User;
+  render: () => React.ReactNode;
+}
+
+const PrivateRoute = ({render, path, exact, user}: Props) => {
   return <Route
-    {...rest}
+    path={path}
+    exact={exact}
     render={
-      (props) => {
-        return props.user ? <Component {...props}/> : <Redirect to={AppRoute.SIGNIN}/>;
+      () => {
+        return user ? render() : <Redirect to={AppRoute.SIGNIN}/>;
       }
     }
   />;
-};
-
-PrivateRoute.propTypes = {
-  component: PropTypes.component,
-  user: userType
 };
 
 export default PrivateRoute;

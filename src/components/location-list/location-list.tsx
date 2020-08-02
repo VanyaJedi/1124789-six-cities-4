@@ -1,8 +1,13 @@
-import * as React from "react"
-import PropTypes from "prop-types";
-import {cityType} from "../../types/dataTypes";
+import * as React from "react";
+import {City} from "../../types/types";
 
-const LocationList = ({city, onClickCity, cities}) => {
+interface Props {
+  onClickCity: (City) => void;
+  city: City;
+  cities: City[];
+}
+
+const LocationList: React.FunctionComponent<Props> = ({city, onClickCity, cities}: Props) => {
   return (
     <ul className="locations__list tabs__list">
       {cities.map((location, index) => {
@@ -22,12 +27,5 @@ const LocationList = ({city, onClickCity, cities}) => {
     </ul>
   );
 };
-
-LocationList.propTypes = {
-  cities: PropTypes.arrayOf(cityType),
-  city: cityType,
-  onClickCity: PropTypes.func.isRequired,
-};
-
 
 export default LocationList;

@@ -1,36 +1,43 @@
-import * as React from "react"
-import PropTypes from 'prop-types';
+import * as React from "react";
 import {commentInputs} from '../../constants';
 
-class Comments extends React.PureComponent {
+interface Props {
+  addComment: (params: {id: string; comment: string; rating: number}) => void;
+  offerId: string;
+  rating: number;
+  isValidForm: boolean;
+  changeRating: (arg: string) => void;
+  changeFormStatus: (arg: boolean) => void;
+}
+
+class Comments extends React.PureComponent<Props, {}> {
+  props: Props;
+  private commentRef: React.RefObject<HTMLTextAreaElement>;
+  private formRef: React.RefObject<HTMLFormElement>;
+  private sendButtonRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
     this.commentRef = React.createRef();
     this.formRef = React.createRef();
     this.sendButtonRef = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      rating: 0,
-      incorrectFrom: false,
-    };
   }
 
   handleSubmit(evt) {
-    const {addComment, offerId} = this.props;
+    const {addComment, offerId, rating, changeFormStatus} = this.props;
     evt.preventDefault();
 
     const isValidText = this.commentRef.current.value.length >= 50 && this.commentRef.current.value.length <= 300;
-    if (isValidText && this.state.rating) {
+    if (isValidText && rating) {
       addComment({
         id: offerId,
         comment: this.commentRef.current.value,
-        rating: this.state.rating
+        rating
       });
-      this.setState({incorrectFrom: false});
       this.formRef.current.reset();
     } else {
-      this.setState({incorrectFrom: true});
+      changeFormStatus(false);
     }
   }
 
@@ -40,7 +47,7 @@ class Comments extends React.PureComponent {
         ref={this.formRef}
         onSubmit={this.handleSubmit}
         className="reviews__form form" action="#" method="post"
-        style={this.state.incorrectFrom ? {border: `1px solid red`} : {}}
+        style={this.props.isValidForm ? {} : {border: `1px solid red`}}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -51,9 +58,7 @@ class Comments extends React.PureComponent {
                 <React.Fragment key={input.id}>
                   <input
                     onChange={() => {
-                      this.setState({
-                        rating: input.value
-                      });
+                      this.props.changeRating(input.value);
                     }}
                     className="form__rating-input visually-hidden"
                     name="rating" value={input.value}
@@ -74,18 +79,11 @@ class Comments extends React.PureComponent {
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button ref={this.sendButtonRef} className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+          <button ref={this.sendButtonRef} className="reviews__submit form__submit button" type="submit">Submit</button>
         </div>
       </form>
     );
   }
 }
-
-Comments.propTypes = {
-  addComment: PropTypes.func,
-  offerId: PropTypes.string,
-
-};
-
 
 export default Comments;

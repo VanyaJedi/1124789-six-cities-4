@@ -91,7 +91,9 @@ it(`Should make the correct API call to /offers`, () => {
     .onGet(`/hotels`)
     .reply(200, initialOffers);
 
-  return offersLoader(dispatch, ()=>{}, api)
+  return offersLoader(dispatch, ()=> {
+    return {DATA: {city: null}};
+  }, api)
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(2);
       expect(dispatch).toHaveBeenNthCalledWith(2, {

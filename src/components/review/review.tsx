@@ -1,9 +1,12 @@
-import * as React from "react"
-import {reviewType} from "../../types/dataTypes";
+import * as React from "react";
+import {Review as ReviewType} from "../../types/types";
 
+interface Props {
+  review: ReviewType;
+}
 
-const Review = (review) => {
-  const {text, rate, userName, date, avatar} = review;
+const Review: React.FunctionComponent<Props> = (props: Props) => {
+  const {text, rate, userName, date, avatar} = props.review;
   const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
   return (
     <li className="reviews__item">
@@ -25,15 +28,10 @@ const Review = (review) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date}>{`${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</time>
+        <time className="reviews__time" dateTime={date.toString()}>{`${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</time>
       </div>
     </li>
   );
 };
-
-Review.propTypes = {
-  review: reviewType
-};
-
 
 export default Review;

@@ -1,18 +1,31 @@
-import * as React from "react"
+import * as React from "react";
 import OfferList from "../offer-list/offer-list";
 import LocationList from "../location-list/location-list";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 import Empty from "../empty/empty";
 import Header from "../header/header";
-import PropTypes from 'prop-types';
-import {offerType, cityType, userType} from "../../types/dataTypes";
 import withSort from "../../hocs/with-sort/with-sort";
+import {Offer, City, User} from "../../types/types";
 
+interface Props {
+  user: User;
+  city: City;
+  offers: Offer[];
+  onHoveredOffer: () => void;
+  onClickOffer: () => void;
+  onClickCity: () => void;
+  currentOffer: Offer;
+  hoveredOfferId: string;
+  sortType: string;
+  onChangeSortType: () => void;
+  cities: City[];
+  addToFavorites: () => void;
+}
 
 const SortWrapped = withSort(Sort);
 
-const Main = (props) => {
+const Main: React.FunctionComponent<Props> = (props: Props) => {
   const {user, city, offers, onHoveredOffer, onClickOffer, onClickCity, currentOffer, hoveredOfferId, sortType, onChangeSortType, cities, addToFavorites} = props;
   const offersToShow = offers;
 
@@ -25,7 +38,6 @@ const Main = (props) => {
           <section className="locations container">
             <LocationList
               cities={cities}
-              offers={offers}
               onClickCity={onClickCity}
               city={city}
             />
@@ -66,26 +78,6 @@ const Main = (props) => {
       </main>
     </div>
   );
-};
-
-Main.propTypes = {
-  showAuthScreen: PropTypes.func,
-  authScreen: PropTypes.bool,
-  authorizationStatus: PropTypes.string,
-  cities: PropTypes.arrayOf(cityType),
-  offers: PropTypes.arrayOf(
-      offerType
-  ).isRequired,
-  city: cityType,
-  onHoveredOffer: PropTypes.func.isRequired,
-  onClickOffer: PropTypes.func.isRequired,
-  onClickCity: PropTypes.func.isRequired,
-  currentOffer: offerType,
-  hoveredOfferId: PropTypes.string,
-  sortType: PropTypes.string.isRequired,
-  onChangeSortType: PropTypes.func.isRequired,
-  user: userType,
-  addToFavorites: PropTypes.func
 };
 
 export default Main;

@@ -1,12 +1,20 @@
-import * as React from "react"
-import PropTypes from 'prop-types';
-import {offerType} from "../../types/dataTypes";
+import * as React from "react";
 import {AppRoute} from "../../constants";
 import {Link} from 'react-router-dom';
+import {Offer as OfferType} from "../../types/types";
 
 
-const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorites}) => {
-  const {title, img, cost, type, rate} = offer;
+interface Props {
+  onHoveredOffer: (arg: string) => void;
+  onClickOffer: (arg: OfferType) => void;
+  offer: OfferType;
+  currentOffer: OfferType;
+  addToFavorites: (arg: {id: string; status: number}) => void;
+}
+
+
+const Offer: React.FunctionComponent<Props> = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorites}: Props) => {
+  const {title, img, cost, type, rate, isPrime} = offer;
   return (
     <article className={currentOffer ? `near-places__card place-card` : `cities__place-card place-card` }
       onMouseEnter={() => {
@@ -20,9 +28,9 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorite
         }
       }}
     >
-      <div className="place-card__mark">
+     {isPrime ? <div className="place-card__mark">
         <span>Premium</span>
-      </div>
+      </div>: null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={img} width="260" height="200" alt="Place image"/>
@@ -67,14 +75,6 @@ const Offer = ({offer, onHoveredOffer, onClickOffer, currentOffer, addToFavorite
       </div>
     </article>
   );
-};
-
-Offer.propTypes = {
-  onHoveredOffer: PropTypes.func,
-  onClickOffer: PropTypes.func,
-  offer: offerType,
-  currentOffer: offerType,
-  addToFavorites: PropTypes.func
 };
 
 export default Offer;

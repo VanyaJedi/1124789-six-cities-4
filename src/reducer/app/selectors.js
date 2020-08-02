@@ -18,3 +18,11 @@ export const getSortType = (state) => {
 export const getAuthScreenStatus = (state) => {
   return state[NAME_SPACE].showAuthScreen;
 };
+
+export const getRating = (state) => {
+  return state[NAME_SPACE].rating;
+};
+
+export const getFormStatus = (state) => {
+  return state[NAME_SPACE].isValidForm;
+};

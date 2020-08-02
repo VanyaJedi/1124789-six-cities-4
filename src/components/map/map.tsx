@@ -1,7 +1,7 @@
-import * as React from "react"
-import leaflet from 'leaflet';
-import PropTypes from "prop-types";
-import {offerType} from "../../types/dataTypes";
+import * as React from "react";
+import * as leaflet from 'leaflet';
+import {Offer, City} from "../../types/types";
+import {LatLngExpression} from "leaflet";
 
 const icon = leaflet.icon({
   iconUrl: `img/pin.svg`,
@@ -12,7 +12,25 @@ const activeIcon = leaflet.icon({
   iconSize: [30, 30]
 });
 
-export default class Map extends React.PureComponent {
+interface Props {
+  offers: Offer[];
+  currentOffer: Offer;
+  city: City;
+  hoveredOfferId?: string;
+}
+
+interface Options {
+  center: LatLngExpression;
+  zoom: number;
+  zoomControl: boolean;
+  marker?: boolean;
+}
+
+export default class Map extends React.PureComponent<Props, {}> {
+  private _mapRef: React.RefObject<HTMLDivElement>;
+  private _map: leaflet.Map;
+  private _markers: leaflet.Marker[];
+
   constructor(props) {
     super(props);
     this._map = null;
@@ -28,12 +46,14 @@ export default class Map extends React.PureComponent {
   }
 
   _initMap() {
-    this._map = leaflet.map(this._mapRef.current, {
+    const options: Options = {
       center: this.props.city.cityCoord,
       zoom: this.props.city.zoom,
       zoomControl: false,
       marker: true
-    });
+    };
+
+    this._map = leaflet.map(this._mapRef.current, options);
     this._map.setView(this.props.city.cityCoord, this.props.city.zoom);
 
     leaflet
@@ -72,16 +92,3 @@ export default class Map extends React.PureComponent {
     return <div ref={this._mapRef} id="map" style={{height: `100%`, width: `100%`}}></div>;
   }
 }
-
-Map.propTypes = {
-  offers: PropTypes.arrayOf(
-      offerType
-  ),
-  currentOffer: offerType,
-  city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    cityCoord: PropTypes.arrayOf(PropTypes.number).isRequired,
-    zoom: PropTypes.number.isRequired
-  }).isRequired,
-
-};

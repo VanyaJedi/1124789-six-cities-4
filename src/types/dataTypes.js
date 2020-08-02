@@ -1,5 +1,5 @@
 
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 export const offerType = PropTypes.shape({
   id: PropTypes.string.isRequired,

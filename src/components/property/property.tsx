@@ -1,14 +1,28 @@
-import * as React from "react"
+import * as React from "react";
 import ReviewList from "../review-list/review-list";
-import {offerType, userType} from "../../types/dataTypes";
 import Map from "../map/map";
 import OfferList from "../offer-list/offer-list";
-import {reviewType} from "../../types/dataTypes";
-import PropTypes from "prop-types";
 import Comments from "../comments/comments";
 import Header from "../header/header";
+import {Offer, Review, User} from "../../types/types";
 
-const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) => {
+interface Props {
+  offer: Offer;
+  reviews: Review[];
+  offers: Offer[];
+  addComment: () => void;
+  user: User;
+  addToFavorites: () => void;
+  rating: number;
+  isValidForm: boolean;
+  changeRating: () => void;
+  changeFormStatus: () => void;
+}
+
+const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers, addComment, addToFavorites, rating, isValidForm, changeRating, changeFormStatus}: Props) => {
+  if (!offer) {
+    return null;
+  }
   const {images, title, isPrime, type, rate, bedAmount, maxAdults, cost, houseItems, owner, city} = offer;
   const {avatar, name, isSuper} = owner;
   return (
@@ -99,7 +113,16 @@ const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) =>
               </div>
               <section className="property__reviews reviews">
                 <ReviewList reviews={reviews}/>
-                {user ? <Comments addComment={addComment} offerId={offer.id}/> : null}
+                {user
+                  ?
+                  <Comments
+                    addComment={addComment}
+                    offerId={offer.id}
+                    rating={rating}
+                    isValidForm={isValidForm}
+                    changeRating={changeRating}
+                    changeFormStatus={changeFormStatus}
+                  /> : null}
               </section>
             </div>
           </div>
@@ -123,19 +146,6 @@ const Property = ({user, offer, reviews, offers, addComment, addToFavorites}) =>
       </main>
     </div>
   );
-};
-
-
-Property.propTypes = {
-  offer: offerType,
-  reviews: PropTypes.arrayOf(
-      reviewType
-  ),
-  offers: PropTypes.arrayOf(offerType),
-  authorizationStatus: PropTypes.string,
-  addComment: PropTypes.func,
-  user: userType,
-  addToFavorites: PropTypes.func
 };
 
 

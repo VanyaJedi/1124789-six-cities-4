@@ -1,10 +1,12 @@
-import * as React from "react"
+import * as React from "react";
 import Review from "../review/review";
-import {reviewType} from "../../types/dataTypes";
-import PropTypes from "prop-types";
+import {Review as ReviewType} from "../../types/types";
 
+interface Props {
+  reviews: ReviewType[];
+}
 
-const ReviewList = ({reviews}) => {
+const ReviewList: React.FunctionComponent<Props> = ({reviews}: Props) => {
 
   const reviewsToShow = reviews.slice().sort((prev, curr) => {
     if (prev.date > curr.date) {
@@ -23,23 +25,13 @@ const ReviewList = ({reviews}) => {
         {
           reviewsToShow.map((review) => {
             return <Review key={review.id}
-              text={review.text}
-              rate={review.rate}
-              userName={review.userName}
-              date={review.date}
-              avatar={review.avatar}
-              isPro={review.isPro}
+              review={review}
             />;
           })
         }
       </div>
     </React.Fragment>
   );
-};
-ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(
-      reviewType
-  ),
 };
 
 export default ReviewList;

@@ -1,9 +1,15 @@
-import * as React from "react"
+import * as React from "react";
 import {userType} from "../../types/dataTypes";
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../constants';
+import {User} from "../../types/types";
 
-const Header = ({user}) => {
+interface Props {
+  user: User;
+}
+
+const Header: React.FunctionComponent<Props> = (props: Props) => {
+  const {user} = props;
   return (
     <header className="header">
       <div className="container">

@@ -1,12 +1,19 @@
-import * as React from "react"
-import PropTypes from "prop-types";
+import * as React from "react";
+import {Sort as SortType} from "../../types/types";
+interface Props {
+  onChangeSortType: (arg: string) => void;
+  opened: boolean;
+  onClickHandler: () => void;
+  sortTypeMapping: SortType[];
+  sortType: string;
+}
 
-const Sort = (props)=> {
+const Sort = (props: Props)=> {
   const {onChangeSortType, opened, onClickHandler, sortTypeMapping, sortType} = props;
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex="0"
+      <span className="places__sorting-type" tabIndex={0}
         onClick={onClickHandler}
       >
         Popular
@@ -28,18 +35,6 @@ const Sort = (props)=> {
       </ul>
     </form>
   );
-};
-
-Sort.propTypes = {
-  onChangeSortType: PropTypes.func.isRequired,
-  opened: PropTypes.bool.isRequired,
-  onClickHandler: PropTypes.func.isRequired,
-  sortTypeMapping: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
-  })),
-  sortType: PropTypes.string.isRequired
 };
 
 
