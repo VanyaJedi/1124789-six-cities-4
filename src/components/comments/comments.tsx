@@ -1,6 +1,12 @@
 import * as React from "react";
 import {commentInputs} from '../../constants';
 
+const FORM_CONSTRAINTS = {
+  MIN: 50,
+  MAX: 300,
+};
+
+
 interface Props {
   addComment: (params: {id: string; comment: string; rating: number}) => void;
   offerId: string;
@@ -22,13 +28,14 @@ class Comments extends React.PureComponent<Props, {}> {
     this.formRef = React.createRef();
     this.sendButtonRef = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.props.changeRating(null);
   }
 
   handleSubmit(evt) {
-    const {addComment, offerId, rating, changeFormStatus} = this.props;
+    const {addComment, offerId, rating, changeFormStatus, changeRating} = this.props;
     evt.preventDefault();
 
-    const isValidText = this.commentRef.current.value.length >= 50 && this.commentRef.current.value.length <= 300;
+    const isValidText = this.commentRef.current.value.length >= FORM_CONSTRAINTS.MIN && this.commentRef.current.value.length <= FORM_CONSTRAINTS.MAX;
     if (isValidText && rating) {
       addComment({
         id: offerId,
@@ -36,6 +43,7 @@ class Comments extends React.PureComponent<Props, {}> {
         rating
       });
       this.formRef.current.reset();
+      changeRating(null);
     } else {
       changeFormStatus(false);
     }

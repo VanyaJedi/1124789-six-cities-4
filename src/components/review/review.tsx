@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Review as ReviewType} from "../../types/types";
+import {MONTH_NAMES} from "../../constants";
 
 interface Props {
   review: ReviewType;
@@ -8,7 +9,6 @@ interface Props {
 const Review: React.FunctionComponent<Props> = (props: Props) => {
   const {text, rate, userName, date, avatar} = props.review;
   const dateFormat = new Date(date);
-  const monthNames = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -29,7 +29,7 @@ const Review: React.FunctionComponent<Props> = (props: Props) => {
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime={date.toString()}>{`${monthNames[dateFormat.getMonth()]} ${dateFormat.getDate()}, ${dateFormat.getFullYear()}`}</time>
+        <time className="reviews__time" dateTime={date.toString()}>{`${MONTH_NAMES[dateFormat.getMonth()]} ${dateFormat.getDate()}, ${dateFormat.getFullYear()}`}</time>
       </div>
     </li>
   );

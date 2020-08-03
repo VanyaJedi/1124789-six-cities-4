@@ -12,15 +12,33 @@ const mockStore = configureStore([]);
 it(`App snapshot`, () => {
 
   const initialState = {
-    cities,
-    city: offers[0].city,
-    offers,
-    reviews,
-    hoveredOfferId: null,
-    currentOffer: null,
-    sortType: `Popular`
+    DATA: {
+      city: {
+        name: `Amsterdam`,
+        location: {
+          latitude: 52.37454,
+          longitude: 4.897976,
+          zoom: 13
+        }
+      },
+      offers,
+      offersOnCity: offers,
+      nearbyOffers: offers,
+      reviews,
+      favorites: offers
+    },
+    APP: {
+      hoveredOfferId: null,
+      currentOffer: null,
+      sortType: `Popular`,
+      rating: 0,
+      isValidForm: true,
+      isLoading: false
+    },
+    USER: {
+      user: null
+    }
   };
-
 
   const store = mockStore(initialState);
 

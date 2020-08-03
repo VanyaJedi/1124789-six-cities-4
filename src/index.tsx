@@ -38,6 +38,9 @@ store.dispatch(DataOperation.loadOffers())
 })
 .then(() => {
   store.dispatch(ActionCreatorApp.changeLoading(false));
+})
+.catch(() => {
+  store.dispatch(ActionCreatorApp.changeLoading(false));
 });
 
 ReactDOM.render(

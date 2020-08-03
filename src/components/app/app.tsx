@@ -47,96 +47,96 @@ interface Props {
 
 const App: React.FunctionComponent<Props> = (props: Props) => {
 
-    const {
-      login,
-      user,
-      city,
-      offers,
-      reviews,
-      onHoveredOffer,
-      onClickOffer,
-      onClickCity,
-      hoveredOfferId,
-      sortType,
-      onChangeSortType,
-      cities,
-      addComment,
-      nearbyOffers,
-      addToFavorites,
-      favorites,
-      rating,
-      isValidForm,
-      changeRating,
-      changeFormStatus,
-      isLoading
-    } = props;
+  const {
+    login,
+    user,
+    city,
+    offers,
+    reviews,
+    onHoveredOffer,
+    onClickOffer,
+    onClickCity,
+    hoveredOfferId,
+    sortType,
+    onChangeSortType,
+    cities,
+    addComment,
+    nearbyOffers,
+    addToFavorites,
+    favorites,
+    rating,
+    isValidForm,
+    changeRating,
+    changeFormStatus,
+    isLoading
+  } = props;
 
-    return (
-      isLoading ? null : (
-        <Router history={history}>
-          <Switch>
-            <Route path={AppRoute.ROOT} exact>
-              <Main
-                user={user}
-                city={city}
-                offers={offers}
-                hoveredOfferId={hoveredOfferId}
-                onHoveredOffer={onHoveredOffer}
-                onClickOffer={onClickOffer}
-                onClickCity={onClickCity}
-                currentOffer={null}
-                onChangeSortType={onChangeSortType}
-                sortType={sortType}
-                cities={cities}
-                addToFavorites={addToFavorites}
-              />
-            </Route>
-            <Route path={AppRoute.SIGNIN} exact>
-              {user ? <Redirect to={AppRoute.ROOT}/> : <SignIn loginHandler={login}/>}
-            </Route>
-            <PrivateRoute
-              exact
-              path={AppRoute.FAVORITES}
-              component={Favorites}
+  return (
+    isLoading ? null : (
+      <Router history={history}>
+        <Switch>
+          <Route path={AppRoute.ROOT} exact>
+            <Main
               user={user}
-              render={() => {
-                return (
-                  favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>
-                );
-              }}
+              city={city}
+              offers={offers}
+              hoveredOfferId={hoveredOfferId}
+              onHoveredOffer={onHoveredOffer}
+              onClickOffer={onClickOffer}
+              onClickCity={onClickCity}
+              currentOffer={null}
+              onChangeSortType={onChangeSortType}
+              sortType={sortType}
+              cities={cities}
+              addToFavorites={addToFavorites}
             />
-            <Route
-              path={`${AppRoute.OFFER}/:id`}
-              exact
-              render={(props) => {
-                const offerId = props.match.params.id;
-                const offer = offers.find((el) => el.id === offerId);
-                return (
-                  <Property
-                    user={user}
-                    offers={nearbyOffers}
-                    offer={offer}
-                    reviews={reviews}
-                    addComment={addComment}
-                    addToFavorites={addToFavorites}
-                    rating={rating}
-                    isValidForm={isValidForm}
-                    changeRating={changeRating}
-                    changeFormStatus={changeFormStatus}
-                  />
-                );
-              }}
-            />
-            <Route render={() => {
-              return (<React.Fragment>
-                <h1>404 page not found</h1>
-                <Link to="/">go to main page</Link>
-              </React.Fragment>);
-            }}/>
-          </Switch>
-        </Router>)
-    );
-}
+          </Route>
+          <Route path={AppRoute.SIGNIN} exact>
+            {user ? <Redirect to={AppRoute.ROOT}/> : <SignIn loginHandler={login}/>}
+          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            component={Favorites}
+            user={user}
+            render={() => {
+              return (
+                favorites.length ? <Favorites user={user} favorites={favorites}/> : <FavoritesEmpty user={user}/>
+              );
+            }}
+          />
+          <Route
+            path={`${AppRoute.OFFER}/:id`}
+            exact
+            render={(propsHst) => {
+              const offerId = propsHst.match.params.id;
+              const offer = offers.find((el) => el.id === offerId);
+              return (
+                <Property
+                  user={user}
+                  offers={nearbyOffers}
+                  offer={offer}
+                  reviews={reviews}
+                  addComment={addComment}
+                  addToFavorites={addToFavorites}
+                  rating={rating}
+                  isValidForm={isValidForm}
+                  changeRating={changeRating}
+                  changeFormStatus={changeFormStatus}
+                />
+              );
+            }}
+          />
+          <Route render={() => {
+            return (<React.Fragment>
+              <h1>404 page not found</h1>
+              <Link to="/">go to main page</Link>
+            </React.Fragment>);
+          }}/>
+        </Switch>
+      </Router>)
+  );
+};
 
 const mapStateToProps = (state) => ({
   user: getUser(state),
