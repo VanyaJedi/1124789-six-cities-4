@@ -45,15 +45,8 @@ interface Props {
   isLoading: boolean;
 }
 
-class App extends React.PureComponent<Props, {}> {
+const App: React.FunctionComponent<Props> = (props: Props) => {
 
-  props: Props;
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
     const {
       login,
       user,
@@ -76,7 +69,8 @@ class App extends React.PureComponent<Props, {}> {
       changeRating,
       changeFormStatus,
       isLoading
-    } = this.props;
+    } = props;
+
     return (
       isLoading ? null : (
         <Router history={history}>
@@ -142,7 +136,6 @@ class App extends React.PureComponent<Props, {}> {
           </Switch>
         </Router>)
     );
-  }
 }
 
 const mapStateToProps = (state) => ({
