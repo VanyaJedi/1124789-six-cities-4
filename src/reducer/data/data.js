@@ -1,6 +1,8 @@
 
 import {extend} from "../../utils.js";
 import {getCurrentOffer} from "../app/selectors.js";
+import {getCity} from "./selectors";
+import {ActionCreator as ActionCreatorApp} from "../app/app";
 
 const initialState = {
   city: null,
@@ -77,7 +79,9 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.changeCity(response.data[0].city));
+        if (!getCity(getState()).name) {
+          dispatch(ActionCreator.changeCity(response.data[0].city));
+        }
         dispatch(ActionCreator.loadOffers(response.data));
       });
   },
@@ -109,7 +113,11 @@ const Operation = {
       rating: data.rating,
     })
     .then((response) => {
+      dispatch(ActionCreatorApp.changeFormStatus(true));
       dispatch(ActionCreator.loadReviews(response.data));
+    })
+    .catch(()=> {
+      dispatch(ActionCreatorApp.changeFormStatus(false));
     });
   },
 
