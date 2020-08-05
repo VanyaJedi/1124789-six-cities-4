@@ -1,13 +1,13 @@
 export const CITIES_TO_SHOW = 6;
 
 export const AppRoute = {
-  SIGNIN: `/signin`,
+  SIGNIN: `/login`,
   FAVORITES: `/favorites`,
   ROOT: `/`,
   OFFER: `/offer`
 };
 
-export const commentInputs = [
+export const COMMENT_INPUTS = [
   {
     id: 5,
     value: `5`,

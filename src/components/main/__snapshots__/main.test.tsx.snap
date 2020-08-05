@@ -18,6 +18,8 @@ exports[`Main snapshot 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -264,7 +266,7 @@ exports[`Main snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "80%",
                         }
                       }
                     />

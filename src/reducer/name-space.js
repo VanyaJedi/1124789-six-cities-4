@@ -1,7 +1,7 @@
-const nameSpace = {
+const NameSpace = {
   DATA: `DATA`,
   APP: `APP`,
   USER: `USER`
 };
 
-export default nameSpace;
+export default NameSpace;

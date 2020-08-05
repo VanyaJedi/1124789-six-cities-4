@@ -18,6 +18,8 @@ exports[`Favorites list snapshot 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -109,7 +111,7 @@ exports[`Favorites list snapshot 1`] = `
                       alt="Place image"
                       className="place-card__image"
                       height="110"
-                      src="img/apartment-small-03.jpg"
+                      src="img/apartment-02.jpg"
                       width="150"
                     />
                   </a>
@@ -228,7 +230,7 @@ exports[`Favorites list snapshot 1`] = `
                       alt="Place image"
                       className="place-card__image"
                       height="110"
-                      src="img/apartment-small-03.jpg"
+                      src="img/apartment-01.jpg"
                       width="150"
                     />
                   </a>
@@ -321,7 +323,8 @@ exports[`Favorites list snapshot 1`] = `
   >
     <a
       className="footer__logo-link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="6 cities logo"

@@ -45,6 +45,7 @@ const Offer: React.FunctionComponent<Props> = ({offer, onHoveredOffer, onClickOf
           <button
             onClick={(evt) => {
               evt.preventDefault();
+
               const data = {
                 id: offer.id,
                 status: offer.isFav ? 0 : 1
@@ -60,7 +61,7 @@ const Offer: React.FunctionComponent<Props> = ({offer, onHoveredOffer, onClickOf
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${Math.floor(rate) / 5 * 100}%`}}></span>
+            <span style={{width: `${Math.round(rate) / 5 * 100}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

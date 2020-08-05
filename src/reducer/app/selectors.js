@@ -1,7 +1,7 @@
-import nameSpace from "../name-space.js";
+import NameSpace from "../name-space.js";
 
 
-const NAME_SPACE = nameSpace.APP;
+const NAME_SPACE = NameSpace.APP;
 
 export const getHoveredOfferId = (state) => {
   return state[NAME_SPACE].hoveredOfferId;

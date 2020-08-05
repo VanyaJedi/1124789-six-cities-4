@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Subtract} from "utility-types";
 
-const sortTypeMapping = [
+const SORT_TYPE_MAPPING = [
   {
     id: `1`,
     type: `Popular`,
@@ -43,10 +43,10 @@ const withSort = (Component) => {
       this.state = {
         opened: false,
       };
-      this.onClickHandler = this.onClickHandler.bind(this);
+      this.handleElementClick = this.handleElementClick.bind(this);
     }
 
-    onClickHandler() {
+    handleElementClick() {
       this.setState((state) => {
         return {opened: !state.opened};
       });
@@ -58,8 +58,8 @@ const withSort = (Component) => {
       return <Component
         {...this.props}
         opened={opened}
-        onClickHandler={this.onClickHandler}
-        sortTypeMapping={sortTypeMapping}
+        onClickHandler={this.handleElementClick}
+        sortTypeMapping={SORT_TYPE_MAPPING}
       />;
     }
   }

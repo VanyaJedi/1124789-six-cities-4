@@ -2,7 +2,12 @@ import {reducer, ActionCreator, Operation, ActionType} from "./user.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {user} from "../../mock/test/data.js";
-const api = createAPI(()=>{});
+
+
+const onAuth = jest.fn();
+const emptyMockFn = jest.fn();
+
+const api = createAPI(onAuth);
 
 
 const initData = {
@@ -34,7 +39,7 @@ it(`Should make the correct auth check`, () => {
     .onGet(`/login`)
     .reply(200, user);
 
-  return checkStatusOperation(dispatch, ()=>{}, api)
+  return checkStatusOperation(dispatch, emptyMockFn, api)
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -61,7 +66,7 @@ it(`Should make the correct login`, () => {
     })
     .reply(200, user);
 
-  return loginOperation(dispatch, ()=>{}, api)
+  return loginOperation(dispatch, emptyMockFn, api)
     .then(()=> {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenNthCalledWith(1, {

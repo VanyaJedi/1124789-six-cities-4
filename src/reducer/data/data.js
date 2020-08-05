@@ -3,6 +3,8 @@ import {extend} from "../../utils.js";
 import {getCurrentOffer} from "../app/selectors.js";
 import {getCity} from "./selectors";
 import {ActionCreator as ActionCreatorApp} from "../app/app";
+import history from "../../history";
+import {AppRoute} from "../../constants";
 
 const initialState = {
   city: null,
@@ -130,6 +132,9 @@ const Operation = {
         dispatch(Operation.loadNearbyOffers(currentOffer.id));
         dispatch(Operation.loadFavorites());
       }
+    })
+    .catch(() => {
+      history.push(AppRoute.SIGNIN);
     });
   }
 };

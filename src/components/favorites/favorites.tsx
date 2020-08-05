@@ -2,6 +2,8 @@ import * as React from "react";
 import Header from "../header/header";
 import {getCities} from "../../utils";
 import {Offer, User} from "../../types/types";
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../constants';
 
 interface Props {
   user: User;
@@ -38,7 +40,7 @@ const Favorites: React.FunctionComponent<Props> = (props: Props) => {
                           <article key={offer.id} className="favorites__card place-card">
                             <div className="favorites__image-wrapper place-card__image-wrapper">
                               <a href="#">
-                                <img className="place-card__image" src="img/apartment-small-03.jpg" width="150" height="110" alt="Place image"/>
+                                <img className="place-card__image" src={offer.img} width="150" height="110" alt="Place image"/>
                               </a>
                             </div>
                             <div className="favorites__card-info place-card__info">
@@ -77,9 +79,9 @@ const Favorites: React.FunctionComponent<Props> = (props: Props) => {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link to={AppRoute.ROOT} className="footer__logo-link" href="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
+        </Link>
       </footer>
     </div>
   );

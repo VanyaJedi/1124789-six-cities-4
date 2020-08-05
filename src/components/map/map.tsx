@@ -38,10 +38,17 @@ export default class Map extends React.PureComponent<Props, {}> {
     this._markers = [];
   }
 
-  _getActulaIcon(offer, currentOffer, hoveredOfferId) {
-    if (currentOffer) {
-      return offer.id === currentOffer.id ? activeIcon : icon;
-    }
+  componentDidMount() {
+    this._initMap();
+    this._renderPins(this.props);
+  }
+
+  componentDidUpdate() {
+    this._renderPins(this.props);
+    this._map.setView(this.props.city.cityCoord, this.props.city.zoom);
+  }
+
+  _getActulaIcon(offer, hoveredOfferId) {
     return offer.id === hoveredOfferId ? activeIcon : icon;
   }
 
@@ -69,23 +76,19 @@ export default class Map extends React.PureComponent<Props, {}> {
       this._map.removeLayer(marker);
     });
     offers.forEach((offer) => {
-      const actualIcon = this._getActulaIcon(offer, currentOffer, hoveredOfferId);
+      const actualIcon = this._getActulaIcon(offer, hoveredOfferId);
       const marker = leaflet
        .marker(offer.coordinates, {icon: actualIcon})
        .addTo(this._map);
       this._markers.push(marker);
     });
-  }
 
-  componentDidMount() {
-    this._initMap();
-    this._renderPins(this.props);
-  }
-
-  componentDidUpdate() {
-    this._renderPins(this.props);
-    this._map.setView(this.props.city.cityCoord, this.props.city.zoom);
-
+    if (currentOffer) {
+      const marker = leaflet
+       .marker(currentOffer.coordinates, {icon: activeIcon})
+       .addTo(this._map);
+      this._markers.push(marker);
+    }
   }
 
   render() {

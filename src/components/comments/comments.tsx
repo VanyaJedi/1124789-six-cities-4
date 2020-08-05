@@ -1,5 +1,5 @@
 import * as React from "react";
-import {commentInputs} from '../../constants';
+import {COMMENT_INPUTS} from '../../constants';
 
 const FORM_CONSTRAINTS = {
   MIN: 50,
@@ -61,7 +61,7 @@ class Comments extends React.PureComponent<Props, {}> {
         <div className="reviews__rating-form form__rating">
 
           {
-            commentInputs.map((input) => {
+            COMMENT_INPUTS.map((input) => {
               return (
                 <React.Fragment key={input.id}>
                   <input

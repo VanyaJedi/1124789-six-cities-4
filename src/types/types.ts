@@ -1,3 +1,5 @@
+import {LatLngExpression} from "leaflet";
+
 
 interface Owner {
     avatar: string,
@@ -7,7 +9,7 @@ interface Owner {
 
 export interface City {
   name: string,
-  cityCoord: any,
+  cityCoord: LatLngExpression,
   zoom: number
 }
 

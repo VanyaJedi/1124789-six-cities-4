@@ -33,10 +33,10 @@ const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers,
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, index) => {
+              {images.slice(0, 6).map((image, index) => {
                 return (
                   <div key={index + image} className="property__image-wrapper">
-                    <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
+                    <img className="property__image" src={image} alt="Photo studio"/>
                   </div>
                 );
               })
@@ -61,7 +61,7 @@ const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers,
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${Math.floor(rate) / 5 * 100}%`}}></span>
+                  <span style={{width: `${Math.round(rate) / 5 * 100}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rate}</span>

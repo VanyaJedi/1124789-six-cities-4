@@ -3,7 +3,9 @@ import {offers as initialOffers, reviews} from "../../mock/test/data.js";
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 
-const api = createAPI(()=>{});
+const onAuth = jest.fn();
+
+const api = createAPI(onAuth);
 
 const mockCity = {
   name: `Berlin`,

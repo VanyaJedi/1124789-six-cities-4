@@ -18,6 +18,8 @@ exports[`Property list snapshot 1`] = `
         >
           <a
             className="header__logo-link header__logo-link--active"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -84,7 +86,7 @@ exports[`Property list snapshot 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="img/apartment-01.jpg"
+              src="img/apartment-02.jpg"
             />
           </div>
         </div>
@@ -139,7 +141,7 @@ exports[`Property list snapshot 1`] = `
               <span
                 style={
                   Object {
-                    "width": "60%",
+                    "width": "80%",
                   }
                 }
               />
@@ -671,7 +673,7 @@ exports[`Property list snapshot 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "60%",
+                          "width": "80%",
                         }
                       }
                     />
