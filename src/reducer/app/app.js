@@ -4,9 +4,9 @@ const initialState = {
   hoveredOfferId: null,
   currentOffer: null,
   sortType: `Popular`,
-  rating: 0,
-  isValidForm: true,
   isLoading: true,
+  isSubmiting: false,
+  isError: false
 };
 
 
@@ -14,9 +14,9 @@ const ActionType = {
   HOVER_OFFER: `HOVER_OFFER`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  CHANGE_RATING: `CHANGE_RATING`,
-  CHANGE_FORM_STATUS: `CHANGE_FORM_STATUS`,
   CHANGE_LOADING: `CHANGE_LOADING`,
+  CHANGE_SUBMITING: `CHANGE_SUBMITING`,
+  CHANGE_ERROR: `CHANGE_ERROR`,
 };
 
 
@@ -45,6 +45,14 @@ const ActionCreator = {
     type: ActionType.CHANGE_LOADING,
     payload: status
   }),
+  changeSubmiting: (status) => ({
+    type: ActionType.CHANGE_SUBMITING,
+    payload: status
+  }),
+  changeError: (status) => ({
+    type: ActionType.CHANGE_ERROR,
+    payload: status
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,12 +63,12 @@ const reducer = (state = initialState, action) => {
       return extend(state, {currentOffer: action.payload});
     case ActionType.CHANGE_SORT_TYPE:
       return extend(state, {sortType: action.payload});
-    case ActionType.CHANGE_RATING:
-      return extend(state, {rating: action.payload});
-    case ActionType.CHANGE_FORM_STATUS:
-      return extend(state, {isValidForm: action.payload});
     case ActionType.CHANGE_LOADING:
       return extend(state, {isLoading: action.payload});
+    case ActionType.CHANGE_SUBMITING:
+      return extend(state, {isSubmiting: action.payload});
+    case ActionType.CHANGE_ERROR:
+      return extend(state, {isError: action.payload});
     default:
       return state;
   }

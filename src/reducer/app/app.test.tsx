@@ -63,3 +63,66 @@ it(`Reducer should change the sortType`, () => {
     sortType: `CostDesc`
   });
 });
+
+it(`Reducer should change loading status`, () => {
+  expect(reducer(
+      {
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`,
+        isLoading: true,
+        isSubmiting: false
+      },
+      ActionCreator.changeLoading(false)
+  ))
+  .toEqual({
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`,
+    isLoading: false,
+    isSubmiting: false
+  });
+});
+
+it(`Reducer should change submiting status`, () => {
+  expect(reducer(
+      {
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`,
+        isLoading: true,
+        isSubmiting: false
+      },
+      ActionCreator.changeSubmiting(true)
+  ))
+  .toEqual({
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`,
+    isLoading: true,
+    isSubmiting: true
+  });
+});
+
+
+it(`Reducer should change error status`, () => {
+  expect(reducer(
+      {
+        hoveredOfferId: null,
+        currentOffer: null,
+        sortType: `Popular`,
+        isLoading: true,
+        isSubmiting: false,
+        isError: false
+      },
+      ActionCreator.changeError(true)
+  ))
+  .toEqual({
+    hoveredOfferId: null,
+    currentOffer: null,
+    sortType: `Popular`,
+    isLoading: true,
+    isSubmiting: false,
+    isError: true
+  });
+});

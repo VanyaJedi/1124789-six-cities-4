@@ -6,20 +6,24 @@ it(`Comments snapshot`, () => {
 
   const addComment = jest.fn();
   const offerId = `1`;
+  const onSubmit = jest.fn();
+  const onInputChange = jest.fn();
+  const isValidForm = false;
   const rating = 0;
-  const isValidForm = true;
-  const changeRating = jest.fn();
-  const changeFormStatus = jest.fn();
+  const review = ``;
+  const isSubmiting = false;
 
   const tree = renderer
     .create(
         <Comments
           addComment={addComment}
           offerId={offerId}
-          rating={rating}
+          onSubmit={onSubmit}
+          onInputChange={onInputChange}
           isValidForm={isValidForm}
-          changeRating={changeRating}
-          changeFormStatus={changeFormStatus}
+          rating={rating}
+          review={review}
+          isSubmiting={isSubmiting}
         />
     )
     .toJSON();

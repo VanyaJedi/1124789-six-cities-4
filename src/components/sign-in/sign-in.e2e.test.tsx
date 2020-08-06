@@ -10,7 +10,8 @@ Enzyme.configure({
 });
 
 it(`Form should be submited`, () => {
-  const loginHandler = jest.fn();
+  const loginHandler = jest.fn().mockResolvedValueOnce(`first call`)
+                                .mockRejectedValueOnce(new Error(`Async error`));
 
   const signInComponent = mount(
       <SignIn

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  loginHandler: (params: {login: string; password: string}) => void;
+  loginHandler: (params: {login: string; password: string}) => Promise<void>;
 }
 
 class SignIn extends React.PureComponent<Props, {}> {
@@ -23,6 +23,9 @@ class SignIn extends React.PureComponent<Props, {}> {
     loginHandler({
       login: this.loginRef.current.value,
       password: this.passwordRef.current.value,
+    })
+    .catch(() => {
+      this.loginRef.current.style.border = `2px solid red`;
     });
   }
 

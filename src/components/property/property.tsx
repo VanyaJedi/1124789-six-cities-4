@@ -5,6 +5,7 @@ import OfferList from "../offer-list/offer-list";
 import Comments from "../comments/comments";
 import Header from "../header/header";
 import {Offer, Review, User} from "../../types/types";
+import withForm from "../../hocs/with-form/with-form";
 
 interface Props {
   offer: Offer;
@@ -13,13 +14,13 @@ interface Props {
   addComment: () => void;
   user: User;
   addToFavorites: () => void;
-  rating: number;
-  isValidForm: boolean;
-  changeRating: () => void;
-  changeFormStatus: () => void;
+  changeSubmiting: () => void;
+  isSubmiting: boolean;
 }
 
-const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers, addComment, addToFavorites, rating, isValidForm, changeRating, changeFormStatus}: Props) => {
+const CommentsWrap = withForm(Comments);
+
+const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers, addComment, addToFavorites, isSubmiting, changeSubmiting}: Props) => {
   if (!offer) {
     return null;
   }
@@ -116,13 +117,11 @@ const Property: React.FunctionComponent<Props> = ({user, offer, reviews, offers,
                 <ReviewList reviews={reviews}/>
                 {user
                   ?
-                  <Comments
+                  <CommentsWrap
                     addComment={addComment}
                     offerId={offer.id}
-                    rating={rating}
-                    isValidForm={isValidForm}
-                    changeRating={changeRating}
-                    changeFormStatus={changeFormStatus}
+                    isSubmiting={isSubmiting}
+                    changeSubmiting={changeSubmiting}
                   /> : null}
               </section>
             </div>

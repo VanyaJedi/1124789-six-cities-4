@@ -12,12 +12,18 @@ import {Provider} from "react-redux";
 import {createAPI} from './api';
 import history from './history';
 
+
 const onUnauth = () => {
   store.dispatch(ActionCreatorUser.setUser(null));
 };
 
-const api = createAPI(onUnauth);
+const onServerError = () => {
+  store.dispatch(ActionCreatorApp.changeError(true));
+};
+
+const api = createAPI(onUnauth, onServerError);
 const middlewares = [thunk.withExtraArgument(api)];
+
 
 const store = createStore(
     reducer,
@@ -30,7 +36,7 @@ store.dispatch(DataOperation.loadOffers())
 .then(() => {
   store.dispatch(DataOperation.loadFavorites());
   const location = history.location.pathname;
-  const isOffer = location.match(/\/offer\/(\d)+/);
+  const isOffer = location.match(/\/offer\/(\d+)/);
   if (isOffer) {
     store.dispatch(DataOperation.getComments(isOffer[1]));
     store.dispatch(DataOperation.loadNearbyOffers(isOffer[1]));

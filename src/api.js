@@ -4,7 +4,7 @@ const Error = {
   UNAUTHORIZED: 401
 };
 
-export const createAPI = (onUnauth) => {
+export const createAPI = (onUnauth, onServerError) => {
   const api = axios.create({
     baseURL: `https://4.react.pages.academy/six-cities`,
     timeout: 5000,
@@ -18,14 +18,11 @@ export const createAPI = (onUnauth) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === Error.UNAUTHORIZED) {
+    if (!!response && response.status === Error.UNAUTHORIZED) {
       onUnauth();
-
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
       throw err;
     }
-
+    onServerError();
     throw err;
   };
 

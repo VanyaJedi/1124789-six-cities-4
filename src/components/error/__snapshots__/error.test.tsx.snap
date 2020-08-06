@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error 1`] = `
+<div
+  className="error"
+  style={
+    Object {
+      "border": "2px solid red",
+      "height": "100px",
+      "left": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "200px",
+    }
+  }
+>
+  <span>
+    Сервер недоступен
+  </span>
+</div>
+`;

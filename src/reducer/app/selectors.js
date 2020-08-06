@@ -30,3 +30,11 @@ export const getFormStatus = (state) => {
 export const getLoadingStatus = (state) => {
   return state[NAME_SPACE].isLoading;
 };
+
+export const getSubmitingStatus = (state) => {
+  return state[NAME_SPACE].isSubmiting;
+};
+
+export const getErrorStatus = (state) => {
+  return state[NAME_SPACE].isError;
+};

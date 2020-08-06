@@ -8,8 +8,8 @@ it(`Property list snapshot`, () => {
 
   const addComment = jest.fn();
   const addToFavorites = jest.fn();
-  const changeRating = jest.fn();
-  const changeFormStatus = jest.fn();
+  const changeSubmiting = jest.fn();
+  const isSubmiting = false;
 
   const tree = renderer
     .create(
@@ -21,10 +21,8 @@ it(`Property list snapshot`, () => {
             user={user}
             addComment={addComment}
             addToFavorites={addToFavorites}
-            rating={0}
-            isValidForm={true}
-            changeRating={changeRating}
-            changeFormStatus={changeFormStatus}
+            changeSubmiting={changeSubmiting}
+            isSubmiting={isSubmiting}
           />
         </Router>
         ,

@@ -4,14 +4,15 @@ import SignIn from "../sign-in/sign-in";
 import Favorites from "../favorites/favorites";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import Property from "../property/property";
+import Error from "../error/error";
 import {Route, Switch, Router, Redirect} from 'react-router-dom';
 import {ActionCreator as ActionCreatorApp} from "../../reducer/app/app";
 import {ActionCreator as ActionCreatorData} from "../../reducer/data/data";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {getHoveredOfferId, getCurrentOffer, getSortType, getRating, getFormStatus, getLoadingStatus} from "../../reducer/app/selectors";
-import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites} from "../../reducer/data/selectors";
+import {getHoveredOfferId, getCurrentOffer, getSortType, getSubmitingStatus, getLoadingStatus, getErrorStatus} from "../../reducer/app/selectors";
+import {getCity, getReviews, getFilteredOffers, getCities, getNearbyOffers, getFavorites, getOffers} from "../../reducer/data/selectors";
 import {getUser} from "../../reducer/user/selectors";
 import {AppRoute} from "../../constants";
 import {Link} from 'react-router-dom';
@@ -20,7 +21,7 @@ import PrivateRoute from "../private-route/private-route";
 import {Offer, City, Review, User} from "../../types/types";
 
 interface Props {
-  login: () => void;
+  login: () => Promise<void>;
   offers: Offer[];
   offer: Offer;
   city: City;
@@ -33,16 +34,16 @@ interface Props {
   hoveredOfferId: string;
   sortType: string;
   cities: City[];
-  addComment: () => void;
+  addComment: () => Promise<boolean>;
   nearbyOffers: Offer[];
   user: User;
   addToFavorites: () => void;
   favorites: Offer[];
-  rating: number;
-  isValidForm: boolean;
-  changeRating: () => void;
-  changeFormStatus: () => void;
   isLoading: boolean;
+  changeSubmiting: () => void;
+  isSubmiting: boolean;
+  totalOffers: Offer[];
+  isError: boolean;
 }
 
 const App: React.FunctionComponent<Props> = (props: Props) => {
@@ -64,16 +65,17 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
     nearbyOffers,
     addToFavorites,
     favorites,
-    rating,
-    isValidForm,
-    changeRating,
-    changeFormStatus,
-    isLoading
+    isLoading,
+    changeSubmiting,
+    isSubmiting,
+    totalOffers,
+    isError
   } = props;
 
   return (
     isLoading ? null : (
       <Router history={history}>
+        {isError ? <Error/> : null}
         <Switch>
           <Route path={AppRoute.ROOT} exact>
             <Main
@@ -110,7 +112,7 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
             exact
             render={(propsHst) => {
               const offerId = propsHst.match.params.id;
-              const offer = offers.find((el) => el.id === offerId);
+              const offer = totalOffers.find((el) => el.id === offerId);
               return (
                 <Property
                   user={user}
@@ -119,10 +121,8 @@ const App: React.FunctionComponent<Props> = (props: Props) => {
                   reviews={reviews}
                   addComment={addComment}
                   addToFavorites={addToFavorites}
-                  rating={rating}
-                  isValidForm={isValidForm}
-                  changeRating={changeRating}
-                  changeFormStatus={changeFormStatus}
+                  changeSubmiting={changeSubmiting}
+                  isSubmiting={isSubmiting}
                 />
               );
             }}
@@ -143,15 +143,16 @@ const mapStateToProps = (state) => ({
   city: getCity(state),
   cities: getCities(state),
   offers: getFilteredOffers(state),
+  totalOffers: getOffers(state),
   currentOffer: getCurrentOffer(state),
   reviews: getReviews(state),
   hoveredOfferId: getHoveredOfferId(state),
   sortType: getSortType(state),
   nearbyOffers: getNearbyOffers(state),
   favorites: getFavorites(state),
-  rating: getRating(state),
-  isValidForm: getFormStatus(state),
-  isLoading: getLoadingStatus(state)
+  isLoading: getLoadingStatus(state),
+  isSubmiting: getSubmitingStatus(state),
+  isError: getErrorStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -159,7 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorApp.showAuthScreen(isAuth));
   },
   login(authData) {
-    dispatch(UserOperation.login(authData));
+    return dispatch(UserOperation.login(authData));
   },
   onHoveredOffer(offer) {
     dispatch(ActionCreatorApp.hoverOffer(offer));
@@ -176,17 +177,15 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreatorApp.changeSortType(sortType));
   },
   addComment(commentData) {
-    dispatch(DataOperation.addComment(commentData));
+    return dispatch(DataOperation.addComment(commentData));
   },
   addToFavorites(data) {
     dispatch(DataOperation.addToFavorites(data));
   },
-  changeRating(rate) {
-    dispatch(ActionCreatorApp.changeRating(rate));
+  changeSubmiting(status) {
+    dispatch(ActionCreatorApp.changeSubmiting(status));
   },
-  changeFormStatus(status) {
-    dispatch(ActionCreatorApp.changeFormStatus(status));
-  },
+
 
 });
 

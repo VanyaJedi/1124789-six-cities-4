@@ -105,3 +105,87 @@ it(`Should make the correct API call to /offers`, () => {
     });
 });
 
+it(`Should make the correct API call to /favorites`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const favoritesLoader = Operation.loadFavorites();
+
+  apiMock
+    .onGet(`/favorite`)
+    .reply(200, initialOffers);
+
+  return favoritesLoader(dispatch, ()=> {
+    return {DATA: {city: null}};
+  }, api)
+    .then(()=> {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+});
+
+
+it(`Should make the correct API call to /comments`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const commentsLoader = Operation.getComments(1);
+
+  apiMock
+    .onGet(`/comments/1`)
+    .reply(200, reviews);
+
+  return commentsLoader(dispatch, ()=> {
+    return {DATA: {city: null}};
+  }, api)
+    .then(()=> {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+});
+
+it(`Should add the comment`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const commentsLoader = Operation.addComment({
+    id: `1`,
+    comment: `test test test test test`,
+    rating: 1,
+  });
+
+  apiMock
+    .onPost(`/comments/1`, {
+      comment: `test test test test test`,
+      rating: 1,
+    })
+    .reply(200, reviews[0]);
+
+  return commentsLoader(dispatch, ()=> {
+    return {DATA: {city: null}};
+  }, api)
+    .then(()=> {
+      expect(dispatch).toHaveBeenCalledTimes(2);
+    })
+    .catch(()=> {
+      expect(dispatch).toHaveBeenCalledTimes(3);
+    });
+});
+
+
+it(`Should add to favorites`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const favoritesLoader = Operation.addToFavorites({
+    id: `1`,
+    status: 1,
+  });
+
+  apiMock
+    .onPost(`/favorite/1/1`)
+    .reply(200, initialOffers[0]);
+
+  return favoritesLoader(dispatch, ()=> {
+    return {DATA: {city: null}};
+  }, api)
+    .then(()=> {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
+});
+
+

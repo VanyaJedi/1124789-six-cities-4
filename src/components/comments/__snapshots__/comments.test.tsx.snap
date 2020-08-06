@@ -5,8 +5,7 @@ exports[`Comments snapshot 1`] = `
   action="#"
   className="reviews__form form"
   method="post"
-  onSubmit={[Function]}
-  style={Object {}}
+  onSubmit={[MockFunction]}
 >
   <label
     className="reviews__label form__label"
@@ -18,10 +17,11 @@ exports[`Comments snapshot 1`] = `
     className="reviews__rating-form form__rating"
   >
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="5-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
       value="5"
     />
@@ -41,10 +41,11 @@ exports[`Comments snapshot 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="4-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
       value="4"
     />
@@ -64,10 +65,11 @@ exports[`Comments snapshot 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="3-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
       value="3"
     />
@@ -87,10 +89,11 @@ exports[`Comments snapshot 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="2-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
       value="2"
     />
@@ -110,10 +113,11 @@ exports[`Comments snapshot 1`] = `
       </svg>
     </label>
     <input
+      checked={false}
       className="form__rating-input visually-hidden"
       id="1-star"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
       value="1"
     />
@@ -137,7 +141,9 @@ exports[`Comments snapshot 1`] = `
     className="reviews__textarea form__textarea"
     id="review"
     name="review"
+    onChange={[MockFunction]}
     placeholder="Tell how was your stay, what you like and what can be improved"
+    value=""
   />
   <div
     className="reviews__button-wrapper"
@@ -161,6 +167,7 @@ exports[`Comments snapshot 1`] = `
     </p>
     <button
       className="reviews__submit form__submit button"
+      disabled={true}
       type="submit"
     >
       Submit

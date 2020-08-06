@@ -56,11 +56,11 @@ it(`App snapshot`, () => {
   const nearbyOffers = offers;
   const addToFavorites = jest.fn();
   const favorites = offers;
-  const rating = 0;
-  const isValidForm = true;
-  const changeRating = jest.fn();
-  const changeFormStatus = jest.fn();
   const isLoading = false;
+  const changeSubmiting = jest.fn();
+  const isSubmiting = false;
+  const totalOffers = offers;
+  const isError = false;
 
   const tree = renderer
     .create(
@@ -84,12 +84,12 @@ it(`App snapshot`, () => {
               nearbyOffers={nearbyOffers}
               addToFavorites={addToFavorites}
               favorites={favorites}
-              rating={rating}
-              isValidForm={isValidForm}
-              changeRating={changeRating}
-              changeFormStatus={changeFormStatus}
               offer={offer}
               isLoading={isLoading}
+              changeSubmiting={changeSubmiting}
+              isSubmiting={isSubmiting}
+              totalOffers={totalOffers}
+              isError={isError}
             />
           </Router>
 

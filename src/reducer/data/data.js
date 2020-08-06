@@ -110,16 +110,19 @@ const Operation = {
   },
 
   addComment: (data) => (dispatch, getState, api) => {
+    dispatch(ActionCreatorApp.changeSubmiting(true));
     return api.post(`/comments/${data.id}`, {
       comment: data.comment,
       rating: data.rating,
     })
     .then((response) => {
-      dispatch(ActionCreatorApp.changeFormStatus(true));
       dispatch(ActionCreator.loadReviews(response.data));
+      dispatch(ActionCreatorApp.changeSubmiting(false));
+      return true;
     })
     .catch(()=> {
-      dispatch(ActionCreatorApp.changeFormStatus(false));
+      dispatch(ActionCreatorApp.changeSubmiting(false));
+      return false;
     });
   },
 
@@ -128,9 +131,9 @@ const Operation = {
     .then(() => {
       dispatch(Operation.loadOffers());
       const currentOffer = getCurrentOffer(getState());
+      dispatch(Operation.loadFavorites());
       if (currentOffer) {
         dispatch(Operation.loadNearbyOffers(currentOffer.id));
-        dispatch(Operation.loadFavorites());
       }
     })
     .catch(() => {

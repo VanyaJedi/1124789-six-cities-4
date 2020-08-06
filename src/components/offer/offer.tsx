@@ -68,7 +68,9 @@ const Offer: React.FunctionComponent<Props> = ({offer, onHoveredOffer, onClickOf
         <h2 className="place-card__name">
           <Link to={`${AppRoute.OFFER}/${offer.id}`} onClick={
             () => {
-              onClickOffer(offer);
+              if (onClickOffer) {
+                onClickOffer(offer);
+              }
             }
           }>{title}</Link>
         </h2>
